@@ -16,7 +16,7 @@
         
         .navbar-default .navbar-brand {
             color: rgb(213, 55, 69);
-            font-weight: bold;
+            font-weight: bold;http://www.mtv.pt/#carousel-2zxdsc
         }
 
         .video-container {
@@ -43,9 +43,9 @@
         }
         body{
 
-            font-family: Arial,sans-serif;
+            font-family: "Open Sans", Arial, sans-serif;;
              background-color: rgba(241, 241, 241, 0.7);
-            background-image: url('https://lh5.googleusercontent.com/PFAerXKtUqjzX1QCVv1rJ7ntpdBt-8IubEM9PyInP66QglPCqmkcFAWc7IvyAwUNmy7ImO2ZPhR2v7c=w1919-h950-rw');
+            background-image: url('http://127.0.0.1:8000/storage/pictures/NpqWPOsS0p4JyCDiirUOBES7LEvRAxRukDWgKDHZ.png');
             background-repeat: no-repeat;
             background-size: 70%;
             background-position: 50% 0%;
@@ -55,7 +55,7 @@
         }
 
         .navbar{
-            font-family: Arial,sans-serif;
+            font-family: "Open Sans", Arial, sans-serif;;
             background: white;
             border-color: #ffffff;
         }
@@ -107,6 +107,30 @@
 
                 var url = "/students?filter="+filter;
                 return url;
+            }
+
+            function comment(idUser, idSession){
+
+
+                $con = mysqli_connect("localhost","root", "cpr");
+
+                if(mysqli_connect_errno()){
+                    echo"Failed to connect to MySQL: ", mysqli_connect_error();
+                }
+
+                $sql="INSERT INTO comments (idUser, idSession, title, comment) VALUES ('$idUser', '$idSession', '$title', '$comment')";
+
+                if (!mysqli_query($con,$sql)) {
+                  die('Error: ' . mysqli_error($con));
+                }
+                echo "1 record added";
+
+                mysqli_close($con);
+            }
+
+
+
+
             }
 
 

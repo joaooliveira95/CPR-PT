@@ -8,17 +8,20 @@ use Illuminate\Support\Facades\DB;
 use App\Repositories\UsersRepository;
 use App\Repositories\SessionsRepository;
 use App\Repositories\ExercisesRepository;
+use App\Repositories\CommentsRepository;
 
 class SessionsController extends Controller{
 
     protected $sessionsRepo;
     protected $exercisesRepo;
+    protected $commentsRepo;
     protected $usersRepo;
 
-    public function __construct(UsersRepository $usersRepo, SessionsRepository $sessionsRepo, ExercisesRepository $exercisesRepo){
+    public function __construct(UsersRepository $usersRepo, SessionsRepository $sessionsRepo, ExercisesRepository $exercisesRepo, CommentsRepository $commentsRepo){
         $this->usersRepo = $usersRepo;
         $this->sessionsRepo = $sessionsRepo;
         $this->exercisesRepo = $exercisesRepo;
+        $this->commentsRepo = $commentsRepo;
         $this->middleware('auth');
     }
 
@@ -40,6 +43,8 @@ class SessionsController extends Controller{
         $user = $this->usersRepo->findByID($session->idUser);
         $exercises = $this->exercisesRepo->getSessionExercises($id);
 
-        return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises]);
+        $comments = $this->commentsRepo->getCommentsBySession($id);
+
+        return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises, 'comments' => $comments]);
     }
 }  

@@ -15,7 +15,7 @@
                             To:
                             <input class = "form-control input-sm" type="date" name="to" id="to">
                             <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterDates({{$id}})" value="Submit">
-                            <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterDates({{$id}})" value="Submit">
+                         
                         </div>
                     </form>
                                    

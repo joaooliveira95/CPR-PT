@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace Tests\Unit;
 
 use Tests\TestCase;
@@ -9,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * php vendor/phpunit/phpunit/phpunit
      *
      * @return void
      */

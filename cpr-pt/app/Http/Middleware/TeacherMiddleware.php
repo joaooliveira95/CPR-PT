@@ -9,7 +9,7 @@ class TeacherMiddleware{
     
 
     public function handle($request, Closure $next){
-    	if(Auth::user()->role_id!=1 &&Auth::user()->role!=3){
+    	if(Auth::user()->role_id!=1 && Auth::user()->role_id!=3){
 	    	return redirect('/home');
 	    }
 	    return $next($request);

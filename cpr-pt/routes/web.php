@@ -44,3 +44,6 @@ Route::get('/history/{id}/session', 'SessionsController@session');
 Route::get('/students/{id}/sessions', 'SessionsController@sessions')->middleware('teacher');
 
 Route::get('/students/{id}/session', 'SessionsController@session')->middleware('teacher');
+
+//COMMENTS
+Route::post('/comments/{session_id}{user_id}', 'CommentsController@send')->middleware('teacher');

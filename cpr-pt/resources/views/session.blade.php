@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -21,9 +22,9 @@
                                           <th>Parcial Duration</th>
                                           <th>N Correct Compressions</th>
                                           <th>N Incorrect Compressions</th>
-
                                       </tr>
                                   </thead>
+
                                   <tbody>
                                       @foreach($exercises as $exercise)
                                           <tr>
@@ -36,10 +37,56 @@
                                       @endforeach
                                   </tbody>
                           </table>
+
                           {{ $exercises->links() }}
                       </div>
                     @endif
-                </div>
+                    
+
+
+                    @if($comments!=null)
+             
+                      <div class="row">
+                        <div class="col-md-12">
+                        <h3 class="comments-title"> {{ $comments->count()}} Comments</h3>
+                          @foreach($comments as $comment)
+                            <div class="comment">
+                                <div class="author-info">
+                                    <div class="author-name">
+                                      <h4>{{$comment->title}}</h4>
+                                    </div>
+                                    <p class="author-time">{{$comment->created_at}}</p>
+                                </div>
+                                <div class="comment-content">
+                                    {{$comment->comment}}
+                                </div>
+                            </div>
+                          @endforeach
+                        </div>
+                      </div>
+                    @endif
+
+
+
+                        @if(Voyager::can('browse_sessions'))
+                     {!! Form::open(
+                       array('action'=> array('CommentsController@send', $session->id, Auth::user()->id)
+                       , 'method'=>'post')) !!}
+
+                      {!! Form::label('title','Title: ') !!}
+                      
+                      {!! Form::text('title', null, ['class'=>'form-control']) !!}
+                      <br>
+
+                       {!! Form::label('comment','Comment: ') !!}
+                   
+                      {!! Form::textArea('comment', null, ['class'=>'form-control', 'rows'=>'5' ]) !!}
+
+                      {!! Form::submit('Send', ['class'=>'btn btn-default btn-block', 'style'=>'margin-top:15px;']) !!}
+
+                      {!! Form::close() !!}
+                        @endif
+
             </div>
         </div>
     </div>
