@@ -30,7 +30,7 @@ class CommentsController extends Controller{
     public function send(Request $request, $session_id, $user_id){
 
         $this->validate($request, array(
-                'comment' => 'required|min:5|max:2000'
+                'comment' => 'required|min:1|max:20'
             ));
 
         $comment = new Comment();

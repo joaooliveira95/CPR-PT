@@ -14,7 +14,7 @@
         <style>
             html, body {
                 
-               background-image: url('http://127.0.0.1:8000/storage/pictures/NpqWPOsS0p4JyCDiirUOBES7LEvRAxRukDWgKDHZ.png');
+               background-image: url('http://127.0.0.1:8000/storage/pictures/logo.png');
                 background-color: rgba(241, 241, 241, 0.7);
                
                 background-repeat: no-repeat;

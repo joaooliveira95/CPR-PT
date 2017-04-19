@@ -78,6 +78,13 @@
                    
                       {!! Form::textArea('comment', null, ['class'=>'form-control', 'rows'=>'5' ]) !!}
 
+				@if ($errors->has('comment'))
+                                    <span class="help-block">
+                                        <p class="text-warning"><strong>{{ $errors->first('comment') }}</strong></p>
+                                    </span>
+                                @endif
+
+
                       {!! Form::submit('Send', ['class'=>'btn btn-default btn-block', 'style'=>'margin-top:15px;']) !!}
 
                       {!! Form::close() !!}
