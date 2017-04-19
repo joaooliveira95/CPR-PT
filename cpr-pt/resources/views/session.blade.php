@@ -45,7 +45,7 @@
 
 
                     @if($comments!=null)
-             
+                    <hr>
                       <div class="row">
                         <div class="col-md-12">
                         <h3 class="comments-title"> {{ $comments->count()}} Comments</h3>
@@ -53,7 +53,7 @@
                             <div class="comment">
                                 <div class="author-info">
                                     <div class="author-name">
-                                      <h4>{{$comment->title}}</h4>
+                                      <h4>{{$comment->name}}</h4>
                                     </div>
                                     <p class="author-time">{{$comment->created_at}}</p>
                                 </div>
@@ -68,15 +68,11 @@
 
 
 
-                        @if(Voyager::can('browse_sessions'))
+                        @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                      {!! Form::open(
                        array('action'=> array('CommentsController@send', $session->id, Auth::user()->id)
                        , 'method'=>'post')) !!}
 
-                      {!! Form::label('title','Title: ') !!}
-                      
-                      {!! Form::text('title', null, ['class'=>'form-control']) !!}
-                      <br>
 
                        {!! Form::label('comment','Comment: ') !!}
                    

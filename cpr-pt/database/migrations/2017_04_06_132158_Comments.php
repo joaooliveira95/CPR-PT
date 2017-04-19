@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSessionsTable extends Migration
+class Comments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateSessionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idUser')->unsigned();
-			$table->foreign('idUser')->references('id')->on('users');
+            $table->foreign('idUser')->references('id')->on('users');
+            $table->integer('idSession')->unsigned();
+            $table->foreign('idSession')->references('id')->on('sessions');
+            $table->string('comment');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ class CreateSessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('comments');
     }
 }

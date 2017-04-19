@@ -16,7 +16,7 @@
         
         .navbar-default .navbar-brand {
             color: rgb(213, 55, 69);
-            font-weight: bold;http://www.mtv.pt/#carousel-2zxdsc
+            font-weight: bold;
         }
 
         .video-container {
@@ -82,6 +82,15 @@
         .panel-body {
             padding: 15px;
         }
+
+        .table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+}
     </style>
 
     <!-- Scripts -->
@@ -130,7 +139,6 @@
 
 
 
-
             }
 
 
@@ -152,7 +160,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -162,11 +170,15 @@
                     @if(Auth::guest())
 
                     @else 
-                        @if(Voyager::can('browse_sessions'))
-                            <?= menu('teachers_menu', 'bootstrap'); ?>
-                        @else
-                            <?= menu('students_menu', 'bootstrap'); ?>
+                    <ul class="nav navbar-nav">
+                    <li><a href="http://127.0.0.1:8000/newSession" targer="-self"><span>New Session</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/history" targer="-self"><span>History</span></a></li>
+                        @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
+                        <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li>
                         @endif
+                         <li><a href="http://127.0.0.1:8000/content" targer="-self"><span>Content</span></a></li>
+                        </li>
+                    </ul>
                     @endif
 
                     <!-- Right Side Of Navbar -->

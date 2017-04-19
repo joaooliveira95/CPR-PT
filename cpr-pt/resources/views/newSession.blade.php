@@ -9,6 +9,25 @@
 
                     <div class="panel-body">
 
+                      <div id="interface">
+                          <table id="info_table" class='table table-borderless table-responsive'>
+                            <thead class="thead-default">
+                              <tr>
+                                <th><h4>Resumo do Treino</h4></th>
+                                <th><h4>Recomendações</h4></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ><td>Duração Total: X seg</td><td>Recomendacao!</td></tr>
+                              <tr><td>Em Compressões: X seg</td><td>Recomendacao!</td></tr>
+
+                              <tr><td>Frequência: X /min</td><td>Recomendacao!</td></tr>
+                              <tr><td>Mãos Corretas: X %</td><td>Recomendacao!</td></tr>
+                              <tr><td>Recoil Completo: X %</td><td>Recomendacao!</td></tr>
+                            </tbody>
+                        </table>
+                      </div>
+
                        <div id="treinos" class="table-responsive">
                           @if($exercises!=null)
                               {{ $exercises->links() }}
@@ -21,7 +40,6 @@
                                           <th>Parcial Duration</th>
                                           <th>N Correct Compressions</th>
                                           <th>N Incorrect Compressions</th>
-
                                       </tr>
                                   </thead>
                                   <tbody>

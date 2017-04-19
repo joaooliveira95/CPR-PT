@@ -35,12 +35,9 @@ class NewSessionController extends Controller
     public function index()
     {   
 
-        date_default_timezone_get();
-        $date = date('Y-m-d h:i:s', time());
-
+        
         $session = Session::create([
-            'idUser' => Auth::user()->id,
-            'time' => $date
+            'idUser' => Auth::user()->id
         ]);
         return view('newSession', ['id' => $session->id, 'exercises'=>null]);
     }
