@@ -45,7 +45,7 @@
 
             font-family: "Open Sans", Arial, sans-serif;;
              background-color: rgba(241, 241, 241, 0.7);
-            background-image: url('http://127.0.0.1:8000/storage/pictures/low.jpg');
+            background-image: url('http://127.0.0.1:8000/storage/pictures/logo.png');
             background-repeat: no-repeat;
             background-size: 70%;
             background-position: 50% 0%;

@@ -32,17 +32,26 @@ class NewSessionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
 
-        
+    public function index(){
+        return view('createSession');
+    }
+
+    public function startSession(Request $request)
+    {     
+        $this->validate($request, array(
+                'title' => 'required|min:5|max:20'
+        ));
+
         $session = Session::create([
-            'idUser' => Auth::user()->id
+            'idUser' => Auth::user()->id,
+            'title' => $request->input('title'),
         ]);
         return view('newSession', ['id' => $session->id, 'exercises'=>null]);
     }
 
     public function newExercise($sessionId){
+
         Exercise::create([
             'idSession'=>$sessionId,
             'duracaoTotal'=>10,

@@ -26,9 +26,9 @@ Route::get('/home', 'HomeController@index');
 
 
 
-Route::get('/newSession', 'NewSessionController@index');
 
-Route::get('/newSession/{id}/', 'NewSessionController@newExercise');
+
+
 
 //BLADES
 Route::get('/content', 'BladesController@contentIndex');
@@ -36,6 +36,13 @@ Route::get('/content', 'BladesController@contentIndex');
 Route::get('/history', 'BladesController@historyIndex');
 
 Route::get('/students', 'BladesController@studentsIndex')->middleware('teacher');
+
+Route::get('/newSession', 'NewSessionController@index');
+
+//NEW SESSION
+Route::post('/startSession/', 'NewSessionController@startSession');
+
+Route::get('/curSession/{id}/', 'NewSessionController@newExercise');
 
 
 //SESSIONS CONTROLLER

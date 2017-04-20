@@ -17,6 +17,7 @@ class CreateSessionsTable extends Migration
             $table->increments('id');
             $table->integer('idUser')->unsigned();
 			$table->foreign('idUser')->references('id')->on('users');
+            $table->string('title');
             $table->rememberToken();
             $table->timestamps();
         });

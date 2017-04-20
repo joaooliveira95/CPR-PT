@@ -78,7 +78,7 @@
                    
                       {!! Form::textArea('comment', null, ['class'=>'form-control', 'rows'=>'5' ]) !!}
 
-				@if ($errors->has('comment'))
+				                        @if ($errors->has('comment'))
                                     <span class="help-block">
                                         <p class="text-warning"><strong>{{ $errors->first('comment') }}</strong></p>
                                     </span>

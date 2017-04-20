@@ -58,7 +58,7 @@
                            
                       @endif
                        <div style="display: inline">
-                           <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" value="New Exercise" onclick = "location.href='/newSession/{{$id}}'"/>
+                           <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" value="New Exercise" onclick = "location.href='/curSession/{{$id}}'"/>
 
                            <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" value="End Session" onclick="location.href='/history';"/>
                         </div>

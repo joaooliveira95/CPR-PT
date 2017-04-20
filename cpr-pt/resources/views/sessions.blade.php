@@ -33,9 +33,9 @@
                                     <tr>
                                         <td>{{$session->created_at}}</td>
                                         @if (Auth::user()->id != $session->idUser)
-                                            <td> <a href="/students/{{$session->id}}/session">Nome Sessão</a></td>
+                                            <td> <a href="/students/{{$session->id}}/session">{{$session->title}}</a></td>
                                         @else
-                                            <td> <a href="/history/{{$session->id}}/session">Nome Sessão</a></td>
+                                            <td> <a href="/history/{{$session->id}}/session">{{$session->title}}</a></td>
                                         @endif
                                     </tr>
                                 @endforeach
