@@ -47,26 +47,22 @@ class NewSessionController extends Controller
             'idUser' => Auth::user()->id,
             'title' => $request->input('title'),
         ]);
-        return view('newSession', ['id' => $session->id, 'exercises'=>null]);
+
+        $curExercise = Exercise::create([
+            'idSession'=>$session->id,
+        ]);
+
+        //$exercises = $this->exercisesRepo->getSessionExercises($sessionId);
+        return view('newSession', ['id' => $session->id, 'curExercise'=> $curExercise]);
     }
 
     public function newExercise($sessionId){
-
-        Exercise::create([
+        $curExercise = Exercise::create([
             'idSession'=>$sessionId,
-            'duracaoTotal'=>10,
-            'duracaoParcial'=>10,
-            'nmaosCorretas'=>10,
-            'nmaosIncorretas'=>10,
-            'ncompressoesCorretas'=>10,
-            'ncompressoesIncorretas'=>10,
-            'nrecoilCorreto'=>10,
-            'nrecoilIncorreto'=>10
         ]);
 
-
         $exercises = $this->exercisesRepo->getSessionExercises($sessionId);
-        return view('newSession', ['id' => $sessionId, 'exercises'=> $exercises]);
+        return view('newSession', ['id' => $sessionId, 'curExercise'=> $curExercise]);
     }
 
 }

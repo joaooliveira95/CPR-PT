@@ -94,17 +94,53 @@
     </style>
 
     <!-- Scripts -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
-
+  
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
     <script>
+
+            function setIntervalLimited(callback, interval, x) {
+
+                for (var i = 0; i < x; i++) {
+
+                    setTimeout(callback, i * interval);
+                }
+
+            }
+
+            function exercise(curExercise){
+                 $(document).ready(function(){
+                    $('#exercise_button').click(function(){
+                        $("#exercise_button").attr("disabled", true);
+
+                        setIntervalLimited(function(){
+                            $.post("{{ asset('script.php') }}",
+                                {exercise:curExercise}, 
+                                function(response){
+                                    $("#exercise_button").attr("disabled", true);
+                                });
+                           },1000, 10);  
+
+                        });
+
+                    setInterval(function(){
+                        $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
+                    },1000);
+                
+                    
+                });
+            }
+
+
 
             function filterDates(id){
                 var from = document.getElementById("from").value;
@@ -118,28 +154,6 @@
                 return url;
             }
 
-            function comment(idUser, idSession){
-
-
-                $con = mysqli_connect("localhost","root", "cpr");
-
-                if(mysqli_connect_errno()){
-                    echo"Failed to connect to MySQL: ", mysqli_connect_error();
-                }
-
-                $sql="INSERT INTO comments (idUser, idSession, title, comment) VALUES ('$idUser', '$idSession', '$title', '$comment')";
-
-                if (!mysqli_query($con,$sql)) {
-                  die('Error: ' . mysqli_error($con));
-                }
-                echo "1 record added";
-
-                mysqli_close($con);
-            }
-
-
-
-            }
 
 
 
@@ -220,3 +234,4 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
+

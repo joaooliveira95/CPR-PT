@@ -17,14 +17,6 @@ class CreateExercisesTable extends Migration
             $table->increments('id');
             $table->integer('idSession')->unsigned();
             $table->foreign('idSession')->references('id')->on('sessions');
-            $table->integer('duracaoTotal');
-            $table->integer('duracaoParcial');
-            $table->integer('ncompressoesCorretas');
-            $table->integer('ncompressoesIncorretas');
-            $table->integer('nmaosCorretas');
-            $table->integer('nmaosIncorretas');
-            $table->integer('nrecoilCorreto');
-            $table->integer('nrecoilIncorreto');
             $table->rememberToken();
             $table->timestamps();
         });
