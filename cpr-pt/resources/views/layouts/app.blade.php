@@ -118,14 +118,19 @@
             }
 
             function exercise(curExercise){
+                     
                  $(document).ready(function(){
                     $('#exercise_button').click(function(){
+                        var time = new Date().getTime() / 1000;
                         $("#exercise_button").attr("disabled", true);
 
                         setIntervalLimited(function(){
+
                             $.post("{{ asset('script.php') }}",
-                                {exercise:curExercise}, 
+                                {exercise:curExercise,
+                                 beg_time:time}, 
                                 function(response){
+                                //    alert(response);
                                     $("#exercise_button").attr("disabled", true);
                                 });
                            },1000, 10);  

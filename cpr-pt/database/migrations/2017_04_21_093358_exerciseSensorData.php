@@ -26,7 +26,7 @@ class ExerciseSensorData extends Migration
             $table->integer('valueSensor1');
             $table->integer('valueSensor2');
             $table->integer('valueSensor3');
-            $table->timestamps();
+            $table->integer('timestep');
         });
     }
 
