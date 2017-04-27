@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         if (User::count() == 0) {
             $admin = Role::where('name', 'admin')->firstOrFail();
              $user = Role::where('name', 'user')->firstOrFail();
-              $teach = Role::where('name', 'teacher')->firstOrFail();
+              $teacher = Role::where('name', 'teacher')->firstOrFail();
 
 
             User::create([
