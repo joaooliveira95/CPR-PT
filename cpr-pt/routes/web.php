@@ -42,7 +42,7 @@ Route::get('/newSession', 'NewSessionController@index');
 //NEW SESSION
 Route::post('/startSession/', 'NewSessionController@startSession');
 
-Route::get('/curSession/{id}/', 'NewSessionController@newExercise');
+Route::post('/curSession/{id}/', 'NewSessionController@newExercise');
 
 
 //SESSIONS CONTROLLER

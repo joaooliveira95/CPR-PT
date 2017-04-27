@@ -65,4 +65,6 @@ class NewSessionController extends Controller
         return view('newSession', ['id' => $sessionId, 'curExercise'=> $curExercise]);
     }
 
+    
+
 }

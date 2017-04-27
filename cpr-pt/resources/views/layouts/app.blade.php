@@ -109,40 +109,42 @@
     <script>
 
             function setIntervalLimited(callback, interval, x) {
+                flag = 0;
 
                 for (var i = 0; i < x; i++) {
 
                     setTimeout(callback, i * interval);
+                    
                 }
+                if(i>=x){
+                    flag=1;
+                }
+                return flag;
 
             }
 
             function exercise(curExercise){
                      
                  $(document).ready(function(){
+                       
                     $('#exercise_button').click(function(){
-                        var time = new Date().getTime() / 1000;
-                        $("#exercise_button").attr("disabled", true);
+                       
+                            setIntervalLimited(function(){
+                                $.post("{{ asset('script.php') }}",
+                                    {exercise:curExercise}, 
+                                    function(response){
+                                        $("#exercise_button").attr("disabled", true);
+                                        //alert(response);
+                                    });
+                             },1000, 10); 
 
-                        setIntervalLimited(function(){
 
-                            $.post("{{ asset('script.php') }}",
-                                {exercise:curExercise,
-                                 beg_time:time}, 
-                                function(response){
-                                //    alert(response);
-                                    $("#exercise_button").attr("disabled", true);
-                                });
-                           },1000, 10);  
-
-                        });
-
-                    setInterval(function(){
-                        $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
-                    },1000);
-                
-                    
+                            setInterval(function(){
+                                $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
+                            },1000);
+                    });                    
                 });
+
             }
 
 
