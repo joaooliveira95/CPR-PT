@@ -14,4 +14,8 @@ class Exercise extends Model
     protected $hidden = [
         'remember_token'
     ];
+
+    public function idSession(){
+	    return $this->belongsTo(Session::class);
+	}
 }

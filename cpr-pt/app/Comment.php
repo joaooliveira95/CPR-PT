@@ -14,4 +14,12 @@ class Comment extends Model
         'remember_token'
     ];
 
+    public function idUser(){
+	    return $this->belongsTo(User::class);
+	}
+
+	public function idSession(){
+	    return $this->belongsTo(Session::class);
+	}
+
 }

@@ -54,3 +54,7 @@ Route::get('/students/{id}/session', 'SessionsController@session')->middleware('
 
 //COMMENTS
 Route::post('/comments/{session_id}{user_id}', 'CommentsController@send')->middleware('teacher');
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

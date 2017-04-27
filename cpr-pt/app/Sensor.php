@@ -10,4 +10,5 @@ class Sensor extends Model
         'name', 'info', 'units'
     ];
 
+
 }

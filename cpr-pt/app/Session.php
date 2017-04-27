@@ -13,4 +13,8 @@ class Session extends Model
     protected $hidden = [
         'remember_token'
     ];
+
+    public function idUser(){
+	    return $this->belongsTo(User::class);
+	}
 }
