@@ -128,13 +128,12 @@
                  $(document).ready(function(){
                        
                     $('#exercise_button').click(function(){
-                       
+                            var time = Math.round(new Date() / 1000);
                             setIntervalLimited(function(){
                                 $.post("{{ asset('script.php') }}",
-                                    {exercise:curExercise}, 
+                                    {exercise:curExercise, time:time}, 
                                     function(response){
                                         $("#exercise_button").attr("disabled", true);
-                                        //alert(response);
                                     });
                              },1000, 10); 
 

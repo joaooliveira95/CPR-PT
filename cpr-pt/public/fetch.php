@@ -6,8 +6,21 @@
         $res = mysqli_query($con, $sql); 
 
             while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-                echo "<p> Exercise: " .$row["idExercise"]. "</p>";
-                echo "<p> Sensor1: ".$row["valueSensor1"]." Sensor2: ".$row["valueSensor2"]." Sensor3: ".$row["valueSensor3"]." Timestep: ".$row["timestep"]."s </p>";
+
+                 echo "<table class=table style='text-align: center;'>";
+      			 echo "<tr>
+      			 	<th style='text-align: center;'><h4> Sensor1 </h4></th>
+      			 	<th style='text-align: center;'><h4> Sensor2 </h4></th>
+      			 	<th style='text-align: center;'><h4> Sensor3 </h4></th>
+      			 	<th style='text-align: center;'><h4> Time </h4></th>
+      			 	</tr>";
+      			 echo "<tr>
+      			 	<td><h1>".$row["valueSensor1"]."</h1></td>
+      			 	<td><h1>".$row["valueSensor3"]." </h1></td>
+      			 	<td><h1>".$row["valueSensor3"]."</h1></td>
+      			 	<td><h1>".$row["timestep"]."</h1></td>
+      			 	</tr>";
+      			 echo "</table>";
             }
       
       //  mysqli_close($con);
