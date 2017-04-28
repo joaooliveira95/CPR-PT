@@ -15,20 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
-
-
-
-
-
 
 //BLADES
 Route::get('/content', 'BladesController@contentIndex');
@@ -58,3 +47,5 @@ Route::post('/comments/{session_id}{user_id}', 'CommentsController@send')->middl
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

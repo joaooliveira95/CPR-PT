@@ -14,10 +14,14 @@
             $time = time() - $_REQUEST["time"];
 
             $sql="INSERT INTO exercise_sensors_data (idExercise, idSensor1, idSensor2, idSensor3, valueSensor1, valueSensor2, valueSensor3, timestep) VALUES ('".$_POST["exercise"]."', 1, 2, 3, '$val1', '$val2', '$val3', '$time')";
-
-
             mysqli_query($con,$sql); 
             echo(mysqli_error($con));
+
+            $sql="UPDATE exercises set time='$time' where id='".$_POST["exercise"]."'";
+            mysqli_query($con,$sql); 
+            echo(mysqli_error($con));
+
+
         
 
         mysqli_close($con);

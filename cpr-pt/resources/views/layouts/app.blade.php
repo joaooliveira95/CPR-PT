@@ -84,12 +84,12 @@
         }
 
         .table-borderless > tbody > tr > td,
-.table-borderless > tbody > tr > th,
-.table-borderless > tfoot > tr > td,
-.table-borderless > tfoot > tr > th,
-.table-borderless > thead > tr > td,
-.table-borderless > thead > tr > th {
-    border: none;
+        .table-borderless > tbody > tr > th,
+        .table-borderless > tfoot > tr > td,
+        .table-borderless > tfoot > tr > th,
+        .table-borderless > thead > tr > td,
+        .table-borderless > thead > tr > th {
+            border: none;
 }
     </style>
 
@@ -107,6 +107,9 @@
     </script>
 
     <script>
+            $(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
 
             function setIntervalLimited(callback, interval, x) {
                 flag = 0;
@@ -124,25 +127,23 @@
             }
 
             function exercise(curExercise){
-                     
-                 $(document).ready(function(){
-                       
-                    $('#exercise_button').click(function(){
-                            var time = Math.round(new Date() / 1000);
-                            setIntervalLimited(function(){
-                                $.post("{{ asset('script.php') }}",
-                                    {exercise:curExercise, time:time}, 
-                                    function(response){
-                                        $("#exercise_button").attr("disabled", true);
-                                    });
-                             },1000, 10); 
+ 
+                        var time = Math.round(new Date() / 1000 -1);
+                        setIntervalLimited(function(){
+                            $.post("{{ asset('script.php') }}",
+                                {exercise:curExercise, time:time}, 
+                                function(response){
+                                    $("#exercise_button").attr("disabled", true);
+                                    //alert(response);
+                                });
+                         },1000, 10); 
 
 
-                            setInterval(function(){
-                                $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
-                            },1000);
-                    });                    
-                });
+                        setIntervalLimited(function(){
+                            $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
+                        },1000,12);
+                            
+         
 
             }
 
