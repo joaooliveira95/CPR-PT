@@ -50,6 +50,10 @@ class NewSessionController extends Controller
 
         $curExercise = Exercise::create([
             'idSession'=>$session->id,
+            'time'=>0,
+            'recoil'=>0,
+            'compressions'=>0,
+            'hand_position'=>0,
         ]);
 
         //$exercises = $this->exercisesRepo->getSessionExercises($sessionId);
@@ -59,6 +63,10 @@ class NewSessionController extends Controller
     public function newExercise($sessionId){
         $curExercise = Exercise::create([
             'idSession'=>$sessionId,
+            'time'=>0,
+            'recoil'=>0,
+            'compressions'=>0,
+            'hand_position'=>0,
         ]);
 
         $exercises = $this->exercisesRepo->getSessionExercises($sessionId);

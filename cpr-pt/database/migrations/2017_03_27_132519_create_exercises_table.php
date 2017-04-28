@@ -17,6 +17,10 @@ class CreateExercisesTable extends Migration
             $table->increments('id');
             $table->integer('idSession')->unsigned();
             $table->foreign('idSession')->references('id')->on('sessions');
+            $table->integer('time')->unsigned();
+            $table->integer('recoil')->unsigned();
+            $table->integer('compressions')->unsigned();
+            $table->integer('hand_position')->unsigned();
             $table->rememberToken();
             $table->timestamps();
         });

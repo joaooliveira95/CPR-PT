@@ -8,7 +8,7 @@ class Exercise extends Model
 {
     
     protected $fillable = [
-        'idSession', 'duracaoTotal', 'duracaoParcial', 'nmaosCorretas', 'nmaosIncorretas','ncompressoesCorretas', 'ncompressoesIncorretas', 'nrecoilCorreto', 'nrecoilIncorreto'
+        'idSession', 'time', 'recoil', 'compressions', 'hand_position'
     ];
 
     protected $hidden = [

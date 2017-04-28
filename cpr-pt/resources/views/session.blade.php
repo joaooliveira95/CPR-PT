@@ -17,11 +17,11 @@
                                    <br>
                                   <thead class="thead-default">
                                       <tr>
-                                          <th>idSession</th>
-                                          <th>Total Duration</th>
-                                          <th>Parcial Duration</th>
-                                          <th>N Correct Compressions</th>
-                                          <th>N Incorrect Compressions</th>
+                                          <th>Exercise</th>
+                                          <th>Time</th>
+                                          <th>Recoil</th>
+                                          <th>Compressions</th>
+                                          <th>Hand Position</th>
                                       </tr>
                                   </thead>
 
@@ -29,10 +29,10 @@
                                       @foreach($exercises as $exercise)
                                           <tr>
                                             <td>{{$exercise->id}}</td>
-                                            <td>{{$exercise->duracaoTotal}}</td>
-                                            <td>{{$exercise->duracaoParcial}}</td>
-                                            <td>{{$exercise->ncompressoesCorretas}}</td>
-                                            <td>{{$exercise->ncompressoesIncorretas}}</td>
+                                            <td>{{$exercise->time}}</td>
+                                            <td>{{$exercise->recoil}}</td>
+                                            <td>{{$exercise->compressions}}</td>
+                                            <td>{{$exercise->hand_position}}</td>
                                           </tr>
                                       @endforeach
                                   </tbody>
