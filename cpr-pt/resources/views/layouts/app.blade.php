@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+ 
     <style>
         
         .navbar-default .navbar-brand {
@@ -35,7 +36,7 @@
         height: 100%;
         }
 
-        #container {
+        #progresso_sessao {
             min-width: 310px;
             max-width: 800px;
             height: 400px;
@@ -96,9 +97,8 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
+     @yield('highcharts')
   
     <script>
         window.Laravel = {!! json_encode([
@@ -108,8 +108,10 @@
 
     <script>
             $(document).ready(function() {
-    $(".dropdown-toggle").dropdown();
-});
+                $(".dropdown-toggle").dropdown();
+
+            });
+
 
             function setIntervalLimited(callback, interval, x) {
                 flag = 0;
@@ -127,27 +129,28 @@
             }
 
             function exercise(curExercise){
- 
-                        var time = Math.round(new Date() / 1000 -1);
-                        setIntervalLimited(function(){
-                            $.post("{{ asset('script.php') }}",
-                                {exercise:curExercise, time:time}, 
-                                function(response){
-                                    $("#exercise_button").attr("disabled", true);
-                                    //alert(response);
-                                });
-                         },1000, 10); 
+                    var time = Math.round(new Date() / 1000 -1);
+                    var perfect_BPM = 110;
+                    var BPM = 60 / perfect_BPM*1000;
+                     var snd = new Audio('http://127.0.0.1:8000/storage/beep.mp3');
 
+                    setIntervalLimited(function(){
+                        $.post("{{ asset('script.php') }}",
+                            {exercise:curExercise, time:time}, 
+                            function(response){
+                                $("#exercise_button").attr("disabled", true);
+                                //alert(response);
+                            });
+                     },1000, 20); 
 
-                        setIntervalLimited(function(){
-                            $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
-                        },1000,12);
-                            
-         
+                    setIntervalLimited(function(){
+                        $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
+                    },1000,22);
 
+                    setInterval(function(){
+                        snd.play();
+                    },BPM);
             }
-
-
 
             function filterDates(id){
                 var from = document.getElementById("from").value;

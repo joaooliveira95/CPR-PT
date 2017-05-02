@@ -1,5 +1,86 @@
 @extends('layouts.app')
 
+@section('highcharts')
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script>
+            function progress(idSession) {
+
+               var options = {
+
+                    title: {
+                        text: 'Session Progress'
+                    },
+
+                    subtitle: {
+                        text: 'CPR PT'
+                    },
+
+                    xAxis:{
+                       allowDecimals: false,
+                      title: {
+                            text: 'Exercises'
+                        }
+                    },
+
+                    yAxis: {
+
+                        title: {
+                            text: 'Sensor Units'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+
+                    plotOptions: {
+                      
+                        series: {
+                            pointStart: 0
+                        }
+                    },
+
+        
+                    series: [{
+                        name: 'Time',
+                        data: []
+                    },{
+                        name: 'Recoil',
+                        data: []
+                    }, {
+                        name: 'Compressions (BPM)',
+                        data: []
+                    }, {
+                        name: 'Hand Position',
+                        data: []
+                    }]
+                    
+                };
+
+                var url = "/progress/"+idSession;
+              $.get(url,function(result){
+              
+                var dados= jQuery.parseJSON(result);
+                var total=dados.recoil.length;
+                var i=0;
+                for(i=0;i<total;i++){
+                  options.series[0].data.push( dados.time[i] );
+                  options.series[1].data.push( dados.recoil[i] );
+                  options.series[2].data.push( dados.compress[i] );
+                  options.series[3].data.push( dados.hands[i] );
+
+        
+                }
+                //options.title.text="aqui e podria cambiar el titulo dinamicamente";
+                chart = new Highcharts.Chart("progresso_sessao", options);
+              })
+
+            }
+    </script>
+@endsection
+
 @section('content')
 <link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
 <div class="container">
@@ -40,8 +121,11 @@
 
                           {{ $exercises->links() }}
                       </div>
+                      <h1 href="#" onclick = "progress({{$session->id}})"> Grafico </h1>
+                          <div id="progresso_sessao">
+                          </div>
+
                     @endif
-                    
 
 
                     @if($comments!=null)
@@ -66,6 +150,7 @@
                       </div>
                     @endif
 
+                    
 
 
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
@@ -94,4 +179,6 @@
         </div>
     </div>
 </div>
+
 @endsection
+

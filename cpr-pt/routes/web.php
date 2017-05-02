@@ -41,6 +41,8 @@ Route::get('/students/{id}/sessions', 'SessionsController@sessions')->middleware
 
 Route::get('/students/{id}/session', 'SessionsController@session')->middleware('teacher');
 
+Route::get('/progress/{id}', 'SessionsController@progress');
+
 //COMMENTS
 Route::post('/comments/{session_id}{user_id}', 'CommentsController@send')->middleware('teacher');
 
@@ -49,3 +51,5 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+

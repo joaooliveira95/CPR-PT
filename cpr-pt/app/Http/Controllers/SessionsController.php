@@ -47,4 +47,26 @@ class SessionsController extends Controller{
 
         return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises, 'comments' => $comments]);
     }
+
+
+    public function progress($id){
+        $exercises = $this->exercisesRepo->getSessionExercises($id);
+        $recoil = array();
+        $compress =array();
+        $hands = array();
+
+        $cnt = count($exercises);
+        
+        for($i=0;$i<$cnt;$i++){
+            $time[$i] = $exercises[$i]->time;
+            $recoil[$i] = $exercises[$i]->recoil;
+            $compress[$i]= $exercises[$i]->compressions;
+            $hands[$i]= $exercises[$i]->hand_position;
+        }
+
+        $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands);
+        return json_encode($data);
+    }
+
+
 }  
