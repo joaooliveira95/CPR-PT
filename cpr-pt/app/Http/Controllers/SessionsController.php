@@ -61,7 +61,7 @@ class SessionsController extends Controller{
             $time[$i] = $exercises[$i]->time;
             $recoil[$i] = $exercises[$i]->recoil;
             $compress[$i]= $exercises[$i]->compressions;
-            $hands[$i]= $exercises[$i]->hand_position;
+            $hands[$i]= rand(0,100);//$exercises[$i]->hand_position;
         }
 
         $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands);

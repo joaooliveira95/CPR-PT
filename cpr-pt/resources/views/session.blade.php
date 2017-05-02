@@ -44,7 +44,7 @@
 
         
                     series: [{
-                        name: 'Time',
+                        name: 'Time (s)',
                         data: []
                     },{
                         name: 'Recoil',
@@ -53,7 +53,7 @@
                         name: 'Compressions (BPM)',
                         data: []
                     }, {
-                        name: 'Hand Position',
+                        name: 'Hand Position (%)',
                         data: []
                     }]
                     
