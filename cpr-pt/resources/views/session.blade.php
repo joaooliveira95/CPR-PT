@@ -5,7 +5,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
       <script>
             function progress(idSession) {
-
+             
                var options = {
 
                     title: {
@@ -77,6 +77,12 @@
                 chart = new Highcharts.Chart("progresso_sessao", options);
               })
 
+                var x = document.getElementById('progresso_sessao');
+                if(x.style.display == "block"){
+                  x.style.display = "none";
+                }else{
+                  x.style.display = "block";
+                }
             }
     </script>
 @endsection
@@ -121,7 +127,9 @@
 
                           {{ $exercises->links() }}
                       </div>
-                      <h1 href="#" onclick = "progress({{$session->id}})"> Grafico </h1>
+                     
+
+                      <h3 onclick="progress({{$session->id}})"> Grafico </h1>
                           <div id="progresso_sessao">
                           </div>
 
@@ -150,10 +158,6 @@
                       </div>
                     @endif
 
-                    
-
-
-                        @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                      {!! Form::open(
                        array('action'=> array('CommentsController@send', $session->id, Auth::user()->id)
                        , 'method'=>'post')) !!}
@@ -173,7 +177,6 @@
                       {!! Form::submit('Send', ['class'=>'btn btn-default btn-block', 'style'=>'margin-top:15px;']) !!}
 
                       {!! Form::close() !!}
-                        @endif
 
             </div>
         </div>

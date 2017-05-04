@@ -40,6 +40,7 @@ class CommentsController extends Controller{
 
         $comment->save();
 
-        return redirect("students/$session_id/session");
+       return redirect()->back();
+
     }
 }  
