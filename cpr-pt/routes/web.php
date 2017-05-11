@@ -33,6 +33,8 @@ Route::post('/startSession/', 'NewSessionController@startSession');
 
 Route::post('/curSession/{id}/', 'NewSessionController@newExercise');
 
+Route::get('/exercise_progress/{id}','NewSessionController@live_info');
+
 
 //SESSIONS CONTROLLER
 Route::get('/history/{id}/session', 'SessionsController@session');

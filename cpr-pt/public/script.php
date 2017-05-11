@@ -8,7 +8,7 @@
                 exit();
             }
 
-            $val1 =rand(1,300);
+            $val1 =rand(80,150);
             $val2 = rand(1,100);
             $val3 = rand(1,100);
             $time = time() - $_REQUEST["time"];

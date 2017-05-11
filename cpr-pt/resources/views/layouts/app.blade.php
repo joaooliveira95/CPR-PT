@@ -114,46 +114,6 @@
 
             });
 
-
-            function setIntervalLimited(callback, interval, x) {
-                flag = 0;
-
-                for (var i = 0; i < x; i++) {
-
-                    setTimeout(callback, i * interval);
-                    
-                }
-                if(i>=x){
-                    flag=1;
-                }
-                return flag;
-
-            }
-
-            function exercise(curExercise){
-                    var time = Math.round(new Date() / 1000 -1);
-                    var perfect_BPM = 110;
-                    var BPM = 60 / perfect_BPM*1000;
-                     var snd = new Audio('http://127.0.0.1:8000/storage/beep.mp3');
-
-                    setIntervalLimited(function(){
-                        $.post("{{ asset('script.php') }}",
-                            {exercise:curExercise, time:time}, 
-                            function(response){
-                                $("#exercise_button").attr("disabled", true);
-                                //alert(response);
-                            });
-                     },1000, 20); 
-
-                    setIntervalLimited(function(){
-                        $('#info').load("{{ asset('fetch.php') }}", {exercise:curExercise}).fadeIn("slow");
-                    },1000,22);
-
-                    setInterval(function(){
-                        snd.play();
-                    },BPM);
-            }
-
             function filterDates(id){
                 var from = document.getElementById("from").value;
                 var to = document.getElementById("to").value;

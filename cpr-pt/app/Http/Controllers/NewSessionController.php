@@ -73,6 +73,23 @@ class NewSessionController extends Controller
         return view('newSession', ['id' => $sessionId, 'curExercise'=> $curExercise]);
     }
 
+
+    public function live_info($idExercise){
+        $con = mysqli_connect("127.0.0.1","root","","cpr");
+        $sql="SELECT * FROM exercise_sensors_data WHERE idExercise=$idExercise ORDER BY timestep DESC LIMIT 1";
+        $res = mysqli_query($con, $sql); 
+
+        while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+            $time = $row["timestep"];
+            $compress = $row["valueSensor1"];
+            $recoil = $row["valueSensor2"];
+            $hands = $row["valueSensor3"];
+        }
+
+        $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands);
+        return json_encode($data);
+    }
+
     
 
 }
