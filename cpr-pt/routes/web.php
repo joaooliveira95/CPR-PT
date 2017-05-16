@@ -48,6 +48,9 @@ Route::get('/progress/{id}', 'SessionsController@progress');
 //COMMENTS
 Route::post('/comments/{session_id}{user_id}', 'CommentsController@send');
 
+Route::get('/comments/{id}', 'CommentsController@comments');
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

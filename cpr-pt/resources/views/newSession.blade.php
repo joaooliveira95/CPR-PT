@@ -27,9 +27,20 @@
                 },
                 plotLines: [{
                     value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
+                    width: 2,
+                    color: '#FFFFF'
+                }],
+                plotBands: [{ // Light air
+            from: 100,
+            to: 120,
+            color: 'rgba(0, 100, 0, 0.1)',
+            label: {
+                text: 'Good',
+                style: {
+                    color: '#606060'
+                }
+            }
+        }]
             },
             tooltip: {
                 formatter: function () {
@@ -100,9 +111,7 @@
                              chart.series[0].addPoint({marker:{fillColor:'#fc1000'}, y: compress, color:'#fc1000'});
                         }
                       });
-
-                        
-                    },1000,22);
+                    },1000,20);
 
                     /*setInterval(function(){
                         snd.play();

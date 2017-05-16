@@ -124,8 +124,6 @@
                                       @endforeach
                                   </tbody>
                           </table>
-
-                          {{ $exercises->links() }}
                       </div>
                      
 
@@ -179,6 +177,7 @@
                       {!! Form::close() !!}
 
             </div>
+            {{$comments->links()}}
         </div>
     </div>
 </div>

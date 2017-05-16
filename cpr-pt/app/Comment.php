@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
         protected $fillable = [
-        'idUser', 'idSession', 'comment'
+        'idFrom', 'idTo', 'idSession', 'comment'
     ];
 
     protected $hidden = [

@@ -15,8 +15,10 @@ class Comments extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idUser')->unsigned();
-            $table->foreign('idUser')->references('id')->on('users');
+            $table->integer('idFrom')->unsigned();
+            $table->foreign('idFrom')->references('id')->on('users');
+            $table->integer('idTo')->unsigned();
+            $table->foreign('idTo')->references('id')->on('users');
             $table->integer('idSession')->unsigned();
             $table->foreign('idSession')->references('id')->on('sessions');
             $table->string('comment');

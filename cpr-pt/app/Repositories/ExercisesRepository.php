@@ -8,7 +8,7 @@ class ExercisesRepository extends BaseRepository
 {
   protected $modelClass = Exercise::class;
 
-  public function getSessionExercises($idSession, $take = 8, $paginate = true){
+  public function getSessionExercises($idSession, $take = 8, $paginate = false){
         $query = $this->newQuery();
         $query ->where('idSession', '=', $idSession);
 

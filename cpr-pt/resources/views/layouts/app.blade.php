@@ -191,6 +191,9 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li>
+                                        <a href="/comments/{{Auth::user()->id}}">Comments</a>
+                                    </li>
                                 </ul>
                             </li>
                         @endif

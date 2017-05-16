@@ -32,15 +32,24 @@ class CommentsController extends Controller{
         $this->validate($request, array(
                 'comment' => 'required|min:1|max:2000'
             ));
-
+        $session = $this->sessionsRepo->findByID($session_id);
         $comment = new Comment();
         $comment->comment=$request->comment;
-        $comment->idUser=$user_id;
+        $comment->idFrom=$user_id;
+        $comment->idTo=$session->idUser;
         $comment->idSession=$session_id;
 
         $comment->save();
 
        return redirect()->back();
+
+    }
+
+    public function comments($user_id){
+
+        $comments = $this->commentsRepo->getCommentsOfUser($user_id);
+        
+       return view("commentsBox", ['comments'=>$comments]);
 
     }
 }  
