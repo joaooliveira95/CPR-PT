@@ -111,7 +111,18 @@
     <script>
             $(document).ready(function() {
                 $(".dropdown-toggle").dropdown();
+            });
 
+           $(window).on('load', function() {
+                var url = "/comments/new";
+
+               $.get(url,function(result){
+                    var dados= jQuery.parseJSON(result);
+                   var newComments = dados.new_comments;
+                    $("#ncomments").text("Comments "+newComments);
+                });
+              
+              
             });
 
             function filterDates(id){
@@ -192,7 +203,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="/comments/{{Auth::user()->id}}">Comments</a>
+                                        <a id='ncomments' href="/comments/{{Auth::user()->id}}"></a>
                                     </li>
                                 </ul>
                             </li>

@@ -30,11 +30,15 @@
                             </thead>
                             <tbody>
                                 @foreach($comments as $comment)
-                                    <tr>
-                                        <td>{{$comment->name}}</td>
-                                        <td>{{$comment->created_at}}</td>
-                                        <td> <a href="/history/{{$comment->idSession}}/session">{{$comment->title}}</a></td>
-                                    </tr>
+                                    @if($comment->mark === 0)
+                                        <tr bgcolor="#e6fff2">
+                                    @else
+                                        <tr>
+                                    @endif
+                                            <td>{{$comment->name}}</td>
+                                            <td>{{$comment->created_at}}</td>
+                                            <td> <a href="/comments/open/{{$comment->id}}{{$comment->idSession}}">{{$comment->title}}</a></td>
+                                         </tr>
                                 @endforeach
                             </tbody>
                     </table>

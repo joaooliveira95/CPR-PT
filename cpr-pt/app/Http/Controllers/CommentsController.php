@@ -38,11 +38,21 @@ class CommentsController extends Controller{
         $comment->idFrom=$user_id;
         $comment->idTo=$session->idUser;
         $comment->idSession=$session_id;
+        $comment->mark=0;
 
         $comment->save();
 
        return redirect()->back();
 
+    }
+
+    public function mark($id, $sessionId){
+        $comment = Comment::find($id);
+        $comment->mark = 1;
+        $comment->save();
+
+        $sessionId = $comment->idSession;
+        return redirect('/history/'.$sessionId.'/session');
     }
 
     public function comments($user_id){
@@ -53,5 +63,12 @@ class CommentsController extends Controller{
         
        return view("commentsBox", ['comments'=>$comments]);
 
+    }
+
+    public function newComments(){
+            $id = Auth::id();
+            $new_comments = $this->commentsRepo->getNewCommentsOfUser($id)->count();
+            $data=array("new_comments"=>$new_comments);
+        return json_encode($data);
     }
 }  

@@ -48,6 +48,10 @@ Route::get('/progress/{id}', 'SessionsController@progress');
 //COMMENTS
 Route::post('/comments/{session_id}{user_id}', 'CommentsController@send');
 
+Route::get('/comments/open/{id}{sessionId}', 'CommentsController@mark');
+
+Route::get('/comments/new','CommentsController@newComments');
+
 Route::get('/comments/{id}', 'CommentsController@comments');
 
 

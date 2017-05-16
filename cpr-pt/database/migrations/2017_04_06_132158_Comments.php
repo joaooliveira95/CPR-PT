@@ -22,6 +22,7 @@ class Comments extends Migration
             $table->integer('idSession')->unsigned();
             $table->foreign('idSession')->references('id')->on('sessions');
             $table->string('comment');
+            $table->integer('mark');
             $table->rememberToken();
             $table->timestamps();
         });

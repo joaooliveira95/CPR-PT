@@ -19,7 +19,7 @@ class CommentsRepository extends BaseRepository
       return $this->doQuery($query, $take, $paginate);
   }
 
-    public function getCommentsOfUser($idUser, $take = 3, $paginate = true){
+    public function getCommentsOfUser($idUser, $take = 8, $paginate = true){
 
         $query = $this->newQuery();
         $query ->join('users', 'users.id', '=', 'comments.idFrom');
@@ -32,7 +32,22 @@ class CommentsRepository extends BaseRepository
       return $this->doQuery($query, $take, $paginate);
   }
 
-  public function getCommentsOfUserDate($idUser, $from, $to, $take = 3, $paginate = true){
+
+    public function getNewCommentsOfUser($idUser, $take = 8, $paginate = true){
+
+        $query = $this->newQuery();
+        $query ->join('users', 'users.id', '=', 'comments.idFrom');
+        $query ->join('sessions', 'sessions.id', '=', 'comments.idSession');
+        $query ->select('comments.*', 'users.name', 'sessions.title');
+        $query ->where('mark', '=', 0);
+        $query ->where('idTo', '=', $idUser);
+         $query ->where('idFrom', '!=', $idUser);
+        $query ->orderBy('created_at','desc');
+
+      return $this->doQuery($query, $take, $paginate);
+  }
+
+  public function getCommentsOfUserDate($idUser, $from, $to, $take = 8, $paginate = true){
 
         $query = $this->newQuery();
         $query ->join('users', 'users.id', '=', 'comments.idFrom');
