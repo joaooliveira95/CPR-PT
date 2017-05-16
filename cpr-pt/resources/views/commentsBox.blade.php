@@ -8,6 +8,16 @@
                 <div class="panel-heading">Comments</div>
 
                 <div class="panel-body">
+
+                    <form class="form-inline">
+                         <div class="form-group">
+                                            From:
+                            <input class = "form-control input-sm" type="date" name="from" id="from">
+                            To:
+                            <input class = "form-control input-sm" type="date" name="to" id="to">
+                            <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterDates(2)" value="Submit">
+                        </div>
+                    </form>
                   
                      <div class="table-responsive">
                      <table id="comments_table" class='table table-hover'>

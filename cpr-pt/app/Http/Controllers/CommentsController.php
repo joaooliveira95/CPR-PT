@@ -46,8 +46,10 @@ class CommentsController extends Controller{
     }
 
     public function comments($user_id){
-
         $comments = $this->commentsRepo->getCommentsOfUser($user_id);
+        if(request()->has('from') && request()->has('to')){
+           $comments = $this->commentsRepo->getCommentsOfUserDate($user_id, request('from'),request('to'));
+        }
         
        return view("commentsBox", ['comments'=>$comments]);
 
