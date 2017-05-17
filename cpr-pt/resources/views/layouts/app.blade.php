@@ -118,8 +118,8 @@
 
                $.get(url,function(result){
                     var dados= jQuery.parseJSON(result);
-                   var newComments = dados.new_comments;
-                    $("#ncomments").text("Comments "+newComments);
+                    var newComments = dados.new_comments;
+                    $("#ncomments").append("Comments <sup><b>"+newComments+"</sup>");
                 });
               
               
@@ -185,6 +185,9 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                        <li>
+                            <a id='ncomments' href="/comments/{{Auth::user()->id}}"></a>
+                         </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -202,9 +205,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
-                                    <li>
-                                        <a id='ncomments' href="/comments/{{Auth::user()->id}}"></a>
-                                    </li>
+                                    
                                 </ul>
                             </li>
                         @endif
