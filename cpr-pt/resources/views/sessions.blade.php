@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <form class="form-inline">
                          <div class="form-group">
-                                            From:
+                            From:
                             <input class = "form-control input-sm" type="date" name="from" id="from">
                             To:
                             <input class = "form-control input-sm" type="date" name="to" id="to">

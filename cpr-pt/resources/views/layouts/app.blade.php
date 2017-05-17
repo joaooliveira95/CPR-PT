@@ -14,7 +14,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
  
     <style>
-        
+        .glyphicon.glyphicon-envelope {
+    font-size: 20px;
+}
         .navbar-default .navbar-brand {
             color: rgb(213, 55, 69);
             font-weight: bold;
@@ -113,13 +115,18 @@
                 $(".dropdown-toggle").dropdown();
             });
 
-           $(window).on('load', function() {
+             
+            $(window).on('load', function() {
                 var url = "/comments/new";
 
                $.get(url,function(result){
                     var dados= jQuery.parseJSON(result);
                     var newComments = dados.new_comments;
-                    $("#ncomments").append("Comments <sup><b>"+newComments+"</sup>");
+                    if(newComments>0){
+                       $("#ncomments").append("<sup>"+newComments+"</sup>");  
+                       $("#ncomments").css('color', 'red');
+                    }
+                   
                 });
               
               
@@ -186,7 +193,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                         <li>
-                            <a id='ncomments' href="/comments/{{Auth::user()->id}}"></a>
+                            <a id='ncomments' href="/comments/{{Auth::user()->id}}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                          </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
