@@ -22,6 +22,10 @@
             },
             yAxis: {
                 softMax: 150,
+                min: 80,
+                max:160,
+                startOnTick: false,
+                endOnTick:false,
                 title: {
                     text: 'Compressions (BPM)'
                 },
@@ -84,6 +88,8 @@
                      var snd = new Audio('http://127.0.0.1:8000/storage/beep.mp3');
 
                     setIntervalLimited(function(){
+                      //Corre script q produz falores simulados aleatoriamente
+                      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         $.post("{{ asset('script.php') }}",
                             {exercise:curExercise, time:time}, 
                             function(response){
@@ -104,12 +110,22 @@
                         var dados= jQuery.parseJSON(result);
                         compress = Number(dados.compress);
                         recoil = Number(dados.recoil);
+                  
+                        var symbol_s = 'diamond';
+                        if(recoil<30){
+                          symbol_s = 'triangle';
+                        }else if(recoil>30 && recoil<60){
+                          symbol_s = 'square';
+                        }
+
 
                         if(compress>=100 && compress <= 120){
-                            chart.series[0].addPoint({marker:{fillColor:'#659355'}, y: compress, color:'#659355', name:"POIS"});
+                            chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#659355'}, y: compress, color:'#659355', name:"POIS"});
                         }else{
-                             chart.series[0].addPoint({marker:{fillColor:'#fc1000'}, y: compress, color:'#fc1000'});
+                             chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#fc1000'}, y: compress, color:'#fc1000'});
                         }
+
+                        i
                       });
                     },1000,20);
 
