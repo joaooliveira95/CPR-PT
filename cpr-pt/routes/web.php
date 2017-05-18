@@ -55,9 +55,9 @@ Route::get('/comments/new','CommentsController@newComments');
 Route::get('/comments/{id}', 'CommentsController@comments');
 
 //TURMAS
-Route::get('/turmas/{id}', 'TurmasController@turmas');
+Route::get('/turmas/{id}', 'TurmasController@turmas')->middleware('teacher');;
 
-Route::get('/turma/{id}', 'TurmasController@studentsIndex');
+Route::get('/turma/{id}', 'TurmasController@studentsIndex')->middleware('teacher');;
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
