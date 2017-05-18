@@ -179,6 +179,7 @@
                         <li><a href="http://127.0.0.1:8000/history" targer="-self"><span>History</span></a></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                         <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self"><span>Turmas</span></a></li>
                         @endif
                          <li><a href="http://127.0.0.1:8000/content" targer="-self"><span>Content</span></a></li>
                         </li>
