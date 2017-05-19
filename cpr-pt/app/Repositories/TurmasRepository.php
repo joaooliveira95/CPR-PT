@@ -62,4 +62,15 @@ class TurmasRepository extends BaseRepository
       return $this->doQuery($query, $take, $paginate);
   }
 
+   public function getTurmasOfUserFiltered($idUser, $take = 8, $paginate = true){
+        $query = $this->newQuery();
+        $query ->join('turma_alunos', 'turmas.id','=','turma_alunos.idTurma');
+        $query ->select('turmas.*', 'turma_alunos.idUser');
+        $query ->where('turma_alunos.idUser', '=', $idUser);
+        $query ->where('turmas.name', 'LIKE', '%'.request('filter').'%');
+        $query ->orderBy('created_at');
+
+      return $this->doQuery($query, $take, $paginate);
+   }
+
 }

@@ -16,7 +16,7 @@ class SessionsTableSeeder extends Seeder
 
             Session::create([
                 'id' => 1,
-                'idUser'           => 1,
+                'idUser' => 1,
                 'title' => 'Test'
             ]);
         }

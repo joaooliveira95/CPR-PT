@@ -69,9 +69,7 @@
                   options.series[0].data.push( dados.time[i] );
                   options.series[1].data.push( dados.recoil[i] );
                   options.series[2].data.push( dados.compress[i] );
-                  options.series[3].data.push( dados.hands[i] );
-
-        
+                  options.series[3].data.push( dados.hands[i] );      
                 }
                 //options.title.text="aqui e podria cambiar el titulo dinamicamente";
                 chart = new Highcharts.Chart("progresso_sessao", options);
@@ -134,7 +132,7 @@
                     @endif
 
 
-                    @if($comments!=null)
+                  @if($comments!=null)
                     <hr>
                       <div class="row">
                         <div class="col-md-12">
@@ -161,16 +159,15 @@
                        , 'method'=>'post')) !!}
 
 
-                       {!! Form::label('comment','Comment: ') !!}
+                      {!! Form::label('comment','Comment: ') !!}
                    
                       {!! Form::textArea('comment', null, ['class'=>'form-control', 'rows'=>'5' ]) !!}
 
-				                        @if ($errors->has('comment'))
-                                    <span class="help-block">
-                                        <p class="text-warning"><strong>{{ $errors->first('comment') }}</strong></p>
-                                    </span>
-                                @endif
-
+	                        @if ($errors->has('comment'))
+                              <span class="help-block">
+                                  <p class="text-warning"><strong>{{ $errors->first('comment') }}</strong></p>
+                              </span>
+                          @endif
 
                       {!! Form::submit('Send', ['class'=>'btn btn-default btn-block', 'style'=>'margin-top:15px;']) !!}
 

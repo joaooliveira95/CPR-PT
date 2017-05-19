@@ -45,6 +45,8 @@ Route::get('/students/{id}/session', 'SessionsController@session')->middleware('
 
 Route::get('/progress/{id}', 'SessionsController@progress');
 
+Route::get('/exercises/{id}', 'SessionsController@userExercises');
+
 //COMMENTS
 Route::post('/comments/{session_id}{user_id}', 'CommentsController@send');
 

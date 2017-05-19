@@ -3,13 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\Sensor;
 
-class SensorsTableSeeder extends Seeder
-{
-    /**
-     * Auto generated seed file.
-     *
-     * @return void
-     */
+class SensorsTableSeeder extends Seeder{
+
     public function run()
     {
         if (Sensor::count() == 0) {

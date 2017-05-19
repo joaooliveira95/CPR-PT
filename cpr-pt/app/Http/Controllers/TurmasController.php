@@ -22,6 +22,9 @@ class TurmasController extends Controller{
 
     public function turmas($idUser){
         $turmas = $this->turmasRepo->getTurmasOfUser($idUser);
+        if(request()->has('filter')){
+            $turmas = $this->turmasRepo->getTurmasOfUserFiltered($idUser);
+        }
 
          return view('turmas', ['turmas'=> $turmas]);
     }
@@ -32,7 +35,6 @@ class TurmasController extends Controller{
 
        if(request()->has('filter')){
              $students = $this->turmasRepo->getStudentsOfTurmaFiltered($idTurma, request('filter'));
-            return view('students')->with('students', $students);
         }
 
         return view('students')->with('students', $students);

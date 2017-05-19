@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
     	$this->call(VoyagerDummyDatabaseSeeder::class);
         $this->call(SessionsTableSeeder::class);
         $this->call(SensorsTableSeeder::class);
+        $this->call(TurmasTableSeeder::class);
+        $this->call(TurmaAlunosTableSeeder::class);
     }
 }

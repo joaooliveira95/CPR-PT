@@ -132,10 +132,6 @@
               
             });
 
-            function filterDates(id){
-                var from = document.getElementById("from").value;
-                var to = document.getElementById("to").value;
-            }
 
             function filterStudents(id){
                 var filter = document.getElementById("str_filter").value;
@@ -178,8 +174,8 @@
                     <li><a href="http://127.0.0.1:8000/newSession" targer="-self"><span>New Session</span></a></li>
                         <li><a href="http://127.0.0.1:8000/history" targer="-self"><span>History</span></a></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
-                        <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li>
-                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self"><span>Turmas</span></a></li>
+                     <!--   <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li> -->
+                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self"><span>Students</span></a></li>
                         @endif
                          <li><a href="http://127.0.0.1:8000/content" targer="-self"><span>Content</span></a></li>
                         </li>
@@ -202,6 +198,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
+                                    <li>
+                                        <a href="/admin">
+                                            Backoffice
+                                        </a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

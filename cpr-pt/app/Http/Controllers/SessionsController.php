@@ -68,5 +68,26 @@ class SessionsController extends Controller{
         return json_encode($data);
     }
 
+    public function userExercises($idUser){
+        $exercises = $this->exercisesRepo->getUserExercises($idUser);
+        $recoil = array();
+        $compress =array();
+        $hands = array();
+        $dates = array();
+
+        $cnt = count($exercises);
+        
+        for($i=0;$i<$cnt;$i++){
+            $time[$i] = $exercises[$i]->time;
+            $recoil[$i] = $exercises[$i]->recoil;
+            $compress[$i]= $exercises[$i]->compressions;
+            $dates[$i]= (string) $exercises[$i]->created_at->format('d/m/y h:i');
+            $hands[$i]= rand(0,100);//$exercises[$i]->hand_position;
+        }
+
+        $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands, "dates"=>$dates);
+        return json_encode($data);
+    }
+
 
 }  
