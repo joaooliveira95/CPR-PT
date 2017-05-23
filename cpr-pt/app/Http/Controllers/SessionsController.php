@@ -32,7 +32,7 @@ class SessionsController extends Controller{
             return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
         }
 
-        $sessions = $this->sessionsRepo->getUserSessions($id);
+          $sessions = $this->sessionsRepo->getUserSessions($id);
 
         return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
     }
@@ -42,7 +42,6 @@ class SessionsController extends Controller{
         $session = $this->sessionsRepo->findByID($id);
         $user = $this->usersRepo->findByID($session->idUser);
         $exercises = $this->exercisesRepo->getSessionExercises($id);
-
         $comments = $this->commentsRepo->getCommentsBySession($id);
 
         return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises, 'comments' => $comments]);

@@ -13,7 +13,7 @@
                 marginRight: 10,
             },
             title: {
-                text: 'Live Simulation Data'
+                text: 'Treino CPR PT'
             },
             xAxis: {
                 type: 'datetime',
@@ -27,7 +27,7 @@
                 startOnTick: false,
                 endOnTick:false,
                 title: {
-                    text: 'Compressions (BPM)'
+                    text: 'Compressões (BPM)'
                 },
                 plotLines: [{
                     value: 0,
@@ -143,7 +143,7 @@
     <div class="row">
                 <div class="col-md-12 col-md-offset-0">
             <div class="panel panel-default">
-                <div class="panel-heading">Exercise {{$curExercise->id}}</div>
+                <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div>
 
                     <div class="panel-body">
 
@@ -164,7 +164,7 @@
                              array('action'=> array('NewSessionController@newExercise', $id)
                              , 'method'=>'post')) !!}
 
-                             {!! Form::submit('New Exercise', ['class'=>'btn btn-default btn-sm']) !!}
+                             {!! Form::submit('Novo Treino', ['class'=>'btn btn-default btn-sm']) !!}
 
                             {!! Form::close() !!}
                           </li>

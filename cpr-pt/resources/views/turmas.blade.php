@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Classes</div>
+                <div class="panel-heading">{{trans('messages.classes')}}</div>
 
                 <div class="panel-body">
                     
                     <form class="form-inline">
                          <div class="form-group">
-                                            Filter:
+                                           {{trans('messages.search')}}
                             <input class = "form-control input-sm" type="text" name="filter" id="str_filter">
                         
                             <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterStudents()" value="Submit">
@@ -22,8 +22,8 @@
                              <br>
                             <thead class="thead-default">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Created At</th>
+                                    <th>{{trans('messages.class')}}</th>
+                                    <th>{{trans('messages.created_at')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

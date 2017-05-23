@@ -8,7 +8,7 @@ class UsersRepository extends BaseRepository
 {
   protected $modelClass = User::class;
 
-  public function getUsersByRole($role, $take = 8, $paginate = true){
+  public function getUsersByRole($role, $take = 6, $paginate = true){
 
         $query = $this->newQuery();
         $query ->where('role_id', '=', $role);
@@ -17,7 +17,7 @@ class UsersRepository extends BaseRepository
       return $this->doQuery($query, $take, $paginate);
   }
 
-  public function filterStudents($filter, $take = 8, $paginate = true){
+  public function filterStudents($filter, $take = 6, $paginate = true){
         $by = 'name';
         if(strpos($filter, '@')!== false){
           $by = 'email';

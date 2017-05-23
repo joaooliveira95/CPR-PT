@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Sessions</div>
+                <div class="panel-heading">{{trans('messages.sessions')}}</div>
 
                 <div class="panel-body">
                     <form class="form-inline">
                          <div class="form-group">
-                            From:
+                            {{trans('messages.from')}}
                             <input class = "form-control input-sm" type="date" name="from" id="from">
-                            To:
+                            {{trans('messages.to')}}
                             <input class = "form-control input-sm" type="date" name="to" id="to">
                             <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterDates({{$id}})" value="Submit">
                          
@@ -24,8 +24,8 @@
                              <br>
                             <thead class="thead-default">
                                 <tr>
-                                    <th>Time</th>
-                                    <th>Sessions</th>
+                                    <th>{{trans('messages.date')}}</th>
+                                    <th>{{trans('messages.session')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

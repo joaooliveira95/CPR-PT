@@ -9,7 +9,7 @@
                var options = {
 
                     title: {
-                        text: 'Session Progress'
+                        text: 'Progresso da Sessão'
                     },
 
                     subtitle: {
@@ -19,14 +19,14 @@
                     xAxis:{
                        allowDecimals: false,
                       title: {
-                            text: 'Exercises'
+                            text: 'Treinos'
                         }
                     },
 
                     yAxis: {
 
                         title: {
-                            text: 'Sensor Units'
+                            text: 'Unidades do sensor'
                         }
                     },
                     legend: {
@@ -44,16 +44,16 @@
 
         
                     series: [{
-                        name: 'Time (s)',
+                        name: 'Tempo (s)',
                         data: []
                     },{
                         name: 'Recoil',
                         data: []
                     }, {
-                        name: 'Compressions (BPM)',
+                        name: 'Compressões (BPM)',
                         data: []
                     }, {
-                        name: 'Hand Position (%)',
+                        name: 'Pos. Mãos (%)',
                         data: []
                     }]
                     
@@ -102,11 +102,11 @@
                                    <br>
                                   <thead class="thead-default">
                                       <tr>
-                                          <th>Exercise</th>
-                                          <th>Time</th>
+                                          <th>{{trans('messages.exercise')}}</th>
+                                          <th>{{trans('messages.time')}}</th>
                                           <th>Recoil</th>
-                                          <th>Compressions</th>
-                                          <th>Hand Position</th>
+                                          <th>{{trans('messages.compressions')}}</th>
+                                          <th>{{trans('messages.hands_position')}}</th>
                                       </tr>
                                   </thead>
 
@@ -125,7 +125,7 @@
                       </div>
                      
 
-                      <h3 onclick="progress({{$session->id}})"> Grafico </h1>
+                      <h3 onclick="progress({{$session->id}})"> Gráfico </h1>
                           <div id="progresso_sessao">
                           </div>
 
@@ -136,7 +136,7 @@
                     <hr>
                       <div class="row">
                         <div class="col-md-12">
-                        <h3 class="comments-title"> {{ $comments->count()}} Comments</h3>
+                        <h3 class="comments-title"> {{ $comments->count()}} {{trans('messages.comments')}}</h3>
                           @foreach($comments as $comment)
                             <div class="comment">
                                 <div class="author-info">
@@ -159,7 +159,7 @@
                        , 'method'=>'post')) !!}
 
 
-                      {!! Form::label('comment','Comment: ') !!}
+                    <!--{!! Form::label('comment','Comment: ') !!}-->
                    
                       {!! Form::textArea('comment', null, ['class'=>'form-control', 'rows'=>'5' ]) !!}
 

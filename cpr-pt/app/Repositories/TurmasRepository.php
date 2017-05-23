@@ -8,7 +8,7 @@ class TurmasRepository extends BaseRepository
 {
   protected $modelClass = Turma::class;
 
-  public function getTurmaByName($name, $take = 8, $paginate = true){
+  public function getTurmaByName($name, $take = 6, $paginate = true){
 
         $query = $this->newQuery();
         $query ->where('name', '=', $name);
@@ -18,7 +18,7 @@ class TurmasRepository extends BaseRepository
   }
 
 
-  public function getStudentsOfTurma($idTurma, $take = 8, $paginate = true){
+  public function getStudentsOfTurma($idTurma, $take = 6, $paginate = true){
 
         $query = $this->newQuery();
         $query ->join('turma_alunos', 'turmas.id','=','turma_alunos.idTurma');
@@ -32,7 +32,7 @@ class TurmasRepository extends BaseRepository
   }
 
 
-  public function getStudentsOfTurmaFiltered($idTurma, $filter, $take = 8, $paginate = true){
+  public function getStudentsOfTurmaFiltered($idTurma, $filter, $take = 6, $paginate = true){
         $by = 'users.name';
         if(strpos($filter, '@')!== false){
           $by = 'users.email';
@@ -50,7 +50,7 @@ class TurmasRepository extends BaseRepository
       return $this->doQuery($query, $take, $paginate);
   }
 
-  public function getTurmasOfUser($idUser, $take = 8, $paginate = true){
+  public function getTurmasOfUser($idUser, $take = 6, $paginate = true){
 
         $query = $this->newQuery();
         $query ->join('turma_alunos', 'turmas.id','=','turma_alunos.idTurma');
@@ -62,7 +62,7 @@ class TurmasRepository extends BaseRepository
       return $this->doQuery($query, $take, $paginate);
   }
 
-   public function getTurmasOfUserFiltered($idUser, $take = 8, $paginate = true){
+   public function getTurmasOfUserFiltered($idUser, $take = 6, $paginate = true){
         $query = $this->newQuery();
         $query ->join('turma_alunos', 'turmas.id','=','turma_alunos.idTurma');
         $query ->select('turmas.*', 'turma_alunos.idUser');

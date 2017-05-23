@@ -30,8 +30,11 @@ class CommentsController extends Controller{
     public function send(Request $request, $session_id, $user_id){
 
         $this->validate($request, array(
-                'comment' => 'required|min:1|max:2000'
-            ));
+            'comment' => 'required|min:1|max:2000'
+        ));
+
+
+
         $session = $this->sessionsRepo->findByID($session_id);
         $comment = new Comment();
         $comment->comment=$request->comment;
@@ -39,21 +42,21 @@ class CommentsController extends Controller{
         $comment->idTo=$session->idUser;
         $comment->idSession=$session_id;
         $comment->mark=0;
-
         $comment->save();
 
        return redirect()->back();
-
     }
 
     public function mark($id, $sessionId){
         $comment = Comment::find($id);
-        $comment->mark = 1;
+        $comment->mark=1;
         $comment->save();
 
-        $sessionId = $comment->idSession;
         return redirect('/history/'.$sessionId.'/session');
     }
+
+
+}
 
     public function comments($user_id){
         $comments = $this->commentsRepo->getCommentsOfUser($user_id);
@@ -62,7 +65,6 @@ class CommentsController extends Controller{
         }
         
        return view("commentsBox", ['comments'=>$comments]);
-
     }
 
     public function newComments(){

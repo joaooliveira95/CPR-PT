@@ -87,9 +87,8 @@ class NewSessionController extends Controller
         }
 
         $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands);
+        
         return json_encode($data);
     }
-
-    
 
 }

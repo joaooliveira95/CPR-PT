@@ -49,7 +49,7 @@
         body{
 
             font-family: "Open Sans", Arial, sans-serif;;
-             background-color: rgba(241, 241, 241, 0.7);
+            background-color: rgba(241, 241, 241, 0.7);
             background-image: url('http://127.0.0.1:8000/storage/pictures/logo.png');
             background-repeat: no-repeat;
             background-size: 70%;
@@ -171,13 +171,13 @@
 
                     @else 
                     <ul class="nav navbar-nav">
-                    <li><a href="http://127.0.0.1:8000/newSession" targer="-self"><span>New Session</span></a></li>
-                        <li><a href="http://127.0.0.1:8000/history" targer="-self"><span>History</span></a></li>
+                    <li><a href="http://127.0.0.1:8000/newSession" targer="-self"><span>{{trans('messages.new_session')}}</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/history" targer="-self"><span>{{trans('messages.history')}}</span></a></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                      <!--   <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li> -->
-                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self"><span>Students</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self"><span>{{trans('messages.classes')}}</span></a></li>
                         @endif
-                         <li><a href="http://127.0.0.1:8000/content" targer="-self"><span>Content</span></a></li>
+                         <li><a href="http://127.0.0.1:8000/content" targer="-self"><span>{{trans('messages.content')}}</span></a></li>
                         </li>
                     </ul>
                     @endif

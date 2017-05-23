@@ -37,7 +37,7 @@
                                     @endif
                                             <td>{{$comment->name}}</td>
                                             <td>{{$comment->created_at}}</td>
-                                            <td> <a href="/comments/open/{{$comment->id}}{{$comment->idSession}}">{{$comment->title}}</a></td>
+                                            <td> <a href="/comments/open/{{$comment->id}}/{{$comment->idSession}}">{{$comment->title}}</a></td>
                                          </tr>
                                 @endforeach
                             </tbody>

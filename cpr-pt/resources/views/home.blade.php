@@ -7,6 +7,10 @@
       <script>
             var chart;
             var idUser = {{Auth::user()->id}};
+            var title = "{{trans('messages.progress')}}";
+            var xTitle = "{{trans('messages.exercises')}}";
+            var yTitle = "{{trans('messages.sensor_units')}}";
+            
             $(document).ready(function() {
              
                var options = {
@@ -16,7 +20,7 @@
                         },
 
                     title: {
-                        text: 'Progress'
+                        text: title
                     },
 
                     subtitle: {
@@ -27,7 +31,7 @@
                     xAxis:{
                         type: 'datetime',
                       title: {
-                            text: 'Exercises'
+                            text: xTitle
                         },
                         categories: [],
                     },
@@ -35,7 +39,7 @@
                     yAxis: {
 
                         title: {
-                            text: 'Sensor Units'
+                            text: yTitle
                         }
                     },
                     legend: {
@@ -53,16 +57,16 @@
 
         
                     series: [{
-                        name: 'Time (s)',
+                        name: 'Tempo (s)',
                         data: []
                     },{
                         name: 'Recoil',
                         data: []
                     }, {
-                        name: 'Compressions (BPM)',
+                        name: 'Compressões (BPM)',
                         data: []
                     }, {
-                        name: 'Hand Position (%)',
+                        name: 'Posição das mãos (%)',
                         data: []
                     }]
                     
@@ -98,7 +102,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    
                     <div id="progresso" class="progresso">
                     </div>
                 </div>

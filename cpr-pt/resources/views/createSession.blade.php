@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">New Session</div>
+                <div class="panel-heading">{{trans('messages.new_session')}}</div>
 
                     <div class="panel-body">
 
@@ -13,7 +13,7 @@
                        array('action'=> 'NewSessionController@startSession'
                        , 'method'=>'post')) !!}
 
-                       {!! Form::label('Title','Title: ') !!}
+                       {!! Form::label('Title','Título: ') !!}
 
                        {!! Form::text('title', null, ['class'=>'form-control']) !!}
 
@@ -24,7 +24,7 @@
                             @endif
 
 
-                       {!! Form::submit('Create', ['class'=>'btn btn-default btn-block', 'style'=>'margin-top:15px;']) !!}
+                       {!! Form::submit('New', ['class'=>'btn btn-default btn-block', 'style'=>'margin-top:15px;']) !!}
 
                       {!! Form::close() !!}
                     </div>
