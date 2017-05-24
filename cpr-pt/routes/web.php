@@ -17,14 +17,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@switchLang']);
+
 Route::get('/home', 'HomeController@index');
+
 
 //BLADES
 Route::get('/content', 'BladesController@contentIndex');
 
 Route::get('/history', 'BladesController@historyIndex');
 
-Route::get('/students', 'BladesController@studentsIndex')->middleware('teacher');
+Route::get('/students', 'BladesController@studentsIndex');
 
 Route::get('/newSession', 'NewSessionController@index');
 

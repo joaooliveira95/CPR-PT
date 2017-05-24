@@ -22,6 +22,7 @@ return [
     'compressions' => 'Compressões',
     'hands_position' => 'Posição das mãos',
     'comments' => 'Comentários',
+        'search' => 'Pesquisa ',
     'sensor_units' => 'Unidades do Sensor',
     'created_at' => 'Criado em',
     'name' => 'Nome'
