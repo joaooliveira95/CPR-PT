@@ -69,10 +69,7 @@
                     setTimeout(callback, i * interval);
                     
                 }
-                if(i>=x){
-                    flag=1;
-                }
-                return flag;
+
 
             }
 
@@ -98,14 +95,19 @@
 
                     setIntervalLimited(function(){
                       var url = "/exercise_progress/"+curExercise;
+                      var url_resultados = "/exercise_results/"+curExercise;
                       var compress = 0;
                       var recoil = 0;
+                      var time = 0;
+
                       $.get(url,function(result){
                       
                         var dados= jQuery.parseJSON(result);
                         compress = Number(dados.compress);
                         recoil = Number(dados.recoil);
-                  
+                        if(Number(dados.time)>19){
+                          window.open(url_resultados);
+                        }
                         var symbol_s = 'diamond';
                         if(recoil<30){
                           symbol_s = 'triangle';
@@ -113,16 +115,14 @@
                           symbol_s = 'square';
                         }
 
-
                         if(compress>=100 && compress <= 120){
                             chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#659355'}, y: compress, color:'#659355'});
                         }else{
                              chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#fc1000'}, y: compress, color:'#fc1000'});
                         }
-
-                        i
                       });
                     },1000,20);
+
 
                     /*setInterval(function(){
                         snd.play();

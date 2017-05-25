@@ -49,7 +49,6 @@ Route::get('/students/{id}/session', 'SessionsController@session')->middleware('
 Route::get('/progress/{id}', 'SessionsController@progress');
 
 Route::get('/exercises/{id}', 'SessionsController@userExercises');
-
 //COMMENTS
 Route::post('/comments/{session_id}{user_id}', 'CommentsController@send');
 
@@ -70,4 +69,6 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+
+Route::get('/exercise_results/{id}', 'SessionsController@exercise');
 

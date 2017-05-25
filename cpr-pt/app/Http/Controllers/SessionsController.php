@@ -90,4 +90,10 @@ class SessionsController extends Controller{
     }
 
 
+    public function exercise($idExercise){
+         $exercise = $this->exercisesRepo->findByID($idExercise);
+
+         return view("exercise_feedback", ['exercise' => $exercise]);
+    }
+
 }  
