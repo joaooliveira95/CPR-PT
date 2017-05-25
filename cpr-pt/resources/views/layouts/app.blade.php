@@ -39,10 +39,6 @@
         }
 
         #progresso_sessao {
-            min-width: 310px;
-            max-width: 800px;
-            height: 400px;
-            margin: 0 auto;
             display: none;
             
         }
@@ -95,7 +91,12 @@
         .table-borderless > thead > tr > td,
         .table-borderless > thead > tr > th {
             border: none;
-}
+        }
+
+        .centered_tb{
+            text-align:center; 
+            vertical-align:middle;
+        }
     </style>
 
     <!-- Scripts -->

@@ -20,6 +20,7 @@ return [
     'from' => 'De: ',
     'to' => 'Até: ',
     'compressions' => 'Compressões',
+    'compressions_bpm' => 'Compressões (BPM)',
     'hands_position' => 'Posição das mãos',
     'comments' => 'Comentários',
         'search' => 'Pesquisa ',

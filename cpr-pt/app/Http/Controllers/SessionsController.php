@@ -60,7 +60,7 @@ class SessionsController extends Controller{
             $time[$i] = $exercises[$i]->time;
             $recoil[$i] = $exercises[$i]->recoil;
             $compress[$i]= $exercises[$i]->compressions;
-            $hands[$i]= rand(0,100);//$exercises[$i]->hand_position;
+            $hands[$i]= $exercises[$i]->hand_position; //$hands[$i]= rand(0,100);
         }
 
         $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands);
@@ -73,6 +73,7 @@ class SessionsController extends Controller{
         $compress =array();
         $hands = array();
         $dates = array();
+        $time = array();
 
         $cnt = count($exercises);
         
@@ -81,7 +82,7 @@ class SessionsController extends Controller{
             $recoil[$i] = $exercises[$i]->recoil;
             $compress[$i]= $exercises[$i]->compressions;
             $dates[$i]= (string) $exercises[$i]->created_at->format('d/m/y h:i');
-            $hands[$i]= rand(0,100);//$exercises[$i]->hand_position;
+            $hands[$i]= $exercises[$i]->hand_position;
         }
 
         $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands, "dates"=>$dates);

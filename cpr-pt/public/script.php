@@ -18,7 +18,15 @@
             echo(mysqli_error($con));
 
             $sql="UPDATE exercises set time='$time' where id='".$_POST["exercise"]."'";
-            mysqli_query($con,$sql); 
+                        mysqli_query($con,$sql); 
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
+            $sql="UPDATE exercises set compressions='$val1' where id='".$_POST["exercise"]."'";
+                        mysqli_query($con,$sql); 
+            $sql="UPDATE exercises set recoil='$val2' where id='".$_POST["exercise"]."'";
+                        mysqli_query($con,$sql); 
+            $sql="UPDATE exercises set hand_position='$val3' where id='".$_POST["exercise"]."'";
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+                        mysqli_query($con,$sql); 
             echo(mysqli_error($con));
 
 

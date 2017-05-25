@@ -10,9 +10,9 @@
             var title = "{{trans('messages.progress')}}";
             var xTitle = "{{trans('messages.exercises')}}";
             var yTitle = "{{trans('messages.sensor_units')}}";
-            
+
             $(document).ready(function() {
-             
+        
                var options = {
 
                         chart: {
@@ -72,7 +72,7 @@
                     
                 };
 
-                var url = "/exercises/"+1;
+                var url = "/exercises/"+idUser;
               $.get(url,function(result){
               
                 var dados= jQuery.parseJSON(result);

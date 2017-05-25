@@ -3,6 +3,7 @@
 // resources/lang/en/messages.php
 
 return [
+	'CPR PT'=>'CPR PT',
     'new_session' => 'New Session',
     'sessions' => 'Sessions',
     'session' => 'Session',
@@ -20,6 +21,7 @@ return [
     'from' => 'From: ',
     'to' => 'To: ',
     'compressions' => 'Compressions',
+    'compressions_bpm' => 'Compressions (BPM)',
     'hands_position' => 'Hands Position',
     'comments' => 'Comments',
     'sensor_units' => 'Sensor Units',

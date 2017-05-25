@@ -89,44 +89,45 @@
 <link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+       <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">{{$user->name}} | {{$session->title}} | {{$session->created_at}}</div>
 
                 <div class="panel-body">
 
-                      <div id="treinos">
+                  <div id="treinos">
                           @if($exercises!=null)
                             <div class="table-responsive">
                              <table id="sessions_table" class='table table-hover'>
                                    <br>
                                   <thead class="thead-default">
                                       <tr>
-                                          <th>{{trans('messages.exercise')}}</th>
-                                          <th>{{trans('messages.time')}}</th>
-                                          <th>Recoil</th>
-                                          <th>{{trans('messages.compressions')}}</th>
-                                          <th>{{trans('messages.hands_position')}}</th>
+                                          <th class = "centered_tb">{{trans('messages.exercise')}}</th>
+                                          <th class = "centered_tb">{{trans('messages.time')}}</th>
+                                          <th class = "centered_tb">Recoil</th>
+                                          <th class = "centered_tb">{{trans('messages.compressions')}}</th>
+                                          <th class = "centered_tb">{{trans('messages.hands_position')}}</th>
                                       </tr>
                                   </thead>
 
                                   <tbody>
                                       @foreach($exercises as $exercise)
                                           <tr>
-                                            <td>{{$exercise->id}}</td>
-                                            <td>{{$exercise->time}}</td>
-                                            <td>{{$exercise->recoil}}</td>
-                                            <td>{{$exercise->compressions}}</td>
-                                            <td>{{$exercise->hand_position}}</td>
+                                            <td class = "centered_tb">{{$exercise->id}}</td>
+                                            <td class = "centered_tb">{{$exercise->time}}</td>
+                                            <td class = "centered_tb">{{$exercise->recoil}}</td>
+                                            <td class = "centered_tb">{{$exercise->compressions}}</td>
+                                            <td class = "centered_tb">{{$exercise->hand_position}}</td>
                                           </tr>
                                       @endforeach
                                   </tbody>
                           </table>
                       </div>
+                  </div>
                      
 
-                      <h3 onclick="progress({{$session->id}})"> Gráfico </h1>
-                          <div id="progresso_sessao">
+                  <h3 onclick="progress({{$session->id}})"> Gráfico </h1>
+                  <div id="progresso_sessao">
                           </div>
 
                     @endif

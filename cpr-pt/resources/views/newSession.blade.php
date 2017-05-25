@@ -5,6 +5,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
       <script>
       var chart;
+         var compress_title = "{{trans('messages.compressions_bpm')}}";
    $(document).ready(function() {
         chart = new Highcharts.chart('progressao_treino', {
             chart: {
@@ -13,7 +14,7 @@
                 marginRight: 10,
             },
             title: {
-                text: 'Treino CPR PT'
+                text: 'CPR PT'
             },
             xAxis: {
                 type: 'datetime',
@@ -27,7 +28,7 @@
                 startOnTick: false,
                 endOnTick:false,
                 title: {
-                    text: 'Compressões (BPM)'
+                    text: compress_title
                 },
                 plotLines: [{
                     value: 0,
@@ -46,13 +47,7 @@
             }
         }]
             },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' ;
-                       
-                       
-                }
-            },
+           
             legend: {
                 enabled: false
             },
@@ -60,7 +55,7 @@
                 enabled: true
             },
             series: [{
-                name: 'Random data',
+                name: compress_title,
                 data: []
             }]
         });
@@ -120,7 +115,7 @@
 
 
                         if(compress>=100 && compress <= 120){
-                            chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#659355'}, y: compress, color:'#659355', name:"POIS"});
+                            chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#659355'}, y: compress, color:'#659355'});
                         }else{
                              chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#fc1000'}, y: compress, color:'#fc1000'});
                         }

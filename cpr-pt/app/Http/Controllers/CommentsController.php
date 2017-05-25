@@ -56,7 +56,7 @@ class CommentsController extends Controller{
     }
 
 
-}
+
 
     public function comments($user_id){
         $comments = $this->commentsRepo->getCommentsOfUser($user_id);
