@@ -5,7 +5,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
       <script>
       var chart;
-         var compress_title = "{{trans('messages.compressions_bpm')}}";
+         var compress_title = "{{trans('messages.compressions')}}";
    $(document).ready(function() {
         chart = new Highcharts.chart('progressao_treino', {
             chart: {
@@ -23,8 +23,8 @@
             },
             yAxis: {
                 softMax: 150,
-                min: 80,
-                max:160,
+              //  min: 80,
+             //   max:160,
                 startOnTick: false,
                 endOnTick:false,
                 title: {
@@ -63,14 +63,9 @@
 
             function setIntervalLimited(callback, interval, x) {
                 flag = 0;
-
                 for (var i = 0; i < x; i++) {
-
-                    setTimeout(callback, i * interval);
-                    
+                    setTimeout(callback, i * interval); 
                 }
-
-
             }
 
             function exercise(curExercise){
@@ -90,9 +85,6 @@
                             });
                      },1000, 20); 
 
-                   
-
-
                     setIntervalLimited(function(){
                       var url = "/exercise_progress/"+curExercise;
                       var url_resultados = "/exercise_results/"+curExercise;
@@ -105,7 +97,7 @@
                         var dados= jQuery.parseJSON(result);
                         compress = Number(dados.compress);
                         recoil = Number(dados.recoil);
-                        if(Number(dados.time)>19){
+                        if(Number(dados.time)==20){
                           window.open(url_resultados);
                         }
                         var symbol_s = 'diamond';

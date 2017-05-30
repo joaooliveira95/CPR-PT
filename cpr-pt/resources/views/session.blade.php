@@ -50,7 +50,7 @@
                         name: 'Recoil',
                         data: []
                     }, {
-                        name: 'Compressões (BPM)',
+                        name: 'Compressões',
                         data: []
                     }, {
                         name: 'Pos. Mãos (%)',
@@ -113,7 +113,7 @@
                                   <tbody>
                                       @foreach($exercises as $exercise)
                                           <tr>
-                                            <td class = "centered_tb">{{$exercise->id}}</td>
+                                            <td class = "centered_tb"><a href="/exercise_results/{{$exercise->id}}"> {{$exercise->id}} </a></td>
                                             <td class = "centered_tb">{{$exercise->time}}</td>
                                             <td class = "centered_tb">{{$exercise->recoil}}</td>
                                             <td class = "centered_tb">{{$exercise->compressions}}</td>
@@ -122,6 +122,7 @@
                                       @endforeach
                                   </tbody>
                           </table>
+                          
                       </div>
                   </div>
                      
