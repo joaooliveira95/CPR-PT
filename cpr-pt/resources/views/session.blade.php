@@ -122,17 +122,17 @@
                                       @endforeach
                                   </tbody>
                           </table>
+
                           
                       </div>
+                        {{$exercises->links()}}
                   </div>
-                     
+                    
 
                   <h3 onclick="progress({{$session->id}})"> Gráfico </h1>
                   <div id="progresso_sessao">
                           </div>
-
                     @endif
-
 
                   @if($comments!=null)
                     <hr>

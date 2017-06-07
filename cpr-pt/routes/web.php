@@ -21,6 +21,8 @@ Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@swit
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/import', 'ImportExportController@import');
+
 
 //BLADES
 Route::get('/content', 'BladesController@contentIndex');
@@ -36,8 +38,13 @@ Route::post('/startSession/', 'NewSessionController@startSession');
 
 Route::post('/curSession/{id}/', 'NewSessionController@newExercise');
 
-Route::get('/exercise_progress/{id}','NewSessionController@live_info');
+//SIMULATION CONTROLLER
 
+Route::get('/exercise_progress/{id}','SimulationController@live_info');
+
+Route::get('/exercise_feedback/{id}','SimulationController@feedback_info');
+
+Route::get('/script/{start_time}/{id}','SimulationController@Script');
 
 //SESSIONS CONTROLLER
 Route::get('/history/{id}/session', 'SessionsController@session');

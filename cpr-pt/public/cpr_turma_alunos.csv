@@ -1,0 +1,15 @@
+name;email;password;role_id;turma_id
+Joao Oliveira;joaomiguelso@hotmail.com;password1;student;1
+Joao Bans;bans@mail.com;password2;student;1
+Filipe Fernandes;phil@mail.com;password3;student;1
+Hugo Rodrigues;adamastor@mail.com;password4;student;1
+Vanessa Cherry;van@mail.com;password5;student;1
+Pedro Teixeira;teixeira@mail.com;password6;student;2
+Mario Araujo;mfe@mail.com;password7;student;2
+Bruna Magalhaes;bruna@mail.com;password8;student;2
+Joana Duarte;jo_duarte@mail.com;password9;student;2
+Tiago Silva;tsilva@mail.com;password10;student;3
+Carlos Mateus;mateus_burgues@mail.com;password11;student;3
+Paulo Jorge;pjorge@mail.com;password12;student;3
+Ana Luisa;analu@mail.com;password13;student;3
+Luis Mouta;partyboy@mail.com;password14;student;3

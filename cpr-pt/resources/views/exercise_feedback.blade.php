@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('highcharts')
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+
       <script>
       var chart;
       var idExercise = "{{$exercise->id}}";
@@ -10,8 +11,16 @@
              
                var options = {
 
+                    chart: {
+                       type: 'line',
+                       panning: true,
+                      panKey: 'shift',
+                        zoomType: 'x',
+                        backgroundColor:'transparent',
+                    },
+                   
                     title: {
-                        text: "Exercicio"
+                        text: 'Dados da Sessão de Treino'
                     },
 
                     subtitle: {
@@ -19,42 +28,71 @@
                     },
 
                     xAxis:{
-                       allowDecimals: false,
-                      title: {
-                            text: 'Treinos'
-                        }
+                        min: 0,
+                        minRange: 30000,
+                        type: 'datetime',
+
+                       title: {
+                            text: 'Tempo (ms)'
+                        },
+          
                     },
 
                     yAxis: {
-
+                        min: 0,
                         title: {
-                            text: 'Compressões'
-                        }
+                            text: 'Sensor (Definir Unidades)'
+                        },
+                        
                     },
+
+                    tooltip: {
+                        headerFormat: '<b>{series.name}</b><br />',
+                        pointFormat: 'x = {point.x}, y = {point.y}'
+                    },
+
                     legend: {
                         layout: 'vertical',
                         align: 'right',
                         verticalAlign: 'middle'
                     },
 
-                    plotOptions: {
-                      
-                        series: {
-                            pointStart: 0
-                        }
-                    },
-
+               
         
                     series: [{
-                        name: 'Compressões',
+                        name: 'Sensor1',
                         data: []
-                    }]
-                    
+                    }, {
+                        name: 'Sensor2',
+                        data: []
+                    }],
+
+                    scrollbar:{
+                      enabled: true,
+                    }
+
+               
                 };
 
-             
-                //options.title.text="aqui e podria cambiar el titulo dinamicamente";
+
+                var url = "/exercise_feedback/"+idExercise;
+              $.get(url,function(result){
+        
+                var dados= jQuery.parseJSON(result);
+                var total=dados.length;
+
+                var i;
+
+                for(i=0;i<total;i++){
+                  var time = Number(dados[i].time);
+
+                  options.series[0].data.push( [time, Number(dados[i].ponto_sensor1)]);
+                  options.series[1].data.push( [time, Number(dados[i].ponto_sensor2)]);     
+                }
+           
                 chart = new Highcharts.Chart("treino", options);
+              
+                })
               });
     </script>
 @endsection
@@ -132,11 +170,12 @@
                   </table>
                   </div>
               </div>
-              <div id="treino">
+              
+          </div>
+          <div id="treino" style="height: 400px;">
 
               </div>
             </div>
-          </div>
         </div>
     </div>
 </div>

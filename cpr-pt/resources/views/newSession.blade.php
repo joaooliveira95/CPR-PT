@@ -8,57 +8,67 @@
          var compress_title = "{{trans('messages.compressions')}}";
    $(document).ready(function() {
         chart = new Highcharts.chart('progressao_treino', {
-            chart: {
-                type: 'spline',
-                animation: Highcharts.svg, // don't animate in old IE
-                marginRight: 10,
-            },
-            title: {
-                text: 'CPR PT'
-            },
-            xAxis: {
-                type: 'datetime',
-                tickPixelInterval: 150,
-                softMax : 3
-            },
-            yAxis: {
-                softMax: 150,
-              //  min: 80,
-             //   max:160,
-                startOnTick: false,
-                endOnTick:false,
-                title: {
-                    text: compress_title
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 2,
-                    color: '#FFFFF'
-                }],
-                plotBands: [{ // Light air
-            from: 100,
-            to: 120,
-            color: 'rgba(0, 100, 0, 0.1)',
-            label: {
-                text: 'Good',
-                style: {
-                    color: '#606060'
-                }
-            }
-        }]
-            },
-           
-            legend: {
-                enabled: false
-            },
-            exporting: {
-                enabled: true
-            },
-            series: [{
-                name: compress_title,
-                data: []
-            }]
-        });
+              chart: {
+                       type: 'line',
+                       panning: true,
+                      panKey: 'shift',
+                        zoomType: 'x',
+                        backgroundColor:'transparent',
+                    },
+                   
+                    title: {
+                        text: 'Dados da Sessão de Treino'
+                    },
+
+                    subtitle: {
+                        text: 'CPR PT'
+                    },
+
+                    xAxis:{
+                        min: 0,
+                        minRange: 30000,
+                        type: 'datetime',
+
+                       title: {
+                            text: 'Tempo (ms)'
+                        },
+          
+                    },
+
+                    yAxis: {
+                        min: 0,
+                        maxSoft: 10000,
+                        minRange: 5000,
+                        title: {
+                            text: 'Sensor (Definir Unidades)'
+                        },
+                    },
+
+                    tooltip: {
+                        headerFormat: '<b>{series.name}</b><br />',
+                        pointFormat: 'x = {point.x}, y = {point.y}'
+                    },
+
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+
+               
+        
+                    series: [{
+                        name: 'Sensor1',
+                        data: []
+                    }, {
+                        name: 'Sensor2',
+                        data: []
+                    }],
+
+                    scrollbar:{
+                      enabled: true,
+                    }
+          });
     });
 
             function setIntervalLimited(callback, interval, x) {
@@ -69,57 +79,42 @@
             }
 
             function exercise(curExercise){
-                    var time = Math.round(new Date() / 1000 -1);
-                    var perfect_BPM = 110;
-                    var BPM = 60 / perfect_BPM*1000;
-                     var snd = new Audio('http://127.0.0.1:8000/storage/beep.mp3');
-
+                    $("#exercise_button").attr("disabled", true); 
+              
+                    var startTime = new Date().getTime();
+      
                     setIntervalLimited(function(){
-                      //Corre script q produz falores simulados aleatoriamente
-                      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        $.post("{{ asset('script.php') }}",
-                            {exercise:curExercise, time:time}, 
-                            function(response){
-                                $("#exercise_button").attr("disabled", true);
-                                //alert(response);
-                            });
-                     },1000, 20); 
+                      var curTime = new Date().getTime();
+                      var time = curTime-startTime;
+                      var url = "/script/"+time+"/"+curExercise;
+                        $.get(url, function(response){
+                           });
+                     },200,100); //10s
 
-                    setIntervalLimited(function(){
+
                       var url = "/exercise_progress/"+curExercise;
-                      var url_resultados = "/exercise_results/"+curExercise;
+              
                       var compress = 0;
-                      var recoil = 0;
+                      var hands = 0;
                       var time = 0;
 
+                      setIntervalLimited(function(){
                       $.get(url,function(result){
                       
                         var dados= jQuery.parseJSON(result);
-                        compress = Number(dados.compress);
-                        recoil = Number(dados.recoil);
-                        if(Number(dados.time)==20){
-                          window.open(url_resultados);
-                        }
-                        var symbol_s = 'diamond';
-                        if(recoil<30){
-                          symbol_s = 'triangle';
-                        }else if(recoil>30 && recoil<60){
-                          symbol_s = 'square';
-                        }
+                        compress = Number(dados.ponto_sensor1);
+                        hands = Number(dados.ponto_sensor2);
+                        timestamp = Number(dados.time);
 
-                        if(compress>=100 && compress <= 120){
-                            chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#659355'}, y: compress, color:'#659355'});
-                        }else{
-                             chart.series[0].addPoint({marker:{symbol: symbol_s, fillColor:'#fc1000'}, y: compress, color:'#fc1000'});
-                        }
-                      });
-                    },1000,20);
+                        chart.series[0].addPoint([timestamp, compress]);
+                        chart.series[1].addPoint([timestamp, hands]);
+                     });
+                    },201,100);
 
-
-                    /*setInterval(function(){
-                        snd.play();
-                    },BPM);*/
-
+                    setTimeout(function(){
+                        var url_resultados = "/exercise_results/"+curExercise;
+                        window.open(url_resultados);
+                    },25000);
 
             }
     </script>
