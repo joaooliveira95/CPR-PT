@@ -171,7 +171,7 @@ class SimulationController extends Controller
 
     public function live_info($idExercise){
         $con = mysqli_connect("127.0.0.1","root","","cpr");
-        $sql="SELECT * FROM exercise_sensors_data WHERE idExercise=$idExercise ORDER BY timestep DESC LIMIT 5";
+        $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise ORDER BY timestep DESC LIMIT 5";
         $res = mysqli_query($con, $sql); 
         $n_rows = $res->num_rows;
 
@@ -202,7 +202,7 @@ class SimulationController extends Controller
     public function feedback_info($idExercise){
             ini_set('memory_limit', '-1'); 
         $con = mysqli_connect("127.0.0.1","root","","cpr");
-        $sql="SELECT * FROM exercise_sensors_data WHERE idExercise=$idExercise ORDER BY timestep ASC";
+        $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise ORDER BY timestep ASC";
         $res = mysqli_query($con, $sql); 
         $n_rows = mysqli_num_rows($res);
    
@@ -244,20 +244,39 @@ class SimulationController extends Controller
         return json_encode($data);
     }
 
-    public function Script($time, $idExercise, $simular){
+    public function script($idExercise, $simular){
+       
+        global $db;
         $data = array();
-       if($simular==1){
-            $con = mysqli_connect("127.0.0.1","root","","cpr");
 
-            $s1= rand(1, 5000);
-            $s2 = rand(1, 500);
+        $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;
 
-             $sql = "INSERT into exercise_sensors_data (idExercise,idSensor1, idSensor2, idSensor3,valueSensor1, valueSensor2, valueSensor3, timestep) values (".$idExercise.", 1, 2, 3,".$s1.",".$s2.", 0, ".$time.")";
-            $data = mysqli_query($con, $sql); 
 
-       }else{
+        if (substr(php_uname(), 0, 7) == "Windows"){
 
-       }
-        return json_encode($data);
+            $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;
+
+
+
+
+            $handle = popen("start /B ". $cmd, "r");
+
+
+            pclose($handle);
+
+        }else{
+
+          $cmd = "python ../pyScript/start.py ".$idExercise." ".$simular." >/dev/null &";
+
+          $outputfile = "startPy.out";
+
+          $pidfile = "startPy.pid";
+
+          exec($cmd);
+
+        }
+
+         return json_encode($data);
     }
+
 }

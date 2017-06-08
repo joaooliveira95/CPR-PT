@@ -36,7 +36,7 @@ Route::get('/newSession', 'NewSessionController@index');
 //NEW SESSION
 Route::post('/startSession/', 'NewSessionController@startSession');
 
-Route::post('/curSession/{id}/', 'NewSessionController@newExercise');
+Route::post('/curSession/{id}&{curExercise}/', 'NewSessionController@newExercise');
 
 //SIMULATION CONTROLLER
 
@@ -44,7 +44,8 @@ Route::get('/exercise_progress/{id}','SimulationController@live_info');
 
 Route::get('/exercise_feedback/{id}','SimulationController@feedback_info');
 
-Route::get('/script/{start_time}/{id}/{sim}','SimulationController@Script');
+Route::get('/script/{id}&{sim}','SimulationController@script');
+
 
 //SESSIONS CONTROLLER
 Route::get('/history/{id}/session', 'SessionsController@session');

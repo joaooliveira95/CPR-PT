@@ -1,22 +1,33 @@
 @extends('layouts.app')
 
 @section('highcharts')
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/boost.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="{{ URL::to('/js/highcharts.js') }}"></script>
+<script type="text/javascript" src="{{ URL::to('/js/boost.js') }}"></script>
+
       <script>
       var chart;
          var compress_title = "{{trans('messages.compressions')}}";
-   $(document).ready(function() {
-        chart = new Highcharts.chart('progressao_treino', {
+             var idExercise = "{{$curExercise->id}}";
+
+    function setIntervalLimited(callback, interval, x) {
+        flag = 0;
+        for (var i = 0; i < x; i++) {
+            setTimeout(callback, i * interval); 
+        }
+    }
+
+     $(document).ready(function() {
+           var options = {
                     chart: {
                        type: 'line',
-                       panning: true,
-                      panKey: 'shift',
-                        zoomType: 'x',
-                        backgroundColor:'transparent',
+
                     },
 
+                    plotOptions: {
+                        series: {
+                            animation: false
+                        }
+                    },
 
                     boost: {
                         useGPUTranslations: true
@@ -75,8 +86,33 @@
                     scrollbar:{
                       enabled: true,
                     }
-          });
-    });
+          };
+          chart = new Highcharts.Chart("progressao_treino", options);
+          chart.series[0].setData([]);
+          chart.series[1].setData([]);
+           var url = "/exercise_feedback/"+idExercise;
+           setIntervalLimited(function(){
+              $.get(url,function(result){
+        
+                var dados= jQuery.parseJSON(result);
+                var total=dados.length;
+
+                var i;
+                for(i=0;i<total;i++){
+                  var time = Number(dados[i].time);
+                  var highestTime = chart.xAxis[0].getExtremes().dataMax;
+                  if(time>highestTime){
+                    chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)]);
+                    chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)]); 
+                  }    
+                }
+
+               
+                });
+            },20,1250);
+
+              
+        });
 
             function setIntervalLimited(callback, interval, x) {
                 flag = 0;
@@ -86,43 +122,11 @@
             }
 
             function exercise(curExercise){
-                    $("#exercise_button").attr("disabled", true); 
-              
-                    var startTime = new Date().getTime();
-      
-                    setInterval(function(){
-                      var curTime = new Date().getTime();
-                      var time = curTime-startTime;
-                      var url = "/script/"+time+"/"+curExercise+"/"+1;
-                        $.get(url, function(response){
-                           });
-                     },250); //10s
-
-
-                      var url = "/exercise_progress/"+curExercise;
-              
-                      var compress = 0;
-                      var hands = 0;
-                      var time = 0;
-
-                      setInterval(function(){
-                      $.get(url,function(result){
-                      
-                        var dados= jQuery.parseJSON(result);
-                        compress = Number(dados.ponto_sensor1);
-                        hands = Number(dados.ponto_sensor2);
-                        timestamp = Number(dados.time);
-
-                        chart.series[0].addPoint([timestamp, compress]);
-                        chart.series[1].addPoint([timestamp, hands]);
-                     });
-                    },250);
-
-                    setTimeout(function(){
-                        var url_resultados = "/exercise_results/"+curExercise;
-                        window.open(url_resultados);
-                    },25000);
-
+                  $("#exercise_button").attr("disabled", true); 
+            
+                  var url = "/script/"+idExercise+"&1";
+                  $.get(url,function(result){
+                  });
             }
     </script>
 @endsection
@@ -150,7 +154,7 @@
 
                           <li style="display: inline-block">
                              {!! Form::open(
-                             array('action'=> array('NewSessionController@newExercise', $id)
+                             array('action'=> array('NewSessionController@newExercise', $id, $curExercise->id)
                              , 'method'=>'post')) !!}
 
                              {!! Form::submit('Novo Treino', ['class'=>'btn btn-default btn-sm']) !!}

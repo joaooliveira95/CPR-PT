@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('highcharts')
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="{{ URL::to('/js/highcharts.js') }}"></script>
+
       <script>
             function progress(idSession) {
              

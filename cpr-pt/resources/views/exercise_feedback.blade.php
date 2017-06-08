@@ -2,7 +2,8 @@
 
 @section('highcharts')
 
-<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script type="text/javascript" src="{{ URL::to('/js/highcharts.js') }}"></script>
+<script type="text/javascript" src="{{ URL::to('/js/boost.js') }}"></script>
 
       <script>
       var chart;
@@ -18,6 +19,17 @@
                         zoomType: 'x',
                         backgroundColor:'transparent',
                     },
+
+                    plotOptions: {
+                        series: {
+                            animation: false
+                        }
+                    },
+
+                    boost: {
+                        useGPUTranslations: true
+                    },
+
                    
                     title: {
                         text: 'Dados da Sessão de Treino'
