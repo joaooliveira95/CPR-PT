@@ -2,7 +2,7 @@
 
 @section('highcharts')
 
-<script type="text/javascript" src="{{ URL::to('/js/highcharts.js') }}"></script>
+<script type="text/javascript" src="{{ URL::to('/js/highstock.js') }}"></script>
 <script type="text/javascript" src="{{ URL::to('/js/boost.js') }}"></script>
 
       <script>
@@ -41,7 +41,7 @@
 
                     xAxis:{
                         min: 0,
-                        minRange: 30000,
+                        minRange: 10000,
                         type: 'datetime',
 
                        title: {

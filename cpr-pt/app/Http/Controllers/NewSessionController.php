@@ -82,5 +82,15 @@ class NewSessionController extends Controller
         return view('newSession', ['id' => $sessionId, 'curExercise'=> $newExercise]);
     }
 
+    public function endSession($curExerciseId){
+
+        $total_time = $this->dataRepo->getExerciseTime($curExerciseId);
+ 
+        Exercise::where('id', $curExerciseId)
+          ->update(['time' => $total_time[0]->timestep]);
+
+        return redirect('/history');
+    }
+
   
 }

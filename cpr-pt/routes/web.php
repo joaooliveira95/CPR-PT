@@ -38,6 +38,8 @@ Route::post('/startSession/', 'NewSessionController@startSession');
 
 Route::post('/curSession/{id}&{curExercise}/', 'NewSessionController@newExercise');
 
+Route::post('/endSession/{curExercise}/', 'NewSessionController@endSession');
+
 //SIMULATION CONTROLLER
 
 Route::get('/exercise_progress/{id}','SimulationController@live_info');

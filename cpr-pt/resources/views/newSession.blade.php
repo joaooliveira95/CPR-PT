@@ -23,12 +23,6 @@
 
                     },
 
-                    plotOptions: {
-                        series: {
-                            animation: false
-                        }
-                    },
-
                     boost: {
                         useGPUTranslations: true
                     },
@@ -91,7 +85,7 @@
           chart.series[0].setData([]);
           chart.series[1].setData([]);
            var url = "/exercise_feedback/"+idExercise;
-           setIntervalLimited(function(){
+           setInterval(function(){
               $.get(url,function(result){
         
                 var dados= jQuery.parseJSON(result);
@@ -109,7 +103,8 @@
 
                
                 });
-            },20,1250);
+            },50);
+
 
               
         });
@@ -127,6 +122,12 @@
                   var url = "/script/"+idExercise+"&1";
                   $.get(url,function(result){
                   });
+
+                  setTimeout(function(){
+                    var url_resultados = "/exercise_results/"+idExercise;
+                    window.open(url_resultados);
+                  },20000);
+
             }
     </script>
 @endsection
@@ -157,13 +158,19 @@
                              array('action'=> array('NewSessionController@newExercise', $id, $curExercise->id)
                              , 'method'=>'post')) !!}
 
-                             {!! Form::submit('Novo Treino', ['class'=>'btn btn-default btn-sm']) !!}
+                             {!! Form::submit('New Exercise', ['class'=>'btn btn-default btn-sm']) !!}
 
                             {!! Form::close() !!}
                           </li>
 
                           <li style="display: inline-block">
-                            <input class = "btn btn-danger btn-sm" type="submit" name="filter_button" id="filter_button" value="End Session" onclick="location.href='/history';"/>
+                             {!! Form::open(
+                             array('action'=> array('NewSessionController@endSession', $curExercise->id)
+                             , 'method'=>'post')) !!}
+
+                             {!! Form::submit('End Session', ['class'=>'btn btn-danger btn-sm']) !!}
+
+                            {!! Form::close() !!}
                           </li>
                         </div>
                 </div>
