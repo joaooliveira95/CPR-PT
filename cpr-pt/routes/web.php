@@ -44,7 +44,7 @@ Route::get('/exercise_progress/{id}','SimulationController@live_info');
 
 Route::get('/exercise_feedback/{id}','SimulationController@feedback_info');
 
-Route::get('/script/{start_time}/{id}','SimulationController@Script');
+Route::get('/script/{start_time}/{id}/{sim}','SimulationController@Script');
 
 //SESSIONS CONTROLLER
 Route::get('/history/{id}/session', 'SessionsController@session');

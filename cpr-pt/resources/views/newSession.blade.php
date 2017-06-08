@@ -2,19 +2,26 @@
 
 @section('highcharts')
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/boost.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
       <script>
       var chart;
          var compress_title = "{{trans('messages.compressions')}}";
    $(document).ready(function() {
         chart = new Highcharts.chart('progressao_treino', {
-              chart: {
+                    chart: {
                        type: 'line',
                        panning: true,
                       panKey: 'shift',
                         zoomType: 'x',
                         backgroundColor:'transparent',
                     },
+
+
+                    boost: {
+                        useGPUTranslations: true
+                    },
+
                    
                     title: {
                         text: 'Dados da Sessão de Treino'
@@ -83,13 +90,13 @@
               
                     var startTime = new Date().getTime();
       
-                    setIntervalLimited(function(){
+                    setInterval(function(){
                       var curTime = new Date().getTime();
                       var time = curTime-startTime;
-                      var url = "/script/"+time+"/"+curExercise;
+                      var url = "/script/"+time+"/"+curExercise+"/"+1;
                         $.get(url, function(response){
                            });
-                     },200,100); //10s
+                     },250); //10s
 
 
                       var url = "/exercise_progress/"+curExercise;
@@ -98,7 +105,7 @@
                       var hands = 0;
                       var time = 0;
 
-                      setIntervalLimited(function(){
+                      setInterval(function(){
                       $.get(url,function(result){
                       
                         var dados= jQuery.parseJSON(result);
@@ -109,7 +116,7 @@
                         chart.series[0].addPoint([timestamp, compress]);
                         chart.series[1].addPoint([timestamp, hands]);
                      });
-                    },201,100);
+                    },250);
 
                     setTimeout(function(){
                         var url_resultados = "/exercise_results/"+curExercise;

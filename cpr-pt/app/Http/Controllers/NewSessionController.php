@@ -10,7 +10,6 @@ use App\Repositories\SessionsRepository;
 use App\Repositories\ExercisesRepository;
 
 
-
 class NewSessionController extends Controller
 {
     
@@ -22,8 +21,7 @@ class NewSessionController extends Controller
      *
      * @return void
      */
-    public function __construct(SessionsRepository $sessionsRepo, ExercisesRepository $exercisesRepo)
-    {
+    public function __construct(SessionsRepository $sessionsRepo, ExercisesRepository $exercisesRepo){
         $this->sessionsRepo = $sessionsRepo;
         $this->exercisesRepo = $exercisesRepo;
         $this->middleware('auth');

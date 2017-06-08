@@ -244,27 +244,20 @@ class SimulationController extends Controller
         return json_encode($data);
     }
 
-    public function Script($time, $idExercise){
-
+    public function Script($time, $idExercise, $simular){
         $data = array();
-      if (substr(php_uname(), 0, 7) == "Windows"){
+       if($simular==1){
+            $con = mysqli_connect("127.0.0.1","root","","cpr");
 
-            $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." 1 ".$time."";
-            //echo $cmd;
-          
-            $handle = popen("start /B ". $cmd, "r");
-            //echo $handle;
-            pclose($handle);
-        }else{
+            $s1= rand(1, 5000);
+            $s2 = rand(1, 500);
 
-            $cmd = "python ../pyScript/start.py ".$idExercise." 1 >/dev/null &";
-            $outputfile = "startPy.out";
-            $pidfile = "startPy.pid";
+             $sql = "INSERT into exercise_sensors_data (idExercise,idSensor1, idSensor2, idSensor3,valueSensor1, valueSensor2, valueSensor3, timestep) values (".$idExercise.", 1, 2, 3,".$s1.",".$s2.", 0, ".$time.")";
+            $data = mysqli_query($con, $sql); 
 
-            exec($cmd);
+       }else{
 
-        }
-    
+       }
         return json_encode($data);
     }
 }
