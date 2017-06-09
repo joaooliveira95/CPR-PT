@@ -169,33 +169,48 @@ class SimulationController extends Controller
  }
 
 
-    public function live_info($idExercise){
+    public function live_info($idExercise, $highestTime){
+             ini_set('memory_limit', '-1'); 
         $con = mysqli_connect("127.0.0.1","root","","cpr");
-        $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise ORDER BY timestep DESC LIMIT 5";
+        $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise AND timestep>$highestTime ORDER BY timestep ASC";
         $res = mysqli_query($con, $sql); 
-        $n_rows = $res->num_rows;
+        $n_rows = mysqli_num_rows($res);
+   
 
         $time = array();
         $sensor1 = array();
         $sensor2 = array();
         $sensor3 = array();
 
+        $data = array();
+
         while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-            array_push($time, $row["timestep"]);
-            array_push($sensor1, $row["valueSensor1"]);
-            array_push($sensor2, $row["valueSensor2"]);
-            array_push($sensor3, $row["valueSensor3"]);
-             
+                array_push($time, $row["timestep"]);
+                array_push($sensor1, $row["valueSensor1"]);
+                array_push($sensor2, $row["valueSensor2"]);
+               // array_push($sensor3, $row["valueSensor3"]);
         }
-        $data=array();
-        if($n_rows>=5){
-            $data = $this->processa_sinal($time, $sensor1, $sensor2, $sensor3);
-        }else if($n_rows<5&&$n_rows>0){
-            $data = array("time"=>$time[$n_rows-1], "compress"=>$sensor1[$n_rows-1], "hands"=>$sensor2[$n_rows-1]); 
-        }else{
-             $data = array("time"=>-1, "compress"=>-1, "hands"=>-1); 
+
+        for($i = 3; $i < $n_rows-2; $i++){
+            $time_temp = array();
+            $sensor1_temp = array();
+            $sensor2_temp = array();
+
+            for($j = $i-2 ; $j <= $i+2; $j++){
+                array_push($time_temp, $time[$j]);
+                array_push($sensor1_temp, $sensor1[$j]);
+                array_push($sensor2_temp, $sensor2[$j]);
+            }
+
+            $data_tmp = $this->processa_sinal($time_temp, $sensor1_temp, $sensor2_temp, $sensor3);
+            array_push($data, $data_tmp); 
+
+            unset($time_temp);
+            unset($sensor1_temp);
+            unset($sensor2_temp);
+
         }
-        
+
         return json_encode($data);
     }
 

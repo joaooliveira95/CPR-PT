@@ -84,8 +84,9 @@
           chart = new Highcharts.Chart("progressao_treino", options);
           chart.series[0].setData([]);
           chart.series[1].setData([]);
-           var url = "/exercise_feedback/"+idExercise;
-           setInterval(function(){
+          setInterval(function(){
+           var url = "/exercise_progress/"+idExercise+"/"+0;
+
               $.get(url,function(result){
         
                 var dados= jQuery.parseJSON(result);
@@ -103,7 +104,10 @@
 
                
                 });
-            },50);
+              var highestTime = chart.xAxis[0].getExtremes().dataMax;
+              url = "/exercise_progress/"+idExercise+"/"+highestTime;
+
+            },500);
 
 
               
