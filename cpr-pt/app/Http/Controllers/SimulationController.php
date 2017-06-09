@@ -172,7 +172,7 @@ class SimulationController extends Controller
     public function live_info($idExercise, $highestTime){
              ini_set('memory_limit', '-1'); 
         $con = mysqli_connect("127.0.0.1","root","","cpr");
-        $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise AND timestep>$highestTime ORDER BY timestep ASC";
+        $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise AND timestep>$highestTime ORDER BY timestep ASC LIMIT 500";
         $res = mysqli_query($con, $sql); 
         $n_rows = mysqli_num_rows($res);
    

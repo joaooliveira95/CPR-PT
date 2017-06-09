@@ -20,6 +20,7 @@
            var options = {
                     chart: {
                        type: 'line',
+                       animation: false,
 
                     },
 
@@ -29,7 +30,7 @@
 
                    
                     title: {
-                        text: 'Dados da Sessão de Treino'
+                        text: 'Dados da SessÃ£o de Treino'
                     },
 
                     subtitle: {
@@ -92,10 +93,10 @@
                 var dados= jQuery.parseJSON(result);
                 var total=dados.length;
 
-                var i;
-                for(i=0;i<total;i++){
+                var highestTime = chart.xAxis[0].getExtremes().dataMax;
+                for(var i=0;i<total;i++){
                   var time = Number(dados[i].time);
-                  var highestTime = chart.xAxis[0].getExtremes().dataMax;
+                 
                   if(time>highestTime){
                     chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)]);
                     chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)]); 
@@ -109,16 +110,7 @@
 
             },500);
 
-
-              
         });
-
-            function setIntervalLimited(callback, interval, x) {
-                flag = 0;
-                for (var i = 0; i < x; i++) {
-                    setTimeout(callback, i * interval); 
-                }
-            }
 
             function exercise(curExercise){
                   $("#exercise_button").attr("disabled", true); 
@@ -127,10 +119,10 @@
                   $.get(url,function(result){
                   });
 
-                  setTimeout(function(){
+                 /* setTimeout(function(){
                     var url_resultados = "/exercise_results/"+idExercise;
                     window.open(url_resultados);
-                  },20000);
+                  },20000);*/
 
             }
     </script>
