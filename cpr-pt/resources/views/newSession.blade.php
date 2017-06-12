@@ -30,7 +30,7 @@
 
                    
                     title: {
-                        text: 'Dados da SessÃ£o de Treino'
+                        text: 'Dados da Sessão de Treino'
                     },
 
                     subtitle: {
@@ -38,6 +38,7 @@
                     },
 
                     xAxis:{
+                        min: 0,
                         softMax: 0,
                         minRange: 20000,
                         type: 'datetime',
@@ -57,8 +58,9 @@
                     },
 
                     tooltip: {
-                        headerFormat: '<b>{series.name}</b><br />',
-                        pointFormat: 'x = {point.x}, y = {point.y}'
+                      enabled: false,
+                       /* headerFormat: '<b>{series.name}</b><br />',
+                        pointFormat: 'x = {point.x}, y = {point.y}'*/
                     },
 
                     legend: {
@@ -71,21 +73,31 @@
         
                     series: [{
                         name: 'Sensor1',
-                        data: []
+                        data: [],
+                         states: {
+                              hover: {
+                                  enabled: false
+                              }
+                          }
                     }, {
                         name: 'Sensor2',
-                        data: []
+                        data: [],
+                         states: {
+                            hover: {
+                                enabled: false
+                            }
+                        }
                     }],
 
                     scrollbar:{
-                      enabled: true,
+                      enabled: false,
                     }
           };
           chart = new Highcharts.Chart("progressao_treino", options);
           chart.series[0].setData([]);
           chart.series[1].setData([]);
           setInterval(function(){
-           var url = "/exercise_progress/"+idExercise+"/"+0;
+           var url = "/exercise_progress/"+idExercise;
 
               $.get(url,function(result){
         
@@ -96,21 +108,15 @@
                 for(var i=0;i<total;i++){
                   var time = Number(dados[i].time);
                  
-                 if(time>10000 && time<20000 && time>highestTime){
-                   chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], true, true);
-                   chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], true, true); 
-                 }else if(time>highestTime){
+                 if(time>highestTime){
                     chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], true, false);
                     chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], true, false); 
                   }    
                 }
-
                
                 });
-              var highestTime = chart.xAxis[0].getExtremes().dataMax;
-              url = "/exercise_progress/"+idExercise+"/"+highestTime;
-
-            },250);
+              url = "/exercise_progress/"+idExercise;
+            },25);
 
         });
 
@@ -121,10 +127,10 @@
                   $.get(url,function(result){
                   });
 
-                 /* setTimeout(function(){
+                  setTimeout(function(){
                     var url_resultados = "/exercise_results/"+idExercise;
                     window.open(url_resultados);
-                  },20000);*/
+                  },21000);
 
             }
     </script>

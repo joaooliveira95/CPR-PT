@@ -42,7 +42,7 @@ Route::post('/endSession/{curExercise}/', 'NewSessionController@endSession');
 
 //SIMULATION CONTROLLER
 
-Route::get('/exercise_progress/{id}/{time}','SimulationController@live_info');
+Route::get('/exercise_progress/{id}','SimulationController@live_info');
 
 Route::get('/exercise_feedback/{id}','SimulationController@feedback_info');
 
