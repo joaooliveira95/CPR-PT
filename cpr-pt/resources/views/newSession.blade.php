@@ -38,8 +38,8 @@
                     },
 
                     xAxis:{
-                        min: 0,
-                        minRange: 30000,
+                        softMax: 0,
+                        minRange: 20000,
                         type: 'datetime',
 
                        title: {
@@ -50,7 +50,6 @@
 
                     yAxis: {
                         min: 0,
-                        maxSoft: 10000,
                         minRange: 5000,
                         title: {
                             text: 'Sensor (Definir Unidades)'
@@ -97,9 +96,12 @@
                 for(var i=0;i<total;i++){
                   var time = Number(dados[i].time);
                  
-                  if(time>highestTime){
-                    chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)]);
-                    chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)]); 
+                 if(time>10000 && time<20000 && time>highestTime){
+                   chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], true, true);
+                   chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], true, true); 
+                 }else if(time>highestTime){
+                    chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], true, false);
+                    chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], true, false); 
                   }    
                 }
 
@@ -108,7 +110,7 @@
               var highestTime = chart.xAxis[0].getExtremes().dataMax;
               url = "/exercise_progress/"+idExercise+"/"+highestTime;
 
-            },500);
+            },250);
 
         });
 
