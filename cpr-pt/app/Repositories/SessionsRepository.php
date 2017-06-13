@@ -23,9 +23,9 @@ class SessionsRepository extends BaseRepository
         $query ->join('users', 'users.id', '=', 'sessions.idUser');
         $query ->select('sessions.*', 'users.name');
         $query ->where('idUser', '=', $idUser);
-        $query->where('created_at', '>', $from);
-        $query->where('created_at', '<', $to);
-        $query ->orderBy('created_at', 'desc');
+        $query->where('sessions.created_at', '>', $from);
+        $query->where('sessions.created_at', '<', $to);
+        $query ->orderBy('sessions.created_at', 'desc');
 
       return $this->doQuerySpecial($query, $take, $paginate, $from, $to);
   }

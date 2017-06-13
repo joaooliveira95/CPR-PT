@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
- 
+    <link href="{{ asset('bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
     <style>
         .glyphicon.glyphicon-envelope {
     font-size: 20px;
@@ -102,6 +103,8 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.pt.min.js') }}"></script>
 
      @yield('highcharts')
   
@@ -112,10 +115,10 @@
     </script>
 
     <script>
-            $(document).ready(function() {
+
+    $(document).ready(function() {
                 $(".dropdown-toggle").dropdown();
             });
-
              
             $(window).on('load', function() {
                 var url = "/comments/new";
@@ -132,7 +135,6 @@
               
               
             });
-
 
             function filterStudents(id){
                 var filter = document.getElementById("str_filter").value;
@@ -191,7 +193,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                         <li>
-                            <a id='ncomments' href="/comments/{{Auth::user()->id}}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                            <a id='ncomments' href="/comments/{{Auth::user()->id}}"><span class="fa fa-envelope-o" aria-hidden="true"></span></a>
                          </li>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

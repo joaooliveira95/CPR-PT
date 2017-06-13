@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use DateTime;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\UsersRepository;
@@ -46,7 +48,11 @@ class BladesController extends Controller{
         $user = Auth::user();
 
         if(request()->has('from') && request()->has('to')){
-            $sessions = $this->sessionsRepo->getUserSessionsByDate($user->id, request('from'), request('to'));
+            $from = DateTime::createFromFormat('m/d/Y', request('from'))->getTimestamp();
+            $to = DateTime::createFromFormat('m/d/Y', request('to'))->getTimestamp();
+
+   
+            $sessions = $this->sessionsRepo->getUserSessionsByDate($user->id, date("Y-m-d H:i:s", $from), date("Y-m-d H:i:s", $to));
             return view('sessions', ['sessions'=> $sessions, 'id' => $user->id]);
         }
 

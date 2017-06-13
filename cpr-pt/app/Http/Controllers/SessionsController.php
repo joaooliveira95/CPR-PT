@@ -28,6 +28,7 @@ class SessionsController extends Controller{
     public function sessions($id){
 
         if(request()->has('from') && request()->has('to')){
+ 
             $sessions = $this->sessionsRepo->getUserSessionsByDate($id, request('from'), request('to'));
             return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
         }

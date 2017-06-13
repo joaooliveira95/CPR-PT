@@ -11,10 +11,20 @@
                     <form class="form-inline">
                          <div class="form-group">
                             {{trans('messages.from')}}
-                            <input class = "form-control input-sm" type="date" name="from" id="from">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input class = "form-control datepicker" type="text" placeholder="MM/DD/YYYY" name="from" id="from">
+                                <div class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
                             {{trans('messages.to')}}
-                            <input class = "form-control input-sm" type="date" name="to" id="to">
-                            <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterDates({{$id}})" value="Submit">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input class = "form-control datepicker" type="text" placeholder="MM/DD/YYYY" name="to" id="to">
+                                <div class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                            <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" value="Submit">
                          
                         </div>
                     </form>
@@ -49,4 +59,14 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    
+    $('.datepicker').datepicker({
+
+            format: 'dd/mm/yyyy',
+            language: 'pt',
+          });
+
+</script>
+
 @endsection

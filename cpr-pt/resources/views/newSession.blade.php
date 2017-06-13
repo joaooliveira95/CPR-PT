@@ -109,13 +109,14 @@
                   var time = Number(dados[i].time);
                  
                  if(time>highestTime){
-                    chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], true, false);
-                    chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], true, false); 
+                    chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], false, false);
+                    chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], false, false); 
                   }    
                 }
                
                 });
-              url = "/exercise_progress/"+idExercise;
+              chart.redraw();
+    
             },25);
 
         });
