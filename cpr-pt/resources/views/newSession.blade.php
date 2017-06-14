@@ -82,6 +82,22 @@
                                 enabled: false
                             }
                         }
+                    },{
+                        name: 'Picos1',
+                        data: [],
+                         states: {
+                              hover: {
+                                  enabled: false
+                              }
+                          }
+                    }, {
+                        name: 'Picos2',
+                        data: [],
+                         states: {
+                            hover: {
+                                enabled: false
+                            }
+                        }
                     }],
 
                       credits: {
@@ -92,10 +108,12 @@
                       enabled: false,
                     }
           };
-          
+
           chart = new Highcharts.Chart("progressao_treino", options);
           chart.series[0].setData([]);
           chart.series[1].setData([]);
+          chart.series[2].setData([]);
+          chart.series[3].setData([]);
           setInterval(function(){
            var url = "/exercise_progress/"+idExercise;
 
@@ -111,6 +129,9 @@
                  if(time>highestTime){
                     chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], false, false);
                     chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], false, false); 
+
+                    chart.series[2].addPoint( [time, Number(dados[i].picos_sensor1)], false, false);
+                    chart.series[3].addPoint( [time, Number(dados[i].picosSensor2)], false, false); 
                   }    
                 }
                
@@ -138,13 +159,13 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" style="width: 90vw;">
 
     <div class="row">
       
         <div class="col-md-12">
             <div class="panel panel-default">
-              <!--  <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div>-->
+              <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div>
 
                 <div class="panel-body">
 

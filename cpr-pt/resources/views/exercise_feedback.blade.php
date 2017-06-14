@@ -64,18 +64,27 @@
                     },
 
                     legend: {
-                        layout: 'vertical',
+                   
                         align: 'right',
-                        verticalAlign: 'middle'
+          
                     },
 
-               
+                      credits: {
+                          enabled: false
+                      },
+
         
                     series: [{
-                        name: 'Sensor1',
+                        name: 'Compressões',
                         data: []
                     }, {
-                        name: 'Sensor2',
+                        name: 'Pos_Mãos',
+                        data: []
+                    },{
+                        name: 'Picos1',
+                        data: []
+                    }, {
+                        name: 'Picos2',
                         data: []
                     }],
 
@@ -100,6 +109,9 @@
 
                   options.series[0].data.push( [time, Number(dados[i].ponto_sensor1)]);
                   options.series[1].data.push( [time, Number(dados[i].ponto_sensor2)]);     
+
+                  options.series[2].data.push( [time, Number(dados[i].picos_sensor1)]);
+                  options.series[3].data.push( [time, Number(dados[i].picosSensor2)]);   
                 }
            
                 chart = new Highcharts.Chart("treino", options);
@@ -111,7 +123,7 @@
 
 @section('content')
 <link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
-<div class="container">
+<div class="container" style="width: 90vw;">
     <div class="row">
        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -184,7 +196,7 @@
               </div>
               
           </div>
-          <div id="treino" style="height: 400px;">
+          <div id="treino" style="height:60vh;>
 
               </div>
             </div>
