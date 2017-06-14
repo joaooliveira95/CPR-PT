@@ -21,7 +21,7 @@
                     chart: {
                        type: 'line',
                        animation: false,
-
+                       backgroundColor: null,
                     },
 
                     boost: {
@@ -31,10 +31,6 @@
                    
                     title: {
                         text: 'Dados da Sessão de Treino'
-                    },
-
-                    subtitle: {
-                        text: 'CPR PT'
                     },
 
                     xAxis:{
@@ -67,10 +63,9 @@
                         layout: 'vertical',
                         align: 'right',
                         verticalAlign: 'middle'
+
                     },
 
-               
-        
                     series: [{
                         name: 'Sensor1',
                         data: [],
@@ -89,10 +84,15 @@
                         }
                     }],
 
+                      credits: {
+                          enabled: false
+                      },
+
                     scrollbar:{
                       enabled: false,
                     }
           };
+          
           chart = new Highcharts.Chart("progressao_treino", options);
           chart.series[0].setData([]);
           chart.series[1].setData([]);
@@ -116,8 +116,8 @@
                
                 });
               chart.redraw();
-    
-            },25);
+
+            },250);
 
         });
 
@@ -139,20 +139,36 @@
 
 @section('content')
 <div class="container">
+
     <div class="row">
-                <div class="col-md-12 col-md-offset-0">
+      
+        <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div>
+              <!--  <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div>-->
 
-                    <div class="panel-body">
+                <div class="panel-body">
 
-                      <div id="info">
-                         
-                      </div>
-                      <div id="progressao_treino">
+                      <div id="progressao_treino" style="height:50vh;">
                         
                       </div>
 
+                       <table class="table">
+                          <tr>
+                              <th style='text-align: center;'>Frquência</th>
+                              <th style='text-align: center;'>Mãos Corretas</th>
+                              <th style='text-align: center;'>Recoil Completo</th>
+                          </tr>
+                          <tr>
+                              <td id="frequencia" style='text-align: center;'>0</td>
+                              <td id="maos" style='text-align: center;'>0</td>
+                              <td id="recoil" style='text-align: center;'>0</td>
+                          </tr>
+                          <tr>
+                              <td id="recomend_frequencia" style='text-align: center;  border: none;'>Recomendacao</td>
+                              <td id="recomend_maos" style='text-align: center; border: none;'>Recomendacao</td>
+                              <td id="recomend_recoil" style='text-align: center; border: none;'>Recomendacao</td>
+                          </tr>
+                        </table>
                        <div class = "inputs">
                           <li style="display: inline-block">   
                             <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="exercise_button" value="Start Exercise" onclick = "exercise({{$curExercise->id}})"/>
@@ -178,9 +194,13 @@
                             {!! Form::close() !!}
                           </li>
                         </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                  </div>
+              </div>
+          </div>
+
+
+       
+      </div>
+
 </div>
 @endsection

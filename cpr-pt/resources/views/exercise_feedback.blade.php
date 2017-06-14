@@ -126,7 +126,7 @@
                     <thead class="thead-default">
                       <tr>
                         <th class = "centered_tb">{{trans('messages.total_time')}}</th>
-                        <th class = "centered_tb">COMPRESSIONS {{trans('messages.time')}}</th>
+                        <th class = "centered_tb">COMPRESS. {{trans('messages.time')}}</th>
                       </tr>
                     </thead>
                     <tbody>
