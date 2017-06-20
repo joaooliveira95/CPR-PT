@@ -1,22 +1,21 @@
-
-.comment{
-	margin-bottom: 45px;
+.comment {
+    margin-bottom: 25px;
 }
 
-.author-name{
-	margin:5px 0px;
+.author-name {
+    margin: 5px 0px;
 }
 
-.author-time{
-	font-size: 11px;
-	font-style: italic;
-	color: #aaa;
+.author-time {
+    font-size: 11px;
+    font-style: italic;
+    color: #aaa;
 }
 
-.comment-content{
-	word-wrap: break-word;
+.comment-content {
+    word-wrap: break-word;
 }
 
-.comments-title{
-	margin-bottom: 45px;
+.comments-title {
+    margin-bottom: 20px;
 }
