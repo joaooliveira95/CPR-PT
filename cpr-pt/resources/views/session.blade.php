@@ -138,7 +138,12 @@
                     <hr>
                       <div class="row">
                         <div class="col-md-12">
-                        <h3 class="comments-title"> {{ $comments->count()}} {{trans('messages.comments')}}</h3>
+                        <h3 class="comments-title">
+                            {{trans('messages.comments')}}  <span style="position: relative;
+  top: -0.7em;" class="fa-stack fa-1x">
+                                <i class="fa fa-comment-o fa-stack-2x"></i>
+                                <strong class="fa-stack-1x text-primary">{{ $comments->count()}}</strong>
+                            </span></h3>
                           @foreach($comments as $comment)
                             <div class="comment">
                                 <div class="author-info">

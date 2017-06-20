@@ -15,6 +15,7 @@
     <link href="{{ asset('bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
     <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
         .glyphicon.glyphicon-envelope {
     font-size: 20px;
 }
@@ -98,6 +99,56 @@
             text-align:center; 
             vertical-align:middle;
         }
+
+        .divider {
+            height: 30px;
+            margin: 10px 9px;
+            border-right: 1px solid #ffffff;
+            border-left: 1px solid #f2f2f2;
+        }
+        .norm_shadow {
+            font-family: 'Lato', Arial;
+            font-weight: 300;
+            font-size: 15px;
+        }
+
+        .drop_link{
+            font-weight: 300;
+            font-family: 'Lato', Arial;
+            font-size: 15px;
+        }
+
+        .drop_shadow{
+            font-family: 'Lato', Arial;
+            font-weight: 300;
+            font-size: 15px;
+        }
+        .norm_shadow:hover i {
+            color: #B23838;
+        }
+        .drop_shadow:hover i {
+            color: #B23838;
+        }
+        .drop_link:hover i {
+            color: #B23838;
+        }
+
+        @keyframes example {
+            0%   {width:48px; height:48px;}
+            25%  {width:60px; height:60px;}
+            50%  {width:48px; height:48px;}
+            75%  {width:60px; height:60px;}
+            100% {width:48px; height:48px;}
+        }
+
+        .heart:hover {
+            animation-name: example;
+            animation-duration: 0.5s;
+        }
+
+        .nav_icon{
+            padding-right: 10px;
+        }
     </style>
 
     <!-- Scripts -->
@@ -117,7 +168,7 @@
     <script>
 
     $(document).ready(function() {
-                $(".dropdown-toggle").dropdown();
+            $(".dropdown-toggle").dropdown();
             });
              
             $(window).on('load', function() {
@@ -130,21 +181,14 @@
                        $("#ncomments").append("<sup>"+newComments+"</sup>");  
                        $("#ncomments").css('color', 'red');
                     }
-                   
                 });
-              
-              
             });
 
             function filterStudents(id){
                 var filter = document.getElementById("str_filter").value;
-
                 var url = "/students?filter="+filter;
                 return url;
             }
-
-
-
 
     </script>
 </head>
@@ -163,24 +207,28 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+
+                    <a class="navbar-brand" href="{{ url('/home') }}" style="padding: 5px 5px;"><img src="http://127.0.0.1:8000/heart_sm.png" class="heart"></a>
+                    <a class="navbar-brand" href="{{ url('/home') }}">{{ config('app.name', 'Laravel') }}</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     @if(Auth::guest())
 
-                    @else 
+                    @else
                     <ul class="nav navbar-nav">
-                    <li><a href="http://127.0.0.1:8000/newSession" targer="-self"><span>{{trans('messages.new_session')}}</span></a></li>
-                        <li><a href="http://127.0.0.1:8000/history" targer="-self"><span>{{trans('messages.history')}}</span></a></li>
+                    <li class="divider" style="height: 50px; margin: 0 9px;"></li>
+                    <li><a href="http://127.0.0.1:8000/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.new_session')}}</span></a></li>
+                    <li class="divider"></li>
+                        <li><a href="http://127.0.0.1:8000/history" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
+                        <li class="divider"></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                      <!--   <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li> -->
-                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self"><span>{{trans('messages.classes')}}</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
+                        <li class="divider"></li>
                         @endif
-                         <li><a href="http://127.0.0.1:8000/content" targer="-self"><span>{{trans('messages.content')}}</span></a></li>
+                         <li><a href="http://127.0.0.1:8000/content" targer="-self" class="norm_shadow"><span><i class="fa fa-play-circle nav_icon" aria-hidden="true"></i>{{trans('messages.content')}}</span></a></li>
                         </li>
                     </ul>
                     @endif
@@ -189,44 +237,50 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}" class="norm_shadow">Login</a></li>
+                            <li><a href="{{ route('register') }}" class="norm_shadow">Register</a></li>
                         @else
                         <li>
-                            <a id='ncomments' href="/comments/{{Auth::user()->id}}"><span class="fa fa-envelope-o" aria-hidden="true"></span></a>
+                            <a id='ncomments' href="/comments/{{Auth::user()->id}}" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Mailbox</a>
                          </li>
                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {{ Config::get('languages')[App::getLocale()] }}
+                            <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown">
+                               
+                               <img src="http://127.0.0.1:8000/{{App::getLocale()}}.png" height="20"> {{ Config::get('languages')[App::getLocale()] }}
                             </a>
                             <ul class="dropdown-menu">
                                 @foreach (Config::get('languages') as $lang => $language)
                                     @if ($lang != App::getLocale())
                                         <li>
-                                            <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
+                                            @if($language == "English")
+                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="http://127.0.0.1:8000/en.png" width="25" class="nav_icon">&nbsp;&nbsp;{{$language}}</a>
+                                            @endif
+                                            @if($language == "Português")
+                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="http://127.0.0.1:8000/pt.png" width="25" class="nav_icon">{{$language}}</a>
+                                            @endif
                                         </li>
                                     @endif
                                 @endforeach
                             </ul>
                         </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-user nav_icon"></i>{{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                                     <li>
-                                        <a href="/admin">
-                                            Backoffice
+                                        <a href="/admin" class="drop_link">
+                                           <i class="fa fa-lock" aria-hidden="true"></i> Backoffice
                                         </a>
                                     </li>
                                     @endif
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="{{ route('logout') }}" class="drop_link"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                           <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

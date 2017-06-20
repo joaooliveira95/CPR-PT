@@ -22,15 +22,22 @@ class SimulationController extends Controller
 {
     private function processa_sinal($time, $sensor1, $sensor2, $sensor3){
 
-         $pausas = 0;
-         $picos_sensor1 = 0;
-         $picos_sensor2 = 0;
-         $picos_sensor3 = 0;
-         $compressoes = 0;
-         $recoil = 0;
-         $recoil_ts = 0;
-         $posicao_maos = 0;
-         $insuflacoes = 0;
+        $pausas = 0;
+        $picos_sensor1 = 0;
+        $picos_sensor2 = 0;
+        $picos_sensor3 = 0;
+        $compressoes = 0;
+        $recoil = 0;
+        $recoil_ts = 0;
+        $posicao_maos = 0;
+        $insuflacoes = 0;
+
+        $pmcorretas=0;
+        $pmincorretas=0;
+        $comp_corretas=0;
+        $comp_incorretas=0;
+
+        $mc = 0;
 
          //print_r($treino);
 
@@ -47,9 +54,11 @@ class SimulationController extends Controller
                if($sensor1[$ts]>TRESHOLD_SENSOR1_COMPRESSOES){
                   // Se compressao correta valor 1
                   $compressoes=1;
+                  $comp_corretas+=1;
                }else{
                   // Se compressao incorreta valor -1
                   $compressoes=-1;
+                  $comp_incorretas+=1;
                }
 
          }else{
@@ -61,15 +70,14 @@ class SimulationController extends Controller
          if ( $sensor2[$ts]>TRESHOLD_SENSOR2_COMPRESSOES && $sensor2[$ts]-$sensor2[$ts-1]>=0 && $sensor2[$ts-1]-$sensor2[$ts-2]>=0 && $sensor2[$ts]-$sensor2[$ts+1]>=0 && $sensor2[$ts+1]-$sensor2[$ts+2]>=0){
 
                if(max($sensor1[$ts-1],$sensor1[$ts],$sensor1[$ts+1])>TRESHOLD_SENSOR1_POSICAO_MAOS){
-
                   $posicao_maos=1; //CORRETO
+                  $pmcorretas+=1;
                }else{
-
                   $posicao_maos=-1; //INCORRETO
+                  $pmincorretas+=1;
                }
 
          }else{
-
             $posicao_maos=0; //N DETETOU
          }
 
@@ -165,7 +173,12 @@ class SimulationController extends Controller
     }
     }*/
 
-    return array("time"=>$time[2], "compress"=>$compressoes, "hands"=>$posicao_maos, "picos_sensor1"=>$picos_sensor1, "picosSensor2"=>$picos_sensor2, "ponto_sensor1"=>$sensor1[2], "ponto_sensor2"=>$sensor2[2]);
+  
+    if(($comp_corretas+$comp_incorretas)>0){
+        $mc = round($pmcorretas/($comp_corretas+$comp_incorretas)*100,0);
+    }
+
+    return array("time"=>$time[2], "compress"=>$compressoes, "hands"=>$posicao_maos, "picos_sensor1"=>$picos_sensor1, "picosSensor2"=>$picos_sensor2, "ponto_sensor1"=>$sensor1[2], "ponto_sensor2"=>$sensor2[2], "pos_maos_corretas"=>$mc);
  }
 
 
@@ -270,8 +283,6 @@ class SimulationController extends Controller
         if (substr(php_uname(), 0, 7) == "Windows"){
 
             $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;
-
-
 
 
             $handle = popen("start /B ". $cmd, "r");

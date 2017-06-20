@@ -45,7 +45,7 @@
                         type: 'datetime',
 
                        title: {
-                            text: 'Tempo (ms)'
+                            text: 'Tempo'
                         },
           
                     },

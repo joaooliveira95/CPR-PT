@@ -40,7 +40,7 @@
                         type: 'datetime',
 
                        title: {
-                            text: 'Tempo (ms)'
+                            text: 'Tempo'
                         },
           
                     },
@@ -136,6 +136,7 @@
                 }
                
                 });
+              
               chart.redraw();
 
             },250);
@@ -165,7 +166,7 @@
       
         <div class="col-md-12">
             <div class="panel panel-default">
-              <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div>
+             <!-- <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div> -->
 
                 <div class="panel-body">
 
@@ -190,7 +191,7 @@
                               <td id="recomend_recoil" style='text-align: center; border: none;'>Recomendacao</td>
                           </tr>
                         </table>
-                       <div class = "inputs">
+                       <div class = "inputs" style="margin: 0 auto; text-align: center;">
                           <li style="display: inline-block">   
                             <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="exercise_button" value="Start Exercise" onclick = "exercise({{$curExercise->id}})"/>
                           </li>
