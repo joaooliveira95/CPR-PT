@@ -11,10 +11,9 @@
                     
                     <form class="form-inline">
                          <div class="form-group">
-                                           {{trans('messages.search')}}
-                            <input class = "form-control input-sm" type="text" name="filter" id="str_filter">
+                            <input class = "form-control input-md" type="text" name="filter" id="str_filter" placeholder="Search...">
                         
-                            <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterStudents()" value="Submit">
+                            <input class = "btn btn-default btn-md fa-input" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterStudents()" value="&#xf002;">
                         </div>
                     </form>           
                     <div class="table-responsive">

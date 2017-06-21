@@ -3,49 +3,34 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Comments</div>
+                <div class="panel-heading">Discussions</div>
 
                 <div class="panel-body">
 
-                    <form class="form-inline">
-                         <div class="form-group">
-                                            From:
-                            <input class = "form-control input-sm" type="date" name="from" id="from">
-                            To:
-                            <input class = "form-control input-sm" type="date" name="to" id="to">
-                            <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterDates(2)" value="Submit">
-                        </div>
-                    </form>
-                  
-                     <div class="table-responsive">
-                     <table id="comments_table" class='table table-hover'>
-                             <thead class="thead-default">
-                                <tr>
-                                    <th>From</th>
-                                    <th>Date</th>
-                                    <th>Session</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($comments as $comment)
-                                    @if($comment->mark === 0)
-                                        <tr bgcolor="#e6fff2">
-                                    @else
-                                        <tr>
-                                    @endif
-                                            <td>{{$comment->name}}</td>
-                                            <td>{{$comment->created_at}}</td>
-                                            <td> <a href="/comments/open/{{$comment->id}}/{{$comment->idSession}}">{{$comment->title}}</a></td>
-                                         </tr>
-                                @endforeach
-                            </tbody>
-                    </table>
-                    </div>
-                        {{ $comments->links() }}
+                      
+                        <div id="disqus_thread"></div>
+                        <script>
 
-                </div>
+                        /**
+                        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                        /*
+                        var disqus_config = function () {
+                        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        */
+                        (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://cprpt.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                                        
             </div>
         </div>
     </div>

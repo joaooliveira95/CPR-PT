@@ -8,6 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" href="http://127.0.0.1:8000/heart_md.png">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
@@ -17,8 +18,8 @@
     <style>
     @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
         .glyphicon.glyphicon-envelope {
-    font-size: 20px;
-}
+            font-size: 20px;
+        }
         .navbar-default .navbar-brand {
             color: rgb(213, 55, 69);
             font-weight: bold;
@@ -40,13 +41,9 @@
         height: 100%;
         }
 
-        #progresso_sessao {
-            display: none;
-            
-        }
         body{
-
-            font-family: "Open Sans", Arial, sans-serif;;
+            font-weight: 500;
+            font-family: 'Lato', Arial;
             background-color: rgba(241, 241, 241, 0.7);
             background-image: url('http://127.0.0.1:8000/storage/pictures/logo.png');
             background-repeat: no-repeat;
@@ -149,6 +146,10 @@
         .nav_icon{
             padding-right: 10px;
         }
+
+        .fa-input{
+             font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
     </style>
 
     <!-- Scripts -->
@@ -221,7 +222,7 @@
                     <li class="divider" style="height: 50px; margin: 0 9px;"></li>
                     <li><a href="http://127.0.0.1:8000/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.new_session')}}</span></a></li>
                     <li class="divider"></li>
-                        <li><a href="http://127.0.0.1:8000/history" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/history/{{Auth::user()->id}}/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
                         <li class="divider"></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                      <!--   <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li> -->
@@ -241,7 +242,7 @@
                             <li><a href="{{ route('register') }}" class="norm_shadow">Register</a></li>
                         @else
                         <li>
-                            <a id='ncomments' href="/comments/{{Auth::user()->id}}" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Mailbox</a>
+                            <a id='ncomments' href="/comments/{{Auth::user()->id}}" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Discussions</a>
                          </li>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown">

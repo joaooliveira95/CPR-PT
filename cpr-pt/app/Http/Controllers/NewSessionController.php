@@ -89,7 +89,7 @@ class NewSessionController extends Controller
         Exercise::where('id', $curExerciseId)
           ->update(['time' => $total_time[0]->timestep]);
 
-        return redirect('/history');
+        return redirect('/history/'.Auth::user()->id.'/sessions');
     }
 
   

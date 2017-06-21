@@ -82,12 +82,10 @@ class SimulationController extends Controller
          }
 
          if ($sensor1[$ts]-$sensor1[$ts-1]>=0 && $sensor1[$ts-1]-$sensor1[$ts-2]>=0 && $sensor1[$ts]-$sensor1[$ts+1]>=0 && $sensor1[$ts+1]-$sensor1[$ts+2]>=0){
-
             $picos_sensor1=$sensor1[$ts];
          }else{
             $picos_sensor1=0;
          }
-
 
          if ($sensor2[$ts]-$sensor2[$ts-1]>=0 && $sensor2[$ts-1]-$sensor2[$ts-2]>=0 && $sensor2[$ts]-$sensor2[$ts+1]>=0 && $sensor2[$ts+1]-$sensor2[$ts+2]>=0){
 
@@ -97,88 +95,21 @@ class SimulationController extends Controller
             $picos_sensor2=0;
          }
 
-    
-    //rever recoil
+        $rcc=0;
+        $fcc=0;
 
-   /* $pos_pico_ini=0;
-    $pos_pico_fim=0;
-    $found_first_peak=0;
+  /*
 
-    $p=0;
-
-    while($found_first_peak==0 && $p<sizeof($compressoes)){
-
-      if($compressoes[$p]==1000){
-
-        $found_first_peak=1;
-
-        $pos_pico_ini=$p;
-
-      }
-
-      $p++;
+    $fcc=0;
+    if($dps!=0){
+      $fcc=round(($comp_corretas+$comp_incorretas)/$dps*60,0);
     }
-
-    $rec=0;
-    $rec_incorreto=0;
-    $rec_correto=0;
-
-    for($i=$pos_pico_ini+1;$i<sizeof($compressoes);$i++){
-
-      if($compressoes[$i]==1000 || $compressoes[$i]==900 ){
-
-        $pos_pico_fim=$i;
-
-        $min_pos=min_val($treino->valoresSensor1,$pos_pico_ini,$pos_pico_fim);
-
-        //echo "Pico ".$treino->valoresTimeStamp[$pos_pico_ini]." / ".$treino->valoresTimeStamp[$pos_pico_fim]."/".$treino->valoresTimeStamp[$min_pos]."<br>";
-
-        $rec++;
-
-        //echo "<br>".$treino->valoresSensor1[$pos_pico_ini]." / ".$treino->valoresSensor1[$min_pos];
-
-        $ratio=$treino->valoresSensor1[$pos_pico_ini]/$treino->valoresSensor1[$min_pos];
-        $dif=$treino->valoresSensor1[$pos_pico_ini]-$treino->valoresSensor1[$min_pos];
-        $ratio_norm=$dif/$treino->valoresSensor1[$pos_pico_ini];
-
-
-
-        //echo $ratio_norm."<br>";
-
-        //if($ratio>RATIO_RECOIL && $dif>DIF_RECOIL){
-
-
-
-// SE posicao das maos incorreta no pico anterior e a diferenca entre  max do sensor de cima e o max do sensor de baixo <1000 = no recoil
-
-
-
-        if($ratio_norm>RATIO_RECOIL_NORM){
-
-            $recoil[$treino->valoresTimeStamp[$min_pos]]=1000;
-
-            $rec_correto++;
-
-        }else{
-
-            $recoil[$treino->valoresTimeStamp[$min_pos]]=900;
-
-            $rec_incorreto++;
-
-        }
-
-        $pos_pico_ini=$pos_pico_fim;
-      }
-
-    }
-    }*/
-
-  
+*/
     if(($comp_corretas+$comp_incorretas)>0){
         $mc = round($pmcorretas/($comp_corretas+$comp_incorretas)*100,0);
     }
 
-    return array("time"=>$time[2], "compress"=>$compressoes, "hands"=>$posicao_maos, "picos_sensor1"=>$picos_sensor1, "picosSensor2"=>$picos_sensor2, "ponto_sensor1"=>$sensor1[2], "ponto_sensor2"=>$sensor2[2], "pos_maos_corretas"=>$mc);
+    return array("time"=>$time[2], "compress"=>$compressoes, "hands"=>$posicao_maos, "picos_sensor1"=>$picos_sensor1, "picosSensor2"=>$picos_sensor2, "ponto_sensor1"=>$sensor1[2], "ponto_sensor2"=>$sensor2[2], "pos_maos"=>$mc, "recoil"=>$rcc, "frequencia"=>$fcc);
  }
 
 

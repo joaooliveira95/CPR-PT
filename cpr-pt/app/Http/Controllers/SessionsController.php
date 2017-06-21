@@ -28,12 +28,24 @@ class SessionsController extends Controller{
     public function sessions($id){
 
         if(request()->has('from') && request()->has('to')){
- 
-            $sessions = $this->sessionsRepo->getUserSessionsByDate($id, request('from'), request('to'));
+
+            $from = str_replace('/', '-', request('from'));
+            $temp = explode(" ", $from);
+            $from = $temp[0];
+            $temp = explode("-", $from);
+            $from = $temp[1]."-".$temp[0]."-".$temp[2];
+
+            $to = str_replace('/', '-', request('to'));
+            $temp = explode(" ", $to);
+            $to = $temp[0];
+            $temp = explode("-", $to);
+            $to = $temp[1]."-".$temp[0]."-".$temp[2];
+
+            $sessions = $this->sessionsRepo->getUserSessionsByDate($id, date("Y-m-d H:i:s", strtotime($from)), date("Y-m-d H:i:s", strtotime($to)));
             return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
         }
 
-          $sessions = $this->sessionsRepo->getUserSessions($id);
+        $sessions = $this->sessionsRepo->getUserSessions($id);
 
         return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
     }

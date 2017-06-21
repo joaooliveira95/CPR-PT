@@ -27,8 +27,6 @@ Route::get('/import', 'ImportExportController@import');
 //BLADES
 Route::get('/content', 'BladesController@contentIndex');
 
-Route::get('/history', 'BladesController@historyIndex');
-
 Route::get('/students', 'BladesController@studentsIndex');
 
 Route::get('/newSession', 'NewSessionController@index');
@@ -50,6 +48,9 @@ Route::get('/script/{id}&{sim}','SimulationController@script');
 
 
 //SESSIONS CONTROLLER
+
+Route::get('/history/{id}/sessions', 'SessionsController@sessions');
+
 Route::get('/history/{id}/session', 'SessionsController@session');
 
 Route::get('/students/{id}/sessions', 'SessionsController@sessions')->middleware('teacher');

@@ -4,7 +4,8 @@
 <script type="text/javascript" src="{{ URL::to('/js/highcharts.js') }}"></script>
 
       <script>
-            function progress(idSession) {
+             var idSession = "{{$session->id}}";
+             $(document).ready(function() {
              
                var options = {
 
@@ -72,24 +73,18 @@
                   options.series[3].data.push( dados.hands[i] );      
                 }
                 //options.title.text="aqui e podria cambiar el titulo dinamicamente";
-                chart = new Highcharts.Chart("progresso_sessao", options);
-              })
+                chart = new Highcharts.Chart("progresso_sessao_grafico", options);
+              });
 
-                var x = document.getElementById('progresso_sessao');
-                if(x.style.display == "block"){
-                  x.style.display = "none";
-                }else{
-                  x.style.display = "block";
-                }
-            }
+            });
     </script>
 @endsection
 
 @section('content')
 <link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
-<div class="container">
+<div class="container no_overflow">
     <div class="row">
-       <div class="col-md-10 col-md-offset-1">
+       <div class="col-md-12" style="padding-right: 0;">
             <div class="panel panel-default">
                 <div class="panel-heading">{{$user->name}} | {{$session->title}} | {{$session->created_at}}</div>
 
@@ -127,64 +122,43 @@
                       </div>
                         {{$exercises->links()}}
                   </div>
+
+                  <div id="progresso_sessao_grafico"></div>
+                    @endif
                     
+        
+                 <!--  </div>panel body-->
 
-                  <h3 onclick="progress({{$session->id}})"> Gráfico </h1>
-                  <div id="progresso_sessao">
-                          </div>
-                    @endif
+            <!--</div>panel-->
+           
+       <!-- </div>Lado esquerdo-->
 
-                  @if($comments!=null)
-                    <hr>
-                      <div class="row">
-                        <div class="col-md-12">
-                        <h3 class="comments-title">
-                            {{trans('messages.comments')}}  <span style="position: relative;
-  top: -0.7em;" class="fa-stack fa-1x">
-                                <i class="fa fa-comment-o fa-stack-2x"></i>
-                                <strong class="fa-stack-1x text-primary">{{ $comments->count()}}</strong>
-                            </span></h3>
-                          @foreach($comments as $comment)
-                            <div class="comment">
-                                <div class="author-info">
-                                    <div class="author-name">
-                                      <h4>{{$comment->name}}</h4>
-                                    </div>
-                                    <p class="author-time">{{$comment->created_at}}</p>
-                                </div>
-                                <div class="comment-content">
-                                    {{$comment->comment}}
-                                </div>
-                            </div>
-                          @endforeach
-                        </div>
-                      </div>
-                    @endif
+      <!--  <div class="col-md-3" >
+                   <div class="panel panel-default" >
+         <div class="panel-body">-->
+         <div id="disqus_thread"></div>
+<script>
 
-                     {!! Form::open(
-                       array('action'=> array('CommentsController@send', $session->id, Auth::user()->id)
-                       , 'method'=>'post')) !!}
-
-
-                    <!--{!! Form::label('comment','Comment: ') !!}-->
-                   
-                      {!! Form::textArea('comment', null, ['class'=>'form-control', 'rows'=>'5' ]) !!}
-
-	                        @if ($errors->has('comment'))
-                              <span class="help-block">
-                                  <p class="text-warning"><strong>{{ $errors->first('comment') }}</strong></p>
-                              </span>
-                          @endif
-
-                      {!! Form::submit('Send', ['class'=>'btn btn-default btn-block', 'style'=>'margin-top:15px;']) !!}
-
-                      {!! Form::close() !!}
-
-            </div>
-            {{$comments->links()}}
-        </div>
-    </div>
-</div>
-
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://cprpt.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div><!--PANNNEEEL-->
+        </div><!--Lado Direito-->
+    </div><!--Row-->
+</div><!--Container-->
 @endsection
 

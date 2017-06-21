@@ -8,8 +8,7 @@ class CommentsRepository extends BaseRepository
 {
   protected $modelClass = Comment::class;
 
-  public function getCommentsBySession($idSession, $take = 5, $paginate = true){
-
+  public function getCommentsBySession($idSession, $take = 4, $paginate = true){
         $query = $this->newQuery();
         $query ->join('users', 'users.id', '=', 'comments.idFrom');
         $query ->select('comments.*', 'users.name');
