@@ -134,43 +134,51 @@
                         //chart.series[3].addPoint( [time, Number(dados[i].pos_maos_corretas)], false, false);
 
                         //MAOS CORRETAS
-                        document.getElementById("pos_maos").textContent = dados[i].pos_maos;
-                        if(parseInt(dados[i].pos_maos)<90){
+                        document.getElementById("pos_maos").textContent = dados[i].mc;
+                        if(parseInt(dados[i].mc)<90){
                             document.getElementById("pos_maos").style = "color: red; text-align: center;";
+                            document.getElementById("recomend_pos_maos").style = "color: red; text-align: center; border: none;";
+                            document.getElementById("recomend_pos_maos").textContent = "Melhorar o posicionamento das mãos!";
                         }else{
                             document.getElementById("pos_maos").style = "color: green; text-align: center;";
+                            document.getElementById("recomend_pos_maos").style = "color: green; text-align: center; border: none;";
+                            document.getElementById("recomend_pos_maos").textContent = "Posicionamento das mãos correto.";
                         }
                         //RECOIL
-                        document.getElementById("recoil").textContent = dados[i].recoil;
-                        if(parseInt(dados[i].recoil)<90){
+                        document.getElementById("recoil").textContent = dados[i].rcc;
+                        if(parseInt(dados[i].rcc)<90){
                             document.getElementById("recoil").style = "color: red; text-align: center;";
+                            document.getElementById("recomend_recoil").style = "color: red; text-align: center; border: none;";
+                            document.getElementById("recomend_recoil").textContent = "Melhorar o recoil das compressões!";
                         }else{
                             document.getElementById("recoil").style = "color: green; text-align: center;";
+                            document.getElementById("recomend_recoil").style = "color: green; text-align: center; border: none;";
+                            document.getElementById("recomend_recoil").textContent = "Recoil feito de forma correta.";
                         }
                         
 
                         //Frquencia Compressoes
-                        document.getElementById("frequencia").textContent = dados[i].frequencia;
-                        if(parseInt(dados[i].recoil)<=95){
+                        document.getElementById("frequencia").textContent = dados[i].fcc;
+                        if(parseInt(dados[i].fcc)<=95){
                             document.getElementById("frequencia").style = "color: red; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: red; text-align: center; border: none;";
-                            document.getElementById("recomend_frequencia").textContent = "Aumentar o ritmo das compressões";
-                        }else if( parseInt(dados[i].recoil)>95&& parseInt(dados[i].recoil)<100){
+                            document.getElementById("recomend_frequencia").textContent = "Aumentar o ritmo das compressões!";
+                        }else if( parseInt(dados[i].fcc)>95&& parseInt(dados[i].fcc)<100){
                             document.getElementById("frequencia").style = "color: yellow; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: green; text-align: center; border: none;";
-                            document.getElementById("recomend_frequencia").textContent = "Aumentar ligeiramente o ritmo das compressões";
-                        }else if( parseInt(dados[i].recoil)>=100&& parseInt(dados[i].recoil)<=120){
+                            document.getElementById("recomend_frequencia").textContent = "Aumentar ligeiramente o ritmo das compressões!";
+                        }else if( parseInt(dados[i].fcc)>=100&& parseInt(dados[i].fcc)<=120){
                             document.getElementById("frequencia").style = "color: green; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: green; text-align: center; border: none;";
-                            document.getElementById("recomend_frequencia").textContent = "Bom ritmo das compressões";
-                        }else if( parseInt(dados[i].recoil)>120&& parseInt(dados[i].recoil)<=125){
+                            document.getElementById("recomend_frequencia").textContent = "Bom ritmo das compressões.";
+                        }else if( parseInt(dados[i].fcc)>120&& parseInt(dados[i].fcc)<=125){
                             document.getElementById("frequencia").style = "color: yellow; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: yellow; text-align: center; border: none;";
-                            document.getElementById("recomend_frequencia").textContent = "Diminuir ligeiramente o ritmo das compressões";
-                        }else if( parseInt(dados[i].recoil)>125){
+                            document.getElementById("recomend_frequencia").textContent = "Diminuir ligeiramente o ritmo das compressões!";
+                        }else if( parseInt(dados[i].fcc)>125){
                             document.getElementById("frequencia").style = "color: red; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: red; text-align: center; border: none;";
-                            document.getElementById("recomend_frequencia").textContent = "Diminuir o ritmo das compressões";
+                            document.getElementById("recomend_frequencia").textContent = "Diminuir o ritmo das compressões!";
                         }
 
 
@@ -230,7 +238,7 @@
                           </tr>
                           <tr>
                               <td id="recomend_frequencia" style='text-align: center;  border: none;'>Recomendacao</td>
-                              <td id="recomend_maos" style='text-align: center; border: none;'>Recomendacao</td>
+                              <td id="recomend_pos_maos" style='text-align: center; border: none;'>Recomendacao</td>
                               <td id="recomend_recoil" style='text-align: center; border: none;'>Recomendacao</td>
                           </tr>
                         </table>
