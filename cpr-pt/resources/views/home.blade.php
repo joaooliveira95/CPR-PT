@@ -12,7 +12,7 @@
             var yTitle = "{{trans('messages.sensor_units')}}";
 
             $(document).ready(function() {
-        
+
                var options = {
 
                         chart: {
@@ -37,7 +37,6 @@
                     },
 
                     yAxis: {
-
                         title: {
                             text: yTitle
                         }
@@ -49,13 +48,13 @@
                     },
 
                     plotOptions: {
-                      
+
                         series: {
                             pointStart: 0
                         }
                     },
 
-        
+
                     series: [{
                         name: 'Tempo (s)',
                         data: []
@@ -69,12 +68,12 @@
                         name: 'Posição das mãos (%)',
                         data: []
                     }]
-                    
+
                 };
 
                 var url = "/exercises/"+idUser;
               $.get(url,function(result){
-              
+
                 var dados= jQuery.parseJSON(result);
                 var total=dados.recoil.length;
                 var i=0;
@@ -82,15 +81,15 @@
                   options.series[0].data.push( dados.time[i] );
                   options.series[1].data.push( dados.recoil[i] );
                   options.series[2].data.push( dados.compress[i] );
-                  options.series[3].data.push( dados.hands[i] ); 
-                        
+                  options.series[3].data.push( dados.hands[i] );
+
                 }
                 //options.title.text="aqui e podria cambiar el titulo dinamicamente";
                 chart = new Highcharts.Chart("progresso", options);
                 chart.xAxis[0].setCategories(dados.dates);
               })
             });
-    
+
     </script>
 @endsection
 
@@ -102,10 +101,10 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    
-                    <div id="progresso" class="progresso">
-                    </div>
-                </div>
+
+                     <div id="progresso" class="progresso">
+                     </div>
+                  </div>
             </div>
         </div>
     </div>

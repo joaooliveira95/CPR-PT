@@ -103,19 +103,48 @@
                 var total=dados.length;
 
                 var i;
-
+                var time = 0;
                 for(i=0;i<total;i++){
-                  var time = Number(dados[i].time);
+                  time = Number(dados[i].time);
 
                   options.series[0].data.push( [time, Number(dados[i].ponto_sensor1)]);
                   options.series[1].data.push( [time, Number(dados[i].ponto_sensor2)]);     
 
                   options.series[2].data.push( [time, Number(dados[i].picos_sensor1)]);
                   options.series[3].data.push( [time, Number(dados[i].picosSensor2)]);   
+
+                   document.getElementById("pos_maos").textContent = dados[i].mc+"%";
+                    if(parseInt(dados[i].mc)<90){
+                        document.getElementById("pos_maos").style = "color: red; text-align: center;";
+                    }else{
+                        document.getElementById("pos_maos").style = "color: green; text-align: center;";
+                    }
+
+                              //RECOIL
+                    document.getElementById("recoil").textContent = dados[i].rcc+"%";
+                    if(parseInt(dados[i].rcc)<90){
+                        document.getElementById("recoil").style = "color: red; text-align: center;";
+
+                        document.getElementById("recoil").style = "color: green; text-align: center;";;
+                    }
+
+                    //Frquencia Compressoes
+                        document.getElementById("frequencia").textContent = dados[i].fcc+"BPM";
+                        if(parseInt(dados[i].fcc)<=95){
+                            document.getElementById("frequencia").style = "color: red; text-align: center;";
+                        }else if( parseInt(dados[i].fcc)>95&& parseInt(dados[i].fcc)<100){
+                            document.getElementById("frequencia").style = "color: yellow; text-align: center;";
+                        }else if( parseInt(dados[i].fcc)>=100&& parseInt(dados[i].fcc)<=120){
+                            document.getElementById("frequencia").style = "color: green; text-align: center;";
+                        }else if( parseInt(dados[i].fcc)>120&& parseInt(dados[i].fcc)<=125){
+                            document.getElementById("frequencia").style = "color: yellow; text-align: center;";
+                        }else if( parseInt(dados[i].fcc)>125){
+                            document.getElementById("frequencia").style = "color: red; text-align: center;";
+                        }
                 }
-           
+                document.getElementById("tempo").textContent =time+"s";
                 chart = new Highcharts.Chart("treino", options);
-              
+                
                 })
               });
     </script>
@@ -143,7 +172,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class = "centered_tb">{{$exercise->time}} s</td>
+                        <td id="tempo" class = "centered_tb"></td>
                         <td class = "centered_tb">{{$exercise->time}} s</td>
                       </tr>
                     </tbody>
@@ -165,30 +194,12 @@
 
                       <tbody>
                         <tr>
-                          <!--FREQUENCE-->
-                          @if($exercise->compressions > 100 && $exercise->compressions< 120)
-                            <td class = "centered_tb" style="color:green">{{$exercise->compressions}} BPM</td>
-                          @else
-                            <td class = "centered_tb" style="color:red">{{$exercise->compressions}} BPM</td>
-                          @endif
+                            <td id="frequencia" class = "centered_tb" style="color:green"></td>
 
                           <!--RECOIL-->
-                          @if($exercise->recoil<50)
-                            <td class = "centered_tb" style="color:red">{{$exercise->recoil}} %</td>
-                          @elseif($exercise->recoil>80)
-                            <td class = "centered_tb" style="color:green">{{$exercise->recoil}} %</td>
-                          @else
-                            <td class = "centered_tb">{{$exercise->recoil}} %</td>
-                          @endif
-                         
+                            <td id="recoil" class = "centered_tb" style="color:red"></td>
                           <!--HANDS-->
-                          @if($exercise->hand_position<50)
-                            <td class = "centered_tb" style="color:red">{{$exercise->hand_position}} %</td>
-                          @elseif($exercise->hand_position>80)
-                            <td class = "centered_tb" style="color:green">{{$exercise->hand_position}} %</td>
-                          @else
-                            <td class = "centered_tb">{{$exercise->hand_position}} %</td>
-                          @endif()
+                            <td id="pos_maos" class = "centered_tb"></td>
                         </tr>
                       </tbody>
                   </table>

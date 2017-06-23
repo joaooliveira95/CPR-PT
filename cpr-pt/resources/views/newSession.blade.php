@@ -131,10 +131,10 @@
                         chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], false, false); 
 
                         // chart.series[2].addPoint( [time, Number(dados[i].picos_sensor1)], false, false);
-                        //chart.series[3].addPoint( [time, Number(dados[i].pos_maos_corretas)], false, false);
+                        //chart.series[3].addPoint( [time, Number(dados[i].picosSensor2)], false, false);
 
                         //MAOS CORRETAS
-                        document.getElementById("pos_maos").textContent = dados[i].mc;
+                        document.getElementById("pos_maos").textContent = dados[i].mc+"%";
                         if(parseInt(dados[i].mc)<90){
                             document.getElementById("pos_maos").style = "color: red; text-align: center;";
                             document.getElementById("recomend_pos_maos").style = "color: red; text-align: center; border: none;";
@@ -145,7 +145,7 @@
                             document.getElementById("recomend_pos_maos").textContent = "Posicionamento das mãos correto.";
                         }
                         //RECOIL
-                        document.getElementById("recoil").textContent = dados[i].rcc;
+                        document.getElementById("recoil").textContent = dados[i].rcc+"%";
                         if(parseInt(dados[i].rcc)<90){
                             document.getElementById("recoil").style = "color: red; text-align: center;";
                             document.getElementById("recomend_recoil").style = "color: red; text-align: center; border: none;";
@@ -204,7 +204,7 @@
                   setTimeout(function(){
                     var url_resultados = "/exercise_results/"+idExercise;
                     window.open(url_resultados);
-                  },21000);
+                  },25000);
 
             }
     </script>
