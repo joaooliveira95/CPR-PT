@@ -9,7 +9,7 @@
       var chart;
       var idExercise = "{{$exercise->id}}";
    $(document).ready(function() {
-             
+
                var options = {
 
                     chart: {
@@ -30,7 +30,7 @@
                         useGPUTranslations: true
                     },
 
-                   
+
                     title: {
                         text: 'Dados da Sessão de Treino'
                     },
@@ -47,7 +47,7 @@
                        title: {
                             text: 'Tempo'
                         },
-          
+
                     },
 
                     yAxis: {
@@ -55,7 +55,7 @@
                         title: {
                             text: 'Sensor (Definir Unidades)'
                         },
-                        
+
                     },
 
                     tooltip: {
@@ -64,16 +64,16 @@
                     },
 
                     legend: {
-                   
+
                         align: 'right',
-          
+
                     },
 
                       credits: {
                           enabled: false
                       },
 
-        
+
                     series: [{
                         name: 'Compressões',
                         data: []
@@ -92,13 +92,13 @@
                       enabled: true,
                     }
 
-               
+
                 };
 
 
-                var url = "/exercise_feedback/"+idExercise;
+                var url = "/exercise_progress/"+idExercise;
               $.get(url,function(result){
-        
+
                 var dados= jQuery.parseJSON(result);
                 var total=dados.length;
 
@@ -108,13 +108,13 @@
                   time = Number(dados[i].time);
 
                   options.series[0].data.push( [time, Number(dados[i].ponto_sensor1)]);
-                  options.series[1].data.push( [time, Number(dados[i].ponto_sensor2)]);     
+                  options.series[1].data.push( [time, Number(dados[i].ponto_sensor2)]);
 
                   options.series[2].data.push( [time, Number(dados[i].picos_sensor1)]);
-                  options.series[3].data.push( [time, Number(dados[i].picosSensor2)]);   
+                  options.series[3].data.push( [time, Number(dados[i].picosSensor2)]);
 
-                   document.getElementById("pos_maos").textContent = dados[i].mc+"%";
-                    if(parseInt(dados[i].mc)<90){
+                   document.getElementById("pos_maos").textContent = dados[i].maos_corretas+"%";
+                    if(parseInt(dados[i].maos_corretas)<90){
                         document.getElementById("pos_maos").style = "color: red; text-align: center;";
                     }else{
                         document.getElementById("pos_maos").style = "color: green; text-align: center;";
@@ -129,22 +129,22 @@
                     }
 
                     //Frquencia Compressoes
-                        document.getElementById("frequencia").textContent = dados[i].fcc+"BPM";
-                        if(parseInt(dados[i].fcc)<=95){
+                        document.getElementById("frequencia").textContent = dados[i].frequencia+"BPM";
+                        if(parseInt(dados[i].frequencia)<=95){
                             document.getElementById("frequencia").style = "color: red; text-align: center;";
-                        }else if( parseInt(dados[i].fcc)>95&& parseInt(dados[i].fcc)<100){
+                        }else if( parseInt(dados[i].frequencia)>95&& parseInt(dados[i].frequencia)<100){
                             document.getElementById("frequencia").style = "color: yellow; text-align: center;";
-                        }else if( parseInt(dados[i].fcc)>=100&& parseInt(dados[i].fcc)<=120){
+                        }else if( parseInt(dados[i].frequencia)>=100&& parseInt(dados[i].frequencia)<=120){
                             document.getElementById("frequencia").style = "color: green; text-align: center;";
-                        }else if( parseInt(dados[i].fcc)>120&& parseInt(dados[i].fcc)<=125){
+                        }else if( parseInt(dados[i].frequencia)>120&& parseInt(dados[i].frequencia)<=125){
                             document.getElementById("frequencia").style = "color: yellow; text-align: center;";
-                        }else if( parseInt(dados[i].fcc)>125){
+                        }else if( parseInt(dados[i].frequencia)>125){
                             document.getElementById("frequencia").style = "color: red; text-align: center;";
                         }
                 }
                 document.getElementById("tempo").textContent =time+"s";
                 chart = new Highcharts.Chart("treino", options);
-                
+
                 })
               });
     </script>
@@ -205,7 +205,7 @@
                   </table>
                   </div>
               </div>
-              
+
           </div>
           <div id="treino" style="height:60vh;>
 
@@ -216,4 +216,3 @@
 </div>
 
 @endsection
-

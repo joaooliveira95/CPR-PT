@@ -42,8 +42,6 @@ Route::post('/endSession/{curExercise}/', 'NewSessionController@endSession');
 
 Route::get('/exercise_progress/{id}','SimulationController@live_info');
 
-Route::get('/exercise_feedback/{id}','SimulationController@feedback_info');
-
 Route::get('/script/{id}&{sim}','SimulationController@script');
 
 
@@ -82,4 +80,3 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
 Route::get('/exercise_results/{id}', 'SessionsController@exercise');
-

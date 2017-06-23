@@ -12,7 +12,7 @@
     function setIntervalLimited(callback, interval, x) {
         flag = 0;
         for (var i = 0; i < x; i++) {
-            setTimeout(callback, i * interval); 
+            setTimeout(callback, i * interval);
         }
     }
 
@@ -28,7 +28,7 @@
                         useGPUTranslations: true
                     },
 
-                   
+
                     title: {
                         text: 'Dados da Sessão de Treino'
                     },
@@ -42,7 +42,7 @@
                        title: {
                             text: 'Tempo'
                         },
-          
+
                     },
 
                     yAxis: {
@@ -118,7 +118,7 @@
            var url = "/exercise_progress/"+idExercise;
 
               $.get(url,function(result){
-        
+
                 var dados= jQuery.parseJSON(result);
                 var total=dados.length;
 
@@ -128,14 +128,14 @@
 
                     if(time>highestTime){
                         chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], false, false);
-                        chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], false, false); 
+                        chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], false, false);
 
                         // chart.series[2].addPoint( [time, Number(dados[i].picos_sensor1)], false, false);
                         //chart.series[3].addPoint( [time, Number(dados[i].picosSensor2)], false, false);
 
                         //MAOS CORRETAS
-                        document.getElementById("pos_maos").textContent = dados[i].mc+"%";
-                        if(parseInt(dados[i].mc)<90){
+                        document.getElementById("pos_maos").textContent = dados[i].maos_corretas+"%";
+                        if(parseInt(dados[i].maos_corretas)<90){
                             document.getElementById("pos_maos").style = "color: red; text-align: center;";
                             document.getElementById("recomend_pos_maos").style = "color: red; text-align: center; border: none;";
                             document.getElementById("recomend_pos_maos").textContent = "Melhorar o posicionamento das mãos!";
@@ -155,27 +155,27 @@
                             document.getElementById("recomend_recoil").style = "color: green; text-align: center; border: none;";
                             document.getElementById("recomend_recoil").textContent = "Recoil feito de forma correta.";
                         }
-                        
+
 
                         //Frquencia Compressoes
-                        document.getElementById("frequencia").textContent = dados[i].fcc;
-                        if(parseInt(dados[i].fcc)<=95){
+                        document.getElementById("frequencia").textContent = dados[i].frequencia;
+                        if(parseInt(dados[i].frequencia)<=95){
                             document.getElementById("frequencia").style = "color: red; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: red; text-align: center; border: none;";
                             document.getElementById("recomend_frequencia").textContent = "Aumentar o ritmo das compressões!";
-                        }else if( parseInt(dados[i].fcc)>95&& parseInt(dados[i].fcc)<100){
+                        }else if( parseInt(dados[i].frequencia)>95&& parseInt(dados[i].frequencia)<100){
                             document.getElementById("frequencia").style = "color: yellow; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: green; text-align: center; border: none;";
                             document.getElementById("recomend_frequencia").textContent = "Aumentar ligeiramente o ritmo das compressões!";
-                        }else if( parseInt(dados[i].fcc)>=100&& parseInt(dados[i].fcc)<=120){
+                        }else if( parseInt(dados[i].frequencia)>=100&& parseInt(dados[i].frequencia)<=120){
                             document.getElementById("frequencia").style = "color: green; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: green; text-align: center; border: none;";
                             document.getElementById("recomend_frequencia").textContent = "Bom ritmo das compressões.";
-                        }else if( parseInt(dados[i].fcc)>120&& parseInt(dados[i].fcc)<=125){
+                        }else if( parseInt(dados[i].frequencia)>120&& parseInt(dados[i].frequencia)<=125){
                             document.getElementById("frequencia").style = "color: yellow; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: yellow; text-align: center; border: none;";
                             document.getElementById("recomend_frequencia").textContent = "Diminuir ligeiramente o ritmo das compressões!";
-                        }else if( parseInt(dados[i].fcc)>125){
+                        }else if( parseInt(dados[i].frequencia)>125){
                             document.getElementById("frequencia").style = "color: red; text-align: center;";
                             document.getElementById("recomend_frequencia").style = "color: red; text-align: center; border: none;";
                             document.getElementById("recomend_frequencia").textContent = "Diminuir o ritmo das compressões!";
@@ -184,8 +184,8 @@
 
                     }
                 }
-                  
-               
+
+
                 });
 
               chart.redraw();
@@ -195,8 +195,8 @@
         });
 
             function exercise(curExercise){
-                  $("#exercise_button").attr("disabled", true); 
-            
+                  $("#exercise_button").attr("disabled", true);
+
                   var url = "/script/"+idExercise+"&1";
                   $.get(url,function(result){
                   });
@@ -214,7 +214,7 @@
 <div class="container" style="width: 90vw;">
 
     <div class="row">
-      
+
         <div class="col-md-12">
             <div class="panel panel-default">
              <!-- <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div> -->
@@ -222,7 +222,7 @@
                 <div class="panel-body">
 
                       <div id="progressao_treino" style="height:50vh;">
-                        
+
                       </div>
 
                        <table class="table">
@@ -243,7 +243,7 @@
                           </tr>
                         </table>
                        <div class = "inputs" style="margin: 0 auto; text-align: center;">
-                          <li style="display: inline-block">   
+                          <li style="display: inline-block">
                             <input class = "btn btn-default btn-sm" type="submit" name="filter_button" id="exercise_button" value="Start Exercise" onclick = "exercise({{$curExercise->id}})"/>
                           </li>
 
@@ -272,7 +272,7 @@
           </div>
 
 
-       
+
       </div>
 
 </div>
