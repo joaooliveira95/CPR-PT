@@ -12,7 +12,7 @@ use App\Repositories\ExerciseSensorDatasRepository;
 
 class NewSessionController extends Controller
 {
-    
+
     protected $sessionsRepo;
     protected $exercisesRepo;
     protected $dataRepo;
@@ -40,7 +40,7 @@ class NewSessionController extends Controller
     }
 
     public function startSession(Request $request)
-    {     
+    {
         $this->validate($request, array(
                 'title' => 'required|min:5|max:20'
         ));
@@ -64,12 +64,6 @@ class NewSessionController extends Controller
 
     public function newExercise($sessionId, $curExerciseId){
 
-        $total_time = $this->dataRepo->getExerciseTime($curExerciseId);
- 
-        Exercise::where('id', $curExerciseId)
-          ->update(['time' => $total_time[0]->timestep]);
-
-
         $newExercise = Exercise::create([
             'idSession'=>$sessionId,
             'time'=>0,
@@ -84,13 +78,8 @@ class NewSessionController extends Controller
 
     public function endSession($curExerciseId){
 
-        $total_time = $this->dataRepo->getExerciseTime($curExerciseId);
- 
-        Exercise::where('id', $curExerciseId)
-          ->update(['time' => $total_time[0]->timestep]);
-
         return redirect('/history/'.Auth::user()->id.'/sessions');
     }
 
-  
+
 }

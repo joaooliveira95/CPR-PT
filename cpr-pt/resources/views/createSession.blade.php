@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-default shadow">
                 <div class="panel-heading">{{trans('messages.new_session')}}</div>
 
                     <div class="panel-body">
 
-                      <img src="http://127.0.0.1:8000/cpr.jpg" class="img-responsive img-thumbnail center-block" style="margin-bottom: 5px; max-width: 80%">
-                      
+                      <img src="/cpr.jpg" class="img-responsive img-thumbnail center-block" style="margin-bottom: 5px; max-width: 80%">
+
 
                        {!! Form::open(
                        array('action'=> 'NewSessionController@startSession'

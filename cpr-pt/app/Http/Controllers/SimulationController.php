@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Exercise;
 
 define("TRESHOLD_SENSOR1_BASELINE",300);
 define("TRESHOLD_SENSOR2_BASELINE",300);
@@ -86,12 +87,11 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
    }
 
     private function processa_sinal($time, $sensor1, $sensor2, $sensor3){
-        $pausas = 0;
         $picos_sensor1 = $picos_sensor2 = $picos_sensor3 = 0;
         $compressoes_corretas = $compressoes_incorretas = 0;
         $recoil = 0;
         $recoil_ts = 0;
-        $posicao_maos_corretas =   $posicao_maos_incorretas = 0;
+        $posicao_maos_corretas = $posicao_maos_incorretas = 0;
         $ninsuflacoes = 0;
         $pausas = 1000;
 
@@ -99,7 +99,7 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
          //$treino->cleanSignal(); RESOLVER DEPOIS!!!!
 
          // Duracao total do sinal em segundos
-         // $duracao=($treino->valoresTimeStamp[sizeof($treino->valoresTimeStamp)-2]-$treino->valoresTimeStamp[0])/1000;
+         // $duracao=($time[sizeof($time)-2]-$time[0])/1000;
 
          $ts = 2;
 
@@ -127,7 +127,8 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
          }else{
             $picos_sensor2=0;
          }
-    return array("time"=>$time[2], "picos_sensor1"=>$picos_sensor1, "picosSensor2"=>$picos_sensor2, "ponto_sensor1"=>$sensor1[2], "ponto_sensor2"=>$sensor2[2], "posicao_maos_corretas"=>$posicao_maos_corretas, "compressoes"=>$compressoes_corretas+$compressoes_incorretas, "maos_corretas"=>0, "frequencia"=>0, "rcc"=>0);
+    return array("time"=>$time[2], "picos_sensor1"=>$picos_sensor1, "picosSensor2"=>$picos_sensor2, "ponto_sensor1"=>$sensor1[2], "ponto_sensor2"=>$sensor2[2],
+     "posicao_maos_corretas"=>$posicao_maos_corretas, "compressoes"=>$compressoes_corretas+$compressoes_incorretas, "pausas"=>$pausas,"maos_corretas"=>0, "frequencia"=>0, "rcc"=>0);
  }
 
    public static function calculos($dp, $compressoes, $posicao_maos_corretas){
@@ -151,29 +152,33 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
       return ["maos_corretas"=>$mc, "frequencia"=>$fcc];
    }
 
-   public static function calculos_tempos($pausas){
-      /*   for($i=0;$i<(sizeof($treino->valoresTimeStamp)-3);$i++){
-           		if($pausas[$i]==1000){
-     			if($intervalo_pausa==0){
-     				$pausa_ini=$treino->valoresTimeStamp[$i];
-     				$tf=$treino->valoresTimeStamp[$i];
-     				$dp=$dp+($tf-$ti);
-     			}
-     			$intervalo_pausa=1;
-     		}else{
-     			if($intervalo_pausa==1){
-     				$pausa_fim=$treino->valoresTimeStamp[$i];
-           				 $intervalo_pausa=0;
-           				 $ti=$treino->valoresTimeStamp[$i];
+   public static function calculos_tempos($pausas, $time){
+            $started_band = $start_point=0;
+            $last_event=1;
+            $intervalo_pausa = $pausa_ini = $pausa_fim = 0;
+            $ti = $tf = $dp = 0;
+
+          for($i=0;$i<(sizeof($time)-3);$i++){
+               if($pausas[$i]==1000){
+           			if($intervalo_pausa==0){
+              				$pausa_ini=$time[$i];
+              				$tf=$time[$i];
+              				$dp=$dp+($tf-$ti);
            			}
-           		}
+        			   $intervalo_pausa=1;
+           		}else{
+           			if($intervalo_pausa==1){
+                     $pausa_fim=$time[$i];
+                     $intervalo_pausa=0;
+                     $ti=$time[$i];
+              		}
+              	}
            	}
-      */
 
            	if($intervalo_pausa==1 && $pausas[$i-1]==1000){
-           		$pausa_fim=$treino->valoresTimeStamp[$i-1];
+           		$pausa_fim=$time[$i-1];
            	}elseif($intervalo_pausa==0 && $pausas[$i-1]!=1000){
-           		$tf=$treino->valoresTimeStamp[$i-1];
+           		$tf=$time[$i-1];
            		$dp=$dp+($tf-$ti);
             }
 
@@ -187,45 +192,46 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
         $res = mysqli_query($con, $sql);
         $n_rows = mysqli_num_rows($res);
 
-        $time = array();
-        $sensor1 = array();
-        $sensor2 = array();
-        $sensor3 = array();
+        $time = $sensor1 = $sensor2 = $sensor3 = $pausas = $data = array();
 
-        $data = array();
-
-        $compressoes=0;
-        $pos_maos_corretas=0;
+        $compressoes = $pos_maos_corretas=0;
+         array_push($time, 0);
 
         while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                 array_push($time, $row["timestep"]);
                 array_push($sensor1, $row["valueSensor1"]);
                 array_push($sensor2, $row["valueSensor2"]);
+                array_push($pausas, 0); //!!!!!!!!!!!!!!!
                // array_push($sensor3, $row["valueSensor3"]);
         }
+         $mao_tmp = 0;
+         $compress_tmp = 0;
 
         for($i = 3; $i < $n_rows-2; $i++){
-            $time_temp = array();
-            $sensor1_temp = array();
-            $sensor2_temp = array();
+            $time_temp = $sensor1_temp = $sensor2_temp = array();
 
             for($j = $i-2 ; $j <= $i+2; $j++){
-                array_push($time_temp, $time[$j]);
-                array_push($sensor1_temp, $sensor1[$j]);
-                array_push($sensor2_temp, $sensor2[$j]);
+               array_push($time_temp, $time[$j]);
+               array_push($sensor1_temp, $sensor1[$j]);
+               array_push($sensor2_temp, $sensor2[$j]);
             }
 
             $data_tmp = $this->processa_sinal($time_temp, $sensor1_temp, $sensor2_temp, $sensor3);
 
             $compressoes+=$data_tmp["compressoes"];
             $pos_maos_corretas+=$data_tmp["posicao_maos_corretas"];
+            $pausas[$i]=$data_tmp["pausas"];
 
-            $dp = 0;
+            $calculos_tempos = $this->calculos_tempos($pausas, $time);
+
+            $dp = $calculos_tempos["dp"];
 
             $calculos = $this->calculos($dp, $compressoes, $pos_maos_corretas);
 
             $data_tmp["maos_corretas"]=$calculos["maos_corretas"];
             $data_tmp["frequencia"]=$calculos["frequencia"];
+            $mao_tmp = $calculos["maos_corretas"];
+            $compress_tmp= $calculos["frequencia"];
             array_push($data, $data_tmp);
 
             unset($time_temp);
@@ -233,11 +239,14 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
             unset($sensor2_temp);
         }
 
+        Exercise::where('id', $idExercise)
+         ->update(['hand_position' => $mao_tmp, 'compressions' => $compress_tmp, 'time'=>max($time)]);
+
+
         return json_encode($data);
     }
 
     public function script($idExercise, $simular){
-
         global $db;
         $data = array();
         $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;

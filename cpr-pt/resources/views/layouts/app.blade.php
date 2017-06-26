@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="http://127.0.0.1:8000/heart_md.png">
+    <link rel="icon" href="/heart_md.png">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
@@ -45,11 +45,11 @@
             font-weight: 500;
             font-family: 'Lato', Arial;
             background-color: rgba(241, 241, 241, 0.7);
-            background-image: url('http://127.0.0.1:8000/storage/pictures/logo.png');
+            background-image: url('/storage/pictures/logo.png');
             background-repeat: no-repeat;
             background-size: 70%;
             background-position: 50% 0%;
-            
+
             text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
         }
@@ -93,7 +93,7 @@
         }
 
         .centered_tb{
-            text-align:center; 
+            text-align:center;
             vertical-align:middle;
         }
 
@@ -150,7 +150,27 @@
         .fa-input{
              font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
-    </style>
+
+        .box {
+         width: 25%;
+         float: left;
+         margin: 20px 10px;
+         padding: 10px;
+         text-align: center;
+         background: #f1f1f1;
+         border: 1px 1px 1px;
+         border-style: solid;
+         border-color: transparent #fff #fff;
+         border-radius: 7px;
+         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), inset 1px 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+         .shadow{
+            -webkit-box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.75);
+         }
+
+         </style>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -159,7 +179,7 @@
     <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.pt.min.js') }}"></script>
 
      @yield('highcharts')
-  
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -171,7 +191,7 @@
     $(document).ready(function() {
             $(".dropdown-toggle").dropdown();
             });
-             
+
             $(window).on('load', function() {
                 var url = "/comments/new";
 
@@ -179,7 +199,7 @@
                     var dados= jQuery.parseJSON(result);
                     var newComments = dados.new_comments;
                     if(newComments>0){
-                       $("#ncomments").append("<sup>"+newComments+"</sup>");  
+                       $("#ncomments").append("<sup>"+newComments+"</sup>");
                        $("#ncomments").css('color', 'red');
                     }
                 });
@@ -209,7 +229,7 @@
 
                     <!-- Branding Image -->
 
-                    <a class="navbar-brand" href="{{ url('/home') }}" style="padding: 5px 5px;"><img src="http://127.0.0.1:8000/heart_sm.png" class="heart"></a>
+                    <a class="navbar-brand" href="{{ url('/home') }}" style="padding: 5px 5px;"><img src="/heart_sm.png" class="heart"></a>
                     <a class="navbar-brand" href="{{ url('/home') }}">{{ config('app.name', 'Laravel') }}</a>
                 </div>
 
@@ -220,16 +240,16 @@
                     @else
                     <ul class="nav navbar-nav">
                     <li class="divider" style="height: 50px; margin: 0 9px;"></li>
-                    <li><a href="http://127.0.0.1:8000/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.new_session')}}</span></a></li>
+                    <li><a href="/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.new_session')}}</span></a></li>
                     <li class="divider"></li>
-                        <li><a href="http://127.0.0.1:8000/history/{{Auth::user()->id}}/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
+                        <li><a href="/history/{{Auth::user()->id}}/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
                         <li class="divider"></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
-                     <!--   <li><a href="http://127.0.0.1:8000/students" targer="-self"><span>Students</span></a></li> -->
-                        <li><a href="http://127.0.0.1:8000/turmas/{{Auth::user()->id}}" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
+                     <!--   <li><a href="/students" targer="-self"><span>Students</span></a></li> -->
+                        <li><a href="/turmas/{{Auth::user()->id}}" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
                         <li class="divider"></li>
                         @endif
-                         <li><a href="http://127.0.0.1:8000/content" targer="-self" class="norm_shadow"><span><i class="fa fa-play-circle nav_icon" aria-hidden="true"></i>{{trans('messages.content')}}</span></a></li>
+                         <li><a href="/content" targer="-self" class="norm_shadow"><span><i class="fa fa-play-circle nav_icon" aria-hidden="true"></i>{{trans('messages.content')}}</span></a></li>
                         </li>
                     </ul>
                     @endif
@@ -246,18 +266,18 @@
                          </li>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown">
-                               
-                               <img src="http://127.0.0.1:8000/{{App::getLocale()}}.png" height="20"> {{ Config::get('languages')[App::getLocale()] }}
+
+                               <img src="/{{App::getLocale()}}.png" height="20"> {{ Config::get('languages')[App::getLocale()] }}
                             </a>
                             <ul class="dropdown-menu">
                                 @foreach (Config::get('languages') as $lang => $language)
                                     @if ($lang != App::getLocale())
                                         <li>
                                             @if($language == "English")
-                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="http://127.0.0.1:8000/en.png" width="25" class="nav_icon">&nbsp;&nbsp;{{$language}}</a>
+                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="/en.png" width="25" class="nav_icon">&nbsp;&nbsp;{{$language}}</a>
                                             @endif
                                             @if($language == "Português")
-                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="http://127.0.0.1:8000/pt.png" width="25" class="nav_icon">{{$language}}</a>
+                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="/pt.png" width="25" class="nav_icon">{{$language}}</a>
                                             @endif
                                         </li>
                                     @endif
@@ -288,7 +308,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                         @endif
@@ -304,4 +324,3 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
-

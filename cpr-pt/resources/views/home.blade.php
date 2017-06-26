@@ -14,15 +14,13 @@
             $(document).ready(function() {
 
                var options = {
-
                         chart: {
-                            zoomType: 'x'
+                            zoomType: 'x',
+                            backgroundColor: null,
                         },
-
                     title: {
                         text: title
                     },
-
                     subtitle: {
                         text: document.ontouchstart === undefined ?
                                 'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
@@ -30,7 +28,7 @@
 
                     xAxis:{
                         type: 'datetime',
-                      title: {
+                        title: {
                             text: xTitle
                         },
                         categories: [],
@@ -48,27 +46,15 @@
                     },
 
                     plotOptions: {
-
                         series: {
                             pointStart: 0
                         }
                     },
 
-
                     series: [{
-                        name: 'Tempo (s)',
-                        data: []
-                    },{
-                        name: 'Recoil',
-                        data: []
-                    }, {
-                        name: 'Compressões (BPM)',
-                        data: []
-                    }, {
-                        name: 'Posição das mãos (%)',
+                        name: 'Sensor',
                         data: []
                     }]
-
                 };
 
                 var url = "/exercises/"+idUser;
@@ -78,14 +64,24 @@
                 var total=dados.recoil.length;
                 var i=0;
                 for(i=0;i<total;i++){
-                  options.series[0].data.push( dados.time[i] );
-                  options.series[1].data.push( dados.recoil[i] );
-                  options.series[2].data.push( dados.compress[i] );
-                  options.series[3].data.push( dados.hands[i] );
-
+                  options.series[0].data.push( dados.compress[i] );
                 }
-                //options.title.text="aqui e podria cambiar el titulo dinamicamente";
-                chart = new Highcharts.Chart("progresso", options);
+
+                chart = new Highcharts.Chart("compressoes", options);
+                chart.xAxis[0].setCategories(dados.dates);
+
+                for(i=0;i<total;i++){
+                  options.series[0].data.push( dados.recoil[i] );
+                }
+
+                chart = new Highcharts.Chart("recoil", options);
+                chart.xAxis[0].setCategories(dados.dates);
+
+                for(i=0;i<total;i++){
+                  options.series[0].data.push( dados.hands[i] );
+                }
+
+                chart = new Highcharts.Chart("pos_maos", options);
                 chart.xAxis[0].setCategories(dados.dates);
               })
             });
@@ -97,12 +93,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-md-offset-0">
-            <div class="panel panel-default">
+            <div class="panel panel-default shadow">
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
 
-                     <div id="progresso" class="progresso">
+                     <div id="compressoes" class="progresso">
+                     </div>
+                     <div id="recoil" class="progresso">
+                     </div>
+                     <div id="pos_maos" class="progresso">
                      </div>
                   </div>
             </div>

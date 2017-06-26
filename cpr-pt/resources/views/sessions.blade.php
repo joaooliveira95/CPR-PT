@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-default shadow">
                 <div class="panel-heading">{{trans('messages.sessions')}}</div>
 
                 <div class="panel-body">
@@ -26,10 +26,10 @@
                             </div>
                             <span style="display:inline-block; width: 5px; padding-top: 5px;">
                             <input class = "btn btn-default btn-md" type="submit" name="filter_button" id="filter_button" value="Submit">
-                         
+
                         </div>
                     </form>
-                                   
+
                     <div class="table-responsive">
                        <table id="sessions_table" class='table table-hover'>
                              <br>

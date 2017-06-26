@@ -124,7 +124,7 @@
                     document.getElementById("recoil").textContent = dados[i].rcc+"%";
                     if(parseInt(dados[i].rcc)<90){
                         document.getElementById("recoil").style = "color: red; text-align: center;";
-
+                     }else{
                         document.getElementById("recoil").style = "color: green; text-align: center;";;
                     }
 
@@ -155,7 +155,7 @@
 <div class="container" style="width: 90vw;">
     <div class="row">
        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+            <div class="panel panel-default shadow">
             <div class="panel-heading">{{trans('messages.exercise_feedback')}} {{$exercise->id}}</div>
 
             <div class="panel-body">

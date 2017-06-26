@@ -6,7 +6,7 @@
       <script>
              var idSession = "{{$session->id}}";
              $(document).ready(function() {
-             
+
                var options = {
 
                     title: {
@@ -37,13 +37,13 @@
                     },
 
                     plotOptions: {
-                      
+
                         series: {
                             pointStart: 0
                         }
                     },
 
-        
+
                     series: [{
                         name: 'Tempo (s)',
                         data: []
@@ -57,12 +57,12 @@
                         name: 'Pos. Mãos (%)',
                         data: []
                     }]
-                    
+
                 };
 
                 var url = "/progress/"+idSession;
               $.get(url,function(result){
-              
+
                 var dados= jQuery.parseJSON(result);
                 var total=dados.recoil.length;
                 var i=0;
@@ -70,7 +70,7 @@
                   options.series[0].data.push( dados.time[i] );
                   options.series[1].data.push( dados.recoil[i] );
                   options.series[2].data.push( dados.compress[i] );
-                  options.series[3].data.push( dados.hands[i] );      
+                  options.series[3].data.push( dados.hands[i] );
                 }
                 //options.title.text="aqui e podria cambiar el titulo dinamicamente";
                 chart = new Highcharts.Chart("progresso_sessao_grafico", options);
@@ -85,7 +85,7 @@
 <div class="container no_overflow">
     <div class="row">
        <div class="col-md-12" style="padding-right: 0;">
-            <div class="panel panel-default">
+            <div class="panel panel-default shadow">
                 <div class="panel-heading">{{$user->name}} | {{$session->title}} | {{$session->created_at}}</div>
 
                 <div class="panel-body">
@@ -118,19 +118,19 @@
                                   </tbody>
                           </table>
 
-                          
+
                       </div>
                         {{$exercises->links()}}
                   </div>
 
                   <div id="progresso_sessao_grafico"></div>
                     @endif
-                    
-        
+
+
                  <!--  </div>panel body-->
 
             <!--</div>panel-->
-           
+
        <!-- </div>Lado esquerdo-->
 
       <!--  <div class="col-md-3" >
@@ -161,4 +161,3 @@
     </div><!--Row-->
 </div><!--Container-->
 @endsection
-

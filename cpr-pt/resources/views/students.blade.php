@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2 shadow">
             <div class="panel panel-default">
                 <div class="panel-heading"> {{trans('messages.students')}}</div>
 
@@ -11,7 +11,7 @@
                     <form class="form-inline">
                          <div class="form-group">
                             <input class = "form-control input-md" type="text" name="filter" id="str_filter" placeholder="Search...">
-                        
+
                            <input class = "btn btn-default btn-md fa-input" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterStudents()" value="&#xf002;">
                         </div>
                     </form>
