@@ -35,3 +35,36 @@ function simulation_live_info(maos_corretas, recoil, frequencia){
       recomendation("frequencia", "recomend_frequencia", "red", "Diminuir o ritmo das compressões!");
  }
 }
+
+function simulation_feedback(maos_corretas, recoil, frequencia, time){
+   document.getElementById("pos_maos").textContent = maos_corretas+"%";
+   if(parseInt(maos_corretas)<90){
+      document.getElementById("pos_maos").style = "color: red; text-align: center;";
+   }else{
+      document.getElementById("pos_maos").style = "color: green; text-align: center;";
+   }
+
+        //RECOIL
+   document.getElementById("recoil").textContent = recoil+"%";
+   if(parseInt(recoil)<90){
+      document.getElementById("recoil").style = "color: red; text-align: center;";
+   }else{
+      document.getElementById("recoil").style = "color: green; text-align: center;";;
+   }
+
+   //Frquencia Compressoes
+   document.getElementById("frequencia").textContent = frequencia+"BPM";
+   if(parseInt(frequencia)<=95){
+      document.getElementById("frequencia").style = "color: red; text-align: center;";
+   }else if( parseInt(frequencia)>95&& parseInt(frequencia)<100){
+      document.getElementById("frequencia").style = "color: yellow; text-align: center;";
+   }else if( parseInt(frequencia)>=100&& parseInt(frequencia)<=120){
+      document.getElementById("frequencia").style = "color: green; text-align: center;";
+   }else if( parseInt(frequencia)>120&& parseInt(frequencia)<=125){
+      document.getElementById("frequencia").style = "color: yellow; text-align: center;";
+   }else if( parseInt(frequencia)>125){
+      document.getElementById("frequencia").style = "color: red; text-align: center;";
+   }
+
+   document.getElementById("tempo").textContent =time+"s";
+}
