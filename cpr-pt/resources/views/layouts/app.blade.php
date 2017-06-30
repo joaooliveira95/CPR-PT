@@ -45,7 +45,7 @@
             font-weight: 500;
             font-family: 'Lato', Arial;
             background-color: rgba(241, 241, 241, 0.7);
-            background-image: url('/storage/pictures/logo.png');
+            background-image: url('/logo2.png');
             background-repeat: no-repeat;
             background-size: 70%;
             background-position: 50% 0%;
@@ -192,7 +192,7 @@
             $(".dropdown-toggle").dropdown();
             });
 
-            $(window).on('load', function() {
+            /*$(window).on('load', function() {
                 var url = "/comments/new";
 
                $.get(url,function(result){
@@ -203,7 +203,7 @@
                        $("#ncomments").css('color', 'red');
                     }
                 });
-            });
+            });*/
 
             function filterStudents(id){
                 var filter = document.getElementById("str_filter").value;
@@ -262,7 +262,7 @@
                             <li><a href="{{ route('register') }}" class="norm_shadow">Register</a></li>
                         @else
                         <li>
-                            <a id='ncomments' href="/comments/{{Auth::user()->id}}" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Discussions</a>
+                            <a id='ncomments' href="/comments" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Discussions</a>
                          </li>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown">

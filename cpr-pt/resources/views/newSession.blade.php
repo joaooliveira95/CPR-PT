@@ -137,7 +137,7 @@
             setTimeout(function(){
               var url_resultados = "/exercise_results/"+idExercise;
               window.open(url_resultados);
-            },25000);
+           },22000);
 
       }
     </script>

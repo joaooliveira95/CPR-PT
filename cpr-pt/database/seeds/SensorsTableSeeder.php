@@ -7,7 +7,7 @@ class SensorsTableSeeder extends Seeder{
 
     public function run()
     {
-        if (Sensor::count() == 0) {
+       /* if (Sensor::count() == 0) {
 
             Sensor::create([
                 'id' => 1,
@@ -29,6 +29,6 @@ class SensorsTableSeeder extends Seeder{
                 'info' => 'Sensor that measures chest recoil ...',
                 'units' => 'U'
             ]);
-        }
+        }*/
     }
 }

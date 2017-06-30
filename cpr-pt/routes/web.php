@@ -4,7 +4,6 @@
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -22,7 +21,6 @@ Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@swit
 Route::get('/home', 'HomeController@index');
 
 Route::get('/import', 'ImportExportController@import');
-
 
 //BLADES
 Route::get('/content', 'BladesController@contentIndex');
@@ -59,13 +57,8 @@ Route::get('/progress/{id}', 'SessionsController@progress');
 
 Route::get('/exercises/{id}', 'SessionsController@userExercises');
 //COMMENTS
-Route::post('/comments/{session_id}{user_id}', 'CommentsController@send');
 
-Route::get('/comments/open/{id}/{sessionId}', 'CommentsController@mark');
-
-Route::get('/comments/new','CommentsController@newComments');
-
-Route::get('/comments/{id}', 'CommentsController@comments');
+Route::get('/comments', 'CommentsController@comments');
 
 //TURMAS
 Route::get('/turmas/{id}', 'TurmasController@turmas')->middleware('teacher');;
@@ -77,6 +70,5 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
 
 Route::get('/exercise_results/{id}', 'SessionsController@exercise');

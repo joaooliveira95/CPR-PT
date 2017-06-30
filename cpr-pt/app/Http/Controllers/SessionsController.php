@@ -8,20 +8,20 @@ use Illuminate\Support\Facades\DB;
 use App\Repositories\UsersRepository;
 use App\Repositories\SessionsRepository;
 use App\Repositories\ExercisesRepository;
-use App\Repositories\CommentsRepository;
+//use App\Repositories\CommentsRepository;
 
 class SessionsController extends Controller{
 
     protected $sessionsRepo;
     protected $exercisesRepo;
-    protected $commentsRepo;
+   // protected $commentsRepo;
     protected $usersRepo;
 
-    public function __construct(UsersRepository $usersRepo, SessionsRepository $sessionsRepo, ExercisesRepository $exercisesRepo, CommentsRepository $commentsRepo){
+    public function __construct(UsersRepository $usersRepo, SessionsRepository $sessionsRepo, ExercisesRepository $exercisesRepo){
         $this->usersRepo = $usersRepo;
         $this->sessionsRepo = $sessionsRepo;
         $this->exercisesRepo = $exercisesRepo;
-        $this->commentsRepo = $commentsRepo;
+   //     $this->commentsRepo = $commentsRepo;
         $this->middleware('auth');
     }
 
@@ -55,9 +55,9 @@ class SessionsController extends Controller{
         $session = $this->sessionsRepo->findByID($id);
         $user = $this->usersRepo->findByID($session->idUser);
         $exercises = $this->exercisesRepo->getSessionExercises($id);
-        $comments = $this->commentsRepo->getCommentsBySession($id);
+        //$comments = $this->commentsRepo->getCommentsBySession($id);
 
-        return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises, 'comments' => $comments]);
+        return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises]);
     }
 
 
@@ -68,7 +68,7 @@ class SessionsController extends Controller{
         $hands = array();
 
         $cnt = count($exercises);
-        
+
         for($i=0;$i<$cnt;$i++){
             $time[$i] = $exercises[$i]->time;
             $recoil[$i] = $exercises[$i]->recoil;
@@ -89,7 +89,7 @@ class SessionsController extends Controller{
         $time = array();
 
         $cnt = count($exercises);
-        
+
         for($i=0;$i<$cnt;$i++){
             $time[$i] = $exercises[$i]->time;
             $recoil[$i] = $exercises[$i]->recoil;
@@ -109,4 +109,4 @@ class SessionsController extends Controller{
          return view("exercise_feedback", ['exercise' => $exercise]);
     }
 
-}  
+}

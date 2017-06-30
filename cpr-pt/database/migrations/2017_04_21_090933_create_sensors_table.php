@@ -13,13 +13,13 @@ class CreateSensorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sensors', function (Blueprint $table) {
+        /*Schema::create('sensors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('info');
             $table->string('units');
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateSensorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sensors');
+       // Schema::dropIfExists('sensors');
     }
 }

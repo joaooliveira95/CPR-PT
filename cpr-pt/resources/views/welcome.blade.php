@@ -13,10 +13,10 @@
         <!-- Styles -->
         <style>
             html, body {
-                
-               background-image: url('http://127.0.0.1:8000/storage/pictures/logo.png');
+
+               background-image: url('/logo2.png');
                 background-color: rgba(241, 241, 241, 0.7);
-               
+
                 background-repeat: no-repeat;
                 background-size: auto 100%;
                 background-position: 50% 0%;
@@ -29,7 +29,7 @@
                 0% {opacity: 0;}
                 100% {opacity: 1;}
              }
-             
+
              @keyframes fadeIn {
                 0% {opacity: 0;}
                 100% {opacity: 1;}
@@ -79,7 +79,7 @@
                 padding: 0 1vh;
 
                 font-size: 1.5vw;
-         
+
 
                 letter-spacing: .1rem;
                 text-decoration: none;

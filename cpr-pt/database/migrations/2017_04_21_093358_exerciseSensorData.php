@@ -18,11 +18,11 @@ class ExerciseSensorData extends Migration
             $table->integer('idExercise')->unsigned();
             $table->foreign('idExercise')->references('id')->on('exercises');
             $table->integer('idSensor1')->unsigned();
-            $table->foreign('idSensor1')->references('id')->on('sensors');
+         //   $table->foreign('idSensor1')->references('id')->on('sensors');
             $table->integer('idSensor2')->unsigned();
-            $table->foreign('idSensor2')->references('id')->on('sensors');
+         //   $table->foreign('idSensor2')->references('id')->on('sensors');
             $table->integer('idSensor3')->unsigned();
-            $table->foreign('idSensor3')->references('id')->on('sensors');
+         //   $table->foreign('idSensor3')->references('id')->on('sensors');
             $table->integer('valueSensor1');
             $table->integer('valueSensor2');
             $table->integer('valueSensor3');
