@@ -25,7 +25,7 @@ Route::get('/import', 'ImportExportController@import');
 //BLADES
 Route::get('/content', 'BladesController@contentIndex');
 
-Route::get('/students', 'BladesController@studentsIndex');
+Route::get('/discussion', 'BladesController@discussion');
 
 Route::get('/newSession', 'NewSessionController@index');
 

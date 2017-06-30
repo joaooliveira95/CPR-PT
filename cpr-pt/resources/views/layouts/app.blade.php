@@ -262,7 +262,7 @@
                             <li><a href="{{ route('register') }}" class="norm_shadow">Register</a></li>
                         @else
                         <li>
-                            <a id='ncomments' href="/comments" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Discussions</a>
+                            <a id='ncomments' href="/discussion" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Discussions</a>
                          </li>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown">

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+   /*
         protected $fillable = [
         'idFrom', 'idTo', 'idSession', 'comment', 'mark'
     ];
@@ -21,5 +22,5 @@ class Comment extends Model
 	public function idSession(){
 	    return $this->belongsTo(Session::class);
 	}
-
+*/
 }
