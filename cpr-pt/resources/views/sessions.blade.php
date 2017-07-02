@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     <form class="form-inline">
                          <div class="form-group">
+                        {!! csrf_field() !!}
                          {{trans('messages.from')}}
                             <div class="input-group date" data-provide="datepicker">
                                 <input class = "form-control datepicker" type="text" placeholder="MM/DD/YYYY" name="from" id="from">

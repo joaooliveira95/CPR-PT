@@ -196,7 +196,7 @@
                              {!! Form::open(
                              array('action'=> array('NewSessionController@newExercise', $id, $curExercise->id)
                              , 'mepod'=>'post')) !!}
-
+                             {!! csrf_field() !!}
                              {!! Form::submit('&#xf28b;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'margin: 0 10px 0 10px;']) !!}
 
                             {!! Form::close() !!}
@@ -206,7 +206,7 @@
                              {!! Form::open(
                              array('action'=> array('NewSessionController@endSession', $curExercise->id)
                              , 'mepod'=>'post')) !!}
-
+                             {!! csrf_field() !!}
                              {!! Form::submit('&#xf28d;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'color: red;']) !!}
 
                             {!! Form::close() !!}

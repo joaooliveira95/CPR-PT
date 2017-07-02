@@ -1,122 +1,75 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>CPR PT</title>
+      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+      <link rel="stylesheet" href="/css/welcome.css">
 
-        <title>CPR PT</title>
+</head>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+<body>
+  <html>
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery Parallax Plugin Demo</title>
 
-        <!-- Styles -->
-        <style>
-            html, body {
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://ianlunn.co.uk/plugins/jquery-parallax/scripts/jquery.parallax-1.1.3.js"></script>
+<script type="text/javascript" src="https://ianlunn.co.uk/plugins/jquery-parallax/scripts/jquery.localscroll-1.2.7-min.js"></script>
+<script type="text/javascript" src="https://ianlunn.co.uk/plugins/jquery-parallax/scripts/jquery.scrollTo-1.4.2-min.js"></script>
+</head>
 
-               background-image: url('/logo2.png');
-                background-color: rgba(241, 241, 241, 0.7);
-
-                background-repeat: no-repeat;
-                background-size: auto 100%;
-                background-position: 50% 0%;
-
-                font-family: 'Arial', sans-serif;
-                margin: 0;
-            }
-
-            @-webkit-keyframes fadeIn {
-                0% {opacity: 0;}
-                100% {opacity: 1;}
-             }
-
-             @keyframes fadeIn {
-                0% {opacity: 0;}
-                100% {opacity: 1;}
-             }
-
-            body{
-
-                -webkit-animation-duration: 3s;
-                animation-duration: 3s;
-                -webkit-animation-fill-mode: both;
-                animation-fill-mode: both;
-                -webkit-animation-name: fadeIn;
-                animation-name: fadeIn;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 5vw;
-                font-weight: bold;
-            }
-
-            .links > a {
-                color: #000000;
-                padding: 0 1vh;
-
-                font-size: 1.5vw;
+<body>
+	<ul id="nav">
+		<li><a href="#intro" title="Next Section"><img src="https://ianlunn.co.uk/plugins/jquery-parallax/images/dot.png" alt="Link" /></a></li>
+	    <li><a href="#second" title="Next Section"><img src="https://ianlunn.co.uk/plugins/jquery-parallax/images/dot.png" alt="Link" /></a></li>
+	    <li><a href="#third" title="Next Section"><img src="https://ianlunn.co.uk/plugins/jquery-parallax/images/dot.png" alt="Link" /></a></li>
+	</ul>
+   <div class="container-fluid">
+      <div class="row">
+         <div id="intro">
+           <div class="container">
+             <div class="col-md-10 col-md-offset-3">
+                <h2 class="h2_1">Cardiopulmonary Reanimation</h2>
+                <p class="h2_2 text-center">Personal Trainer</p>
+             </div>
+           </div>
+      	</div> <!--#intro-->
+      </div>
 
 
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+      	<div id="second">
+      		<div class="story"><div class="bg"></div>
+      	    	<div class="float-right">
+      	            <h2>Multiple Backgrounds</h2>
+      	            <p>The multiple backgrounds applied to this section are moved in a similar way to the first section -- every time the user scrolls down the page by a pixel, the positions of the backgrounds are changed.</p>
+      	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nibh erat, sagittis sit amet congue at, aliquam eu libero. Integer molestie, turpis vel ultrices facilisis, nisi mauris sollicitudin mauris, volutpat elementum enim urna eget odio. Donec egestas aliquet facilisis. Nunc eu nunc eget neque ornare fringilla. Nam vel sodales lectus. Nulla in pellentesque eros. Donec ultricies, enim vitae varius cursus, risus mauris iaculis neque, euismod sollicitudin metus erat vitae sapien. Sed pulvinar.</p>
+      	        </div>
+      	    </div> <!--.story-->
 
-            .links > a:hover {
-             color: #444444;
-            }
+      	</div> <!--#second-->
 
-            .m-b-md {
-                margin-bottom: 2px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+      	<div id="third">
+      		<div class="story">
+               <div class="panel panel-default">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">Titulo</h3>
+                 </div>
+                 <div class="panel-body">
+                     Body
+                 </div>
+                 <div class="panel-footer">
+                     Footer
+                 </div>
+               </div>
+      	    </div> <!--.story-->
+      	</div> <!--#third-->
+</div><!--container-->
+</body>
+</html>
 
-            <div class="content">
-                <div class="title m-b-md">
-                   CPR PT
-                </div>
+    <script src="/js/welcome.js"></script>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Cardio Pulmonary Ressuscitation Personal Trainer</a>
-                </div>
-            </div>
-        </div>
-    </body>
+</body>
 </html>

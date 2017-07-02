@@ -15,7 +15,7 @@
                        {!! Form::open(
                        array('action'=> 'NewSessionController@startSession'
                        , 'method'=>'post')) !!}
-
+                        {!! csrf_field() !!}
                        <h4 class="text-center">{!! Form::label('Title','Título') !!}</h4>
                       <div class="row">
                       <div class="input-group col-md-6 col-md-offset-3">

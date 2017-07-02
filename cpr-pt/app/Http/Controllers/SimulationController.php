@@ -19,6 +19,21 @@ define("SIMULAR",0);
 
 class SimulationController extends Controller{
 
+   private function min_val($valores,$ini,$fim){
+      $pmin=$ini;
+      $vmin=$valores[$ini];
+
+      for($i=$ini+1;$i<=$fim;$i++){
+            if($valores[$i]<$vmin){
+               $pmin=$i;
+               $vmin=$valores[$i];
+            }
+      }
+
+      return $pmin;
+
+   }
+
    private function compressoes($ts, $sensor1, $sensor2){
       $compressoes_corretas = $compressoes_incorretas = 0;
 
@@ -55,6 +70,53 @@ class SimulationController extends Controller{
       return ["posicao_maos_corretas"=>$posicao_maos_corretas, "posicao_maos_incorretas"=>$posicao_maos_incorretas];
    }
 
+   private function recoil($ts, $sensor1, $sensor2){
+         $pos_pico_ini=0;
+         $pos_pico_fim=0;
+         $found_first_peak=0;
+         $p=0;
+
+         while($found_first_peak==0 && $p<sizeof($compressoes)){
+
+           if($compressoes==1000){
+             $found_first_peak=1;
+             $pos_pico_ini=$p;
+           }
+           $p++;
+         }
+
+          $rec=0;
+          $rec_incorreto=0;
+          $rec_correto=0;
+
+          for($i=$pos_pico_ini+1;$i<sizeof($compressoes);$i++){
+            if($compressoes==1000 || $compressoes==900 ){
+              $pos_pico_fim=$i;
+
+              $min_pos=$this->min_val($sensor1,$pos_pico_ini,$pos_pico_fim);
+              $rec++;
+
+              $ratio=$sensor1[$pos_pico_ini]/$sensor1[$min_pos];
+              $dif=$sensor1[$pos_pico_ini]-$sensor1[$min_pos];
+              $ratio_norm=$dif/$sensor1[$pos_pico_ini];
+
+      // SE posicao das maos incorreta no pico anterior e a diferenca entre  max do sensor de cima e o max do sensor de baixo <1000 = no recoil
+              if($ratio_norm>RATIO_RECOIL_NORM){
+
+                  $recoil[$ts[$min_pos]]=1000;
+                  $rec_correto++;
+              }else{
+
+                  $recoil[$ts[$min_pos]]=900;
+                  $rec_incorreto++;
+              }
+              $pos_pico_ini=$pos_pico_fim;
+            }
+          }
+
+      return ["rec_correto"=>$rec_correto, "rec_incorreto"=>$rec_incorreto];
+   }
+
    public function pausas($ts, $sensor1, $sensor2, $sensor3){
       $pausas = $picos_sensor3 = $ninsuflacoes = 0;
 
@@ -79,7 +141,7 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
              $picos_sensor3=0;
           }
      }else{
-            $pausas=0;
+         $pausas=0;
          $picos_sensor3=0;
 
          return ["pausas"=>$pausas, "picos_sensor3"=>$picos_sensor3, "ninsuflacoes"=>$ninsuflacoes];
@@ -111,6 +173,10 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
          $res_compressoes = $this->compressoes($ts, $sensor1, $sensor2);
          $compressoes_corretas=$res_compressoes["compressoes_corretas"];
          $compressoes_incorretas=$res_compressoes["compressoes_incorretas"];
+
+      /*   $res_compressoes = $this->recoil($ts, $sensor1, $sensor2);
+         $compressoes_corretas=$res_compressoes["compressoes_corretas"];
+         $compressoes_incorretas=$res_compressoes["compressoes_incorretas"];*/
 
          $res_pos_maos = $this->pos_maos($ts, $sensor1, $sensor2);
          $posicao_maos_corretas=$res_pos_maos["posicao_maos_corretas"];

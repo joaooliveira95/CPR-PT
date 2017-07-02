@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     <form class="form-inline">
                          <div class="form-group">
+                            {!! csrf_field() !!}
                             <input class = "form-control input-md" type="text" name="filter" id="str_filter" placeholder="Search...">
 
                            <input class = "btn btn-default btn-md fa-input" type="submit" name="filter_button" id="filter_button" onclick="window.location.href=filterStudents()" value="&#xf002;">
