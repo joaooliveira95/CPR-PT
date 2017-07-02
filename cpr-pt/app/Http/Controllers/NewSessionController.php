@@ -62,7 +62,7 @@ class NewSessionController extends Controller
         return view('newSession', ['id' => $session->id, 'curExercise'=> $curExercise]);
     }
 
-    public function newExercise($sessionId, $curExerciseId){
+    public function newExercise($sessionId){
 
         $newExercise = Exercise::create([
             'idSession'=>$sessionId,
@@ -76,7 +76,7 @@ class NewSessionController extends Controller
         return view('newSession', ['id' => $sessionId, 'curExercise'=> $newExercise]);
     }
 
-    public function endSession($curExerciseId){
+    public function endSession(){
 
         return redirect('/history/'.Auth::user()->id.'/sessions');
     }

@@ -20,7 +20,8 @@ class TurmasController extends Controller{
         $this->middleware('auth');
     }
 
-    public function turmas($idUser){
+    public function turmas(){
+        $idUser = Auth::user()->id;
         $turmas = $this->turmasRepo->getTurmasOfUser($idUser);
         if(request()->has('filter')){
             $turmas = $this->turmasRepo->getTurmasOfUserFiltered($idUser);

@@ -32,9 +32,9 @@ Route::get('/newSession', 'NewSessionController@index');
 //NEW SESSION
 Route::post('/startSession/', 'NewSessionController@startSession');
 
-Route::post('/curSession/{id}&{curExercise}/', 'NewSessionController@newExercise');
+Route::post('/curSession/{id}/', 'NewSessionController@newExercise');
 
-Route::post('/endSession/{curExercise}/', 'NewSessionController@endSession');
+Route::post('/endSession', 'NewSessionController@endSession');
 
 //SIMULATION CONTROLLER
 
@@ -61,9 +61,9 @@ Route::get('/exercises/{id}', 'SessionsController@userExercises');
 Route::get('/comments', 'CommentsController@comments');
 
 //TURMAS
-Route::get('/turmas/{id}', 'TurmasController@turmas')->middleware('teacher');;
+Route::get('/turmas/', 'TurmasController@turmas')->middleware('teacher');;
 
-Route::get('/turma/{id}', 'TurmasController@studentsIndex')->middleware('teacher');;
+Route::get('/turma/{idTurma}', 'TurmasController@studentsIndex')->middleware('teacher');;
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

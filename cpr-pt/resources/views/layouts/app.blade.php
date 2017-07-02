@@ -246,7 +246,7 @@
                         <li class="divider"></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                      <!--   <li><a href="/students" targer="-self"><span>Students</span></a></li> -->
-                        <li><a href="/turmas/{{Auth::user()->id}}" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
+                        <li><a href="/turmas" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
                         <li class="divider"></li>
                         @endif
                          <li><a href="/content" targer="-self" class="norm_shadow"><span><i class="fa fa-play-circle nav_icon" aria-hidden="true"></i>{{trans('messages.content')}}</span></a></li>
