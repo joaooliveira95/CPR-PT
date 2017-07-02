@@ -30,6 +30,8 @@ Route::get('/discussion', 'BladesController@discussion');
 Route::get('/newSession', 'NewSessionController@index');
 
 //NEW SESSION
+Route::get('/lastSession', 'NewSessionController@lastSession');
+
 Route::post('/startSession', 'NewSessionController@startSession');
 
 Route::post('/curSession/{idSession}/', 'NewSessionController@newExercise');
@@ -44,7 +46,7 @@ Route::get('/script/{idExercise}&{sim}','SimulationController@script');
 
 //SESSIONS
 
-Route::get('/history/{idUser}/sessions', 'SessionsController@sessions');
+Route::get('/history/sessions', 'SessionsController@auth_sessions');
 
 Route::get('/history/{idSession}/session', 'SessionsController@session');
 

@@ -31,7 +31,24 @@ class SessionsController extends Controller{
         return $date;
    }
 
+   public function auth_sessions(){
+      $idUser = Auth::user()->id;
+      if(request()->has('from') && request()->has('to')){
+
+          $from = $this->date_conversion(request('from'));
+          $to = $this->date_conversion(request('to'));
+
+           $sessions = $this->sessionsRepo->getUserSessionsByDate($idUser, date("Y-m-d H:i:s", strtotime($from)), date("Y-m-d H:i:s", strtotime($to)));
+           return view('sessions', ['sessions'=> $sessions, 'id' => $idUser]);
+      }
+
+      $sessions = $this->sessionsRepo->getUserSessions($idUser);
+
+      return view('sessions', ['sessions'=> $sessions, 'id' => $idUser]);
+   }
+
     public function sessions($idUser){
+
         if(request()->has('from') && request()->has('to')){
 
            $from = $this->date_conversion(request('from'));

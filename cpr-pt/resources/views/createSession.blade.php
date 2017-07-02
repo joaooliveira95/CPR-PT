@@ -30,6 +30,7 @@
                                 </span>
                             @endif
                       </div>
+                      <a href="/lastSession">Ultima Sessao</a>
                       {!! Form::close() !!}
                     </div>
                 </div>

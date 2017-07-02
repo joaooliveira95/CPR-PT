@@ -242,7 +242,7 @@
                     <li class="divider" style="height: 50px; margin: 0 9px;"></li>
                     <li><a href="/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.new_session')}}</span></a></li>
                     <li class="divider"></li>
-                        <li><a href="/history/{{Auth::user()->id}}/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
+                        <li><a href="/history/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
                         <li class="divider"></li>
                         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                      <!--   <li><a href="/students" targer="-self"><span>Students</span></a></li> -->

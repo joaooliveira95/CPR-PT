@@ -34,11 +34,11 @@ class TurmasController extends Controller{
       //Retorna todos os utilizadores(alunos) da turma recebida por parametro para a View 'students'
     public function studentsIndex($idTurma){
 
-        $students = $this->turmasRepo->getStudentsOfTurma($idTurma);
+         $students = $this->turmasRepo->getStudentsOfTurma($idTurma);
 
-       if(request()->has('filter')){
+         if(request()->has('filter')){
              $students = $this->turmasRepo->getStudentsOfTurmaFiltered($idTurma, request('filter'));
-        }
+         }
 
         return view('students')->with('students', $students);
     }

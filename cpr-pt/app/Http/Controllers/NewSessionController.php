@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Illuminate\Support\Facades\DB;
 use App\Session;
 use App\Exercise;
 use Illuminate\Http\Request;
@@ -79,8 +80,25 @@ class NewSessionController extends Controller
 
     public function endSession(){
 
-        return redirect('/history/'.Auth::user()->id.'/sessions');
+        return redirect('/history/sessions');
     }
+
+    public function lastSession(){
+      $lastSession = Session::all()->last();
+
+      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+
+      $newExercise = Exercise::create([
+          'idSession'=>$hashids->decode($lastSession->id)[0],
+          'time'=>0,
+          'recoil'=>0,
+          'compressions'=>0,
+          'hand_position'=>0,
+      ]);
+
+
+     return view('newSession', ['id' => $lastSession->id, 'curExercise'=> $newExercise->id]);
+   }
 
 
 }
