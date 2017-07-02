@@ -61,7 +61,6 @@ class NewSessionController extends Controller
             'hand_position'=>0,
         ]);
 
-        //$exercises = $this->exercisesRepo->getSessionExercises($sessionId);
         return view('newSession', ['id' => $idSession, 'curExercise'=> $curExercise->id]);
     }
 
@@ -74,7 +73,7 @@ class NewSessionController extends Controller
             'hand_position'=>0,
         ]);
 
-        $exercises = $this->exercisesRepo->getSessionExercises($idSession);
+
         return view('newSession', ['id' => $idSession, 'curExercise'=> $newExercise->id]);
     }
 

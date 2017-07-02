@@ -96,6 +96,8 @@ class SessionsController extends Controller{
     }
 
     public function exercise($idExercise){
+         $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+         $idExercise = $hashids->decode($idExercise)[0];
 
          $exercise = $this->exercisesRepo->findByID($idExercise);
          return view("exercise_feedback", ['exercise' => $exercise]);

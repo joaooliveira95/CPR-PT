@@ -251,6 +251,8 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
    }
 
     public function live_info($idExercise){
+      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+      $idExercise = $hashids->decode($idExercise)[0];
 
         ini_set('memory_limit', '-1');
         $con = mysqli_connect("127.0.0.1","root","","cpr");
@@ -313,7 +315,8 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
     }
 
     public function script($idExercise, $simular){
-
+      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+      $idExercise = $hashids->decode($idExercise)[0];
         global $db;
         $data = array();
         $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;
