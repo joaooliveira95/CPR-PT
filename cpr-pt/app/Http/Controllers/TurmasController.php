@@ -10,7 +10,6 @@ use App\Repositories\TurmasRepository;
 
 class TurmasController extends Controller{
 
-
     protected $usersRepo;
     protected $turmasRepo;
 
@@ -20,8 +19,10 @@ class TurmasController extends Controller{
         $this->middleware('auth');
     }
 
+      //Retorna para a View 'turmas' todas as turmas que o utilizador(teacher) é professor
     public function turmas(){
         $idUser = Auth::user()->id;
+
         $turmas = $this->turmasRepo->getTurmasOfUser($idUser);
         if(request()->has('filter')){
             $turmas = $this->turmasRepo->getTurmasOfUserFiltered($idUser);
@@ -30,6 +31,7 @@ class TurmasController extends Controller{
          return view('turmas', ['turmas'=> $turmas]);
     }
 
+      //Retorna todos os utilizadores(alunos) da turma recebida por parametro para a View 'students'
     public function studentsIndex($idTurma){
 
         $students = $this->turmasRepo->getStudentsOfTurma($idTurma);

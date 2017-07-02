@@ -36,14 +36,13 @@ Route::post('/curSession/{id}/', 'NewSessionController@newExercise');
 
 Route::post('/endSession', 'NewSessionController@endSession');
 
-//SIMULATION CONTROLLER
+//SIMULATION
 
 Route::get('/exercise_progress/{id}','SimulationController@live_info');
 
 Route::get('/script/{id}&{sim}','SimulationController@script');
 
-
-//SESSIONS CONTROLLER
+//SESSIONS
 
 Route::get('/history/{id}/sessions', 'SessionsController@sessions');
 
@@ -56,19 +55,23 @@ Route::get('/students/{id}/session', 'SessionsController@session')->middleware('
 Route::get('/progress/{id}', 'SessionsController@progress');
 
 Route::get('/exercises/{id}', 'SessionsController@userExercises');
+
+Route::get('/exercise_results/{id}', 'SessionsController@exercise');
+
 //COMMENTS
 
 Route::get('/comments', 'CommentsController@comments');
 
 //TURMAS
-Route::get('/turmas/', 'TurmasController@turmas')->middleware('teacher');;
 
-Route::get('/turma/{idTurma}', 'TurmasController@studentsIndex')->middleware('teacher');;
+Route::get('/turmas', 'TurmasController@turmas')->middleware('teacher');
+
+Route::get('/turma/{idTurma}', 'TurmasController@studentsIndex')->middleware('teacher');
+
+//OTHERS
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-Route::get('/exercise_results/{id}', 'SessionsController@exercise');
