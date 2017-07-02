@@ -32,7 +32,6 @@ class SessionsController extends Controller{
    }
 
     public function sessions($id){
-
         if(request()->has('from') && request()->has('to')){
 
            $from = $this->date_conversion(request('from'));
@@ -47,22 +46,25 @@ class SessionsController extends Controller{
         return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
     }
 
-    public function session($id){
+    public function session($idSession){
+      //Decifra o idSession
+      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+      $idSession = $hashids->decode($idSession)[0];
 
-        $session = $this->sessionsRepo->findByID($id);
+        $session = $this->sessionsRepo->findByID($idSession);
         $user = $this->usersRepo->findByID($session->idUser);
-        $exercises = $this->exercisesRepo->getSessionExercises($id);
+        $exercises = $this->exercisesRepo->getSessionExercises($idSession);
 
         return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises]);
     }
 
+    public function progress($idSession){
+      //Decifra o idSession
+      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+      $idSession = $hashids->decode($idSession)[0];
 
-    public function progress($id){
-        $exercises = $this->exercisesRepo->getSessionExercises($id);
-        $recoil = array();
-        $compress =array();
-        $hands = array();
-
+        $exercises = $this->exercisesRepo->getSessionExercises($idSession);
+        $recoil = $compress = $hands = array();
         $cnt = count($exercises);
 
         for($i=0;$i<$cnt;$i++){
@@ -78,12 +80,7 @@ class SessionsController extends Controller{
 
     public function userExercises($idUser){
         $exercises = $this->exercisesRepo->getUserExercises($idUser);
-        $recoil = array();
-        $compress =array();
-        $hands = array();
-        $dates = array();
-        $time = array();
-
+        $recoil = $compress = $hands = $dates = $time = array();
         $cnt = count($exercises);
 
         for($i=0;$i<$cnt;$i++){
@@ -97,7 +94,6 @@ class SessionsController extends Controller{
         $data=array("time"=>$time, "recoil"=>$recoil,"compress"=>$compress, "hands"=>$hands, "dates"=>$dates);
         return json_encode($data);
     }
-
 
     public function exercise($idExercise){
          $exercise = $this->exercisesRepo->findByID($idExercise);

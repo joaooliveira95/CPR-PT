@@ -50,8 +50,11 @@ class NewSessionController extends Controller
             'title' => $request->input('title'),
         ]);
 
+        $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+        $idSession = $hashids->decode($session->id)[0];
+
         $curExercise = Exercise::create([
-            'idSession'=>$session->id,
+            'idSession'=>$idSession,
             'time'=>0,
             'recoil'=>0,
             'compressions'=>0,
@@ -59,21 +62,24 @@ class NewSessionController extends Controller
         ]);
 
         //$exercises = $this->exercisesRepo->getSessionExercises($sessionId);
-        return view('newSession', ['id' => $session->id, 'curExercise'=> $curExercise]);
+        return view('newSession', ['id' => $idSession, 'curExercise'=> $curExercise]);
     }
 
-    public function newExercise($sessionId){
+    public function newExercise($idSession){
+      //Decifra o idSession
+      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+      $idSession = $hashids->decode($idSession)[0];
 
         $newExercise = Exercise::create([
-            'idSession'=>$sessionId,
+            'idSession'=>$idSession,
             'time'=>0,
             'recoil'=>0,
             'compressions'=>0,
             'hand_position'=>0,
         ]);
 
-        $exercises = $this->exercisesRepo->getSessionExercises($sessionId);
-        return view('newSession', ['id' => $sessionId, 'curExercise'=> $newExercise]);
+        $exercises = $this->exercisesRepo->getSessionExercises($idSession);
+        return view('newSession', ['id' => $idSession, 'curExercise'=> $newExercise]);
     }
 
     public function endSession(){

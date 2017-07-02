@@ -30,9 +30,9 @@ Route::get('/discussion', 'BladesController@discussion');
 Route::get('/newSession', 'NewSessionController@index');
 
 //NEW SESSION
-Route::post('/startSession/', 'NewSessionController@startSession');
+Route::post('/startSession', 'NewSessionController@startSession');
 
-Route::post('/curSession/{id}/', 'NewSessionController@newExercise');
+Route::post('/curSession/{idSession}/', 'NewSessionController@newExercise');
 
 Route::post('/endSession', 'NewSessionController@endSession');
 
@@ -46,13 +46,13 @@ Route::get('/script/{id}&{sim}','SimulationController@script');
 
 Route::get('/history/{id}/sessions', 'SessionsController@sessions');
 
-Route::get('/history/{id}/session', 'SessionsController@session');
+Route::get('/history/{idSession}/session', 'SessionsController@session');
 
 Route::get('/students/{id}/sessions', 'SessionsController@sessions')->middleware('teacher');
 
-Route::get('/students/{id}/session', 'SessionsController@session')->middleware('teacher');
+Route::get('/students/{idSession}/session', 'SessionsController@session')->middleware('teacher');
 
-Route::get('/progress/{id}', 'SessionsController@progress');
+Route::get('/progress/{idSession}', 'SessionsController@progress');
 
 Route::get('/exercises/{id}', 'SessionsController@userExercises');
 
