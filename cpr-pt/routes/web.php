@@ -38,17 +38,17 @@ Route::post('/endSession', 'NewSessionController@endSession');
 
 //SIMULATION
 
-Route::get('/exercise_progress/{id}','SimulationController@live_info');
+Route::get('/exercise_progress/{idExercise}','SimulationController@live_info');
 
-Route::get('/script/{id}&{sim}','SimulationController@script');
+Route::get('/script/{idExercise}&{sim}','SimulationController@script');
 
 //SESSIONS
 
-Route::get('/history/{id}/sessions', 'SessionsController@sessions');
+Route::get('/history/{idUser}/sessions', 'SessionsController@sessions');
 
 Route::get('/history/{idSession}/session', 'SessionsController@session');
 
-Route::get('/students/{id}/sessions', 'SessionsController@sessions')->middleware('teacher');
+Route::get('/students/{idUser}/sessions', 'SessionsController@sessions')->middleware('teacher');
 
 Route::get('/students/{idSession}/session', 'SessionsController@session')->middleware('teacher');
 

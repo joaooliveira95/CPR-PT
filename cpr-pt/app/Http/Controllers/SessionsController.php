@@ -31,19 +31,19 @@ class SessionsController extends Controller{
         return $date;
    }
 
-    public function sessions($id){
+    public function sessions($idUser){
         if(request()->has('from') && request()->has('to')){
 
            $from = $this->date_conversion(request('from'));
            $to = $this->date_conversion(request('to'));
 
-            $sessions = $this->sessionsRepo->getUserSessionsByDate($id, date("Y-m-d H:i:s", strtotime($from)), date("Y-m-d H:i:s", strtotime($to)));
-            return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
+            $sessions = $this->sessionsRepo->getUserSessionsByDate($idUser, date("Y-m-d H:i:s", strtotime($from)), date("Y-m-d H:i:s", strtotime($to)));
+            return view('sessions', ['sessions'=> $sessions, 'id' => $idUser]);
         }
 
-        $sessions = $this->sessionsRepo->getUserSessions($id);
+        $sessions = $this->sessionsRepo->getUserSessions($idUser);
 
-        return view('sessions', ['sessions'=> $sessions, 'id' => $id]);
+        return view('sessions', ['sessions'=> $sessions, 'id' => $idUser]);
     }
 
     public function session($idSession){
@@ -96,8 +96,8 @@ class SessionsController extends Controller{
     }
 
     public function exercise($idExercise){
+
          $exercise = $this->exercisesRepo->findByID($idExercise);
          return view("exercise_feedback", ['exercise' => $exercise]);
     }
-
 }

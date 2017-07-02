@@ -8,7 +8,7 @@
       //VARIAVEIS GLOBAIS
       var chart;
       var compress_title = "{{trans('messages.compressions')}}";
-      var idExercise = "{{$curExercise->id}}";
+      var idExercise = "{{$curExercise}}";
 
      $(document).ready(function() {
            var options = {
@@ -127,7 +127,7 @@
 
       });
 
-      function exercise(curExercise){
+      function exercise(){
             $("#exercise_button").attr("disabled", true);
 
             var url = "/script/"+idExercise+"&1";
@@ -150,8 +150,6 @@
 
         <div class="col-md-12">
             <div class="panel panel-default shadow">
-             <!-- <div class="panel-heading">{{trans('messages.exercise')}} {{$curExercise->id}}</div> -->
-
                 <div class="panel-body">
                       <div class="title"><h2 class="text-center" style="font-family: 'Lato', Arial;">Dados da sessão</h2></div>
                       <div id="progressao_treino" style="height:50vh;">
@@ -189,12 +187,12 @@
                       </div>
                        <div class = "inputs" style="margin: 0 auto; text-align: center;">
                           <li style="display: inline-block">
-                            <input class = "btn btn-default btn-md fa-input" type="submit" name="filter_button" id="exercise_button" onclick = "exercise({{$curExercise->id}})" value="&#xf144;" style="color: green;"/>
+                            <input class = "btn btn-default btn-md fa-input" type="submit" name="filter_button" id="exercise_button" onclick = "exercise()" value="&#xf144;" style="color: green;"/>
                           </li>
 
                           <li style="display: inline-block">
                              {!! Form::open(
-                             array('action'=> array('NewSessionController@newExercise', $id, $curExercise->id)
+                             array('action'=> array('NewSessionController@newExercise', $id)
                              , 'mepod'=>'post')) !!}
                              {!! csrf_field() !!}
                              {!! Form::submit('&#xf28b;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'margin: 0 10px 0 10px;']) !!}
@@ -204,7 +202,7 @@
 
                           <li style="display: inline-block">
                              {!! Form::open(
-                             array('action'=> array('NewSessionController@endSession', $curExercise->id)
+                             array('action'=> array('NewSessionController@endSession')
                              , 'mepod'=>'post')) !!}
                              {!! csrf_field() !!}
                              {!! Form::submit('&#xf28d;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'color: red;']) !!}

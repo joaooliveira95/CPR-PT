@@ -31,7 +31,6 @@ class SimulationController extends Controller{
       }
 
       return $pmin;
-
    }
 
    private function compressoes($ts, $sensor1, $sensor2){
@@ -252,6 +251,7 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
    }
 
     public function live_info($idExercise){
+
         ini_set('memory_limit', '-1');
         $con = mysqli_connect("127.0.0.1","root","","cpr");
         $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise  ORDER BY timestep ASC LIMIT 5000";
@@ -313,6 +313,7 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
     }
 
     public function script($idExercise, $simular){
+
         global $db;
         $data = array();
         $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;
