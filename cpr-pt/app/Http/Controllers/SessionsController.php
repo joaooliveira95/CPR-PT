@@ -104,7 +104,7 @@ class SessionsController extends Controller{
             $time[$i] = $exercises[$i]->time;
             $recoil[$i] = $exercises[$i]->recoil;
             $compress[$i]= $exercises[$i]->compressions;
-            $dates[$i]= (string) $exercises[$i]->created_at->format('d/m/y h:i');
+            $dates[$i]= (string) $exercises[$i]->created_at->format('d/m/y h:i:s');
             $hands[$i]= $exercises[$i]->hand_position;
         }
 

@@ -19,11 +19,7 @@
                             backgroundColor: null,
                         },
                     title: {
-                        text: title
-                    },
-                    subtitle: {
-                        text: document.ontouchstart === undefined ?
-                                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                        text: null
                     },
 
                     xAxis:{
@@ -32,17 +28,14 @@
                             text: xTitle
                         },
                         categories: [],
+                        tickInterval: 1000,
                     },
 
                     yAxis: {
                         title: {
                             text: yTitle
-                        }
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
+                        },
+
                     },
 
                     plotOptions: {
@@ -60,29 +53,24 @@
                 var url = "/exercises/"+idUser;
               $.get(url,function(result){
 
-                var dados= jQuery.parseJSON(result);
-                var total=dados.recoil.length;
-                var i=0;
-                for(i=0;i<total;i++){
-                  options.series[0].data.push( dados.compress[i] );
-                }
-
+                var dados = jQuery.parseJSON(result);
+                options.series[0].data = dados.compress.reverse();
+                options.series[0].name = "Compressions (BPM)";
+                options.xAxis.categories = dados.dates.reverse();
                 chart = new Highcharts.Chart("compressoes", options);
-                chart.xAxis[0].setCategories(dados.dates);
 
-                for(i=0;i<total;i++){
-                  options.series[0].data.push( dados.recoil[i] );
-                }
+               options.series[0].data = dados.recoil.reverse();
+               options.series[0].name = "Recoil (%)";
+                  options.series[0].color = '#FF0000';
+               options.xAxis.categories = dados.dates.reverse();
+               chart = new Highcharts.Chart("recoil", options);
 
-                chart = new Highcharts.Chart("recoil", options);
-                chart.xAxis[0].setCategories(dados.dates);
+               options.series[0].data = dados.hands.reverse();
+               options.xAxis.categories = dados.dates.reverse();
+                  options.series[0].color = '#00FF00';
+               options.series[0].name = "Hand Position (%)";
+               chart = new Highcharts.Chart("pos_maos", options);
 
-                for(i=0;i<total;i++){
-                  options.series[0].data.push( dados.hands[i] );
-                }
-
-                chart = new Highcharts.Chart("pos_maos", options);
-                chart.xAxis[0].setCategories(dados.dates);
               })
             });
 
@@ -90,19 +78,20 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" style="width:90vw;">
     <div class="row">
-        <div class="col-md-12 col-md-offset-0">
+        <div class="col-md-12 ">
             <div class="panel panel-default shadow">
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-
-                     <div id="compressoes" class="progresso">
-                     </div>
-                     <div id="recoil" class="progresso">
-                     </div>
-                     <div id="pos_maos" class="progresso">
+                      <div class="row">
+                           <div id="compressoes" class="col-md-4" style="height:45vh;">
+                           </div>
+                           <div id="recoil" class="col-md-4" style="height:45vh;">
+                           </div>
+                           <div id="pos_maos" class="col-md-4" style="height:45vh;">
+                           </div>
                      </div>
                   </div>
             </div>

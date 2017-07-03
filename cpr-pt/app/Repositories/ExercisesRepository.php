@@ -15,15 +15,14 @@ class ExercisesRepository extends BaseRepository
       return $this->doQuery($query, $take, $paginate);
   }
 
-    public function getUserExercises($idUser, $take = 6, $paginate = true){
-      
+    public function getUserExercises($idUser, $take = 100, $paginate = false){
+
         $query = $this->newQuery();
         $query ->join('sessions', 'sessions.id', '=', 'exercises.idSession');
         $query ->join('users', 'users.id', '=', 'sessions.idUser');
-        $query ->select('exercises.*', 'users.name', 'sessions.title');
+        $query ->select('exercises.*');
         $query ->where('users.id', '=', $idUser);
-
-
+        $query ->orderBy('sessions.created_at', 'desc');
       return $this->doQuery($query, $take, $paginate);
   }
 

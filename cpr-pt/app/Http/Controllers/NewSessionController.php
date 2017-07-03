@@ -118,5 +118,4 @@ class NewSessionController extends Controller{
      return view('newSession', ['id' => $lastSession, 'curExercise'=> $newExercise->id]);
    }
 
-
 }
