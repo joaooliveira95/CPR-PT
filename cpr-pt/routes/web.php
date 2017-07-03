@@ -36,8 +36,9 @@ Route::post('/startSession', 'NewSessionController@startSession');
 
 Route::post('/curSession/{idSession}/', 'NewSessionController@newExercise');
 
-Route::post('/endSession', 'NewSessionController@endSession');
+Route::post('/endSession/{idSession}/', 'NewSessionController@endSession');
 
+Route::get('/endSession_nov/{idSession}/', 'NewSessionController@end_session_no_view');
 //SIMULATION
 
 Route::get('/exercise_progress/{idExercise}','SimulationController@live_info');

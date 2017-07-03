@@ -65,8 +65,8 @@ class SessionsController extends Controller{
 
     public function session($idSession){
       //Decifra o idSession
-      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-      $idSession = $hashids->decode($idSession)[0];
+   //   $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+   //   $idSession = $hashids->decode($idSession)[0];
 
         $session = $this->sessionsRepo->findByID($idSession);
         $user = $this->usersRepo->findByID($session->idUser);
@@ -77,8 +77,8 @@ class SessionsController extends Controller{
 
     public function progress($idSession){
       //Decifra o idSession
-      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-      $idSession = $hashids->decode($idSession)[0];
+   //   $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+   //   $idSession = $hashids->decode($idSession)[0];
 
         $exercises = $this->exercisesRepo->getSessionExercises($idSession);
         $recoil = $compress = $hands = array();
@@ -113,8 +113,8 @@ class SessionsController extends Controller{
     }
 
     public function exercise($idExercise){
-         $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-         $idExercise = $hashids->decode($idExercise)[0];
+      //   $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+      //   $idExercise = $hashids->decode($idExercise)[0];
 
          $exercise = $this->exercisesRepo->findByID($idExercise);
          return view("exercise_feedback", ['exercise' => $exercise]);

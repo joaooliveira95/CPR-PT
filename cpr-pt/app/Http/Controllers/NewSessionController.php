@@ -11,8 +11,7 @@ use App\Repositories\SessionsRepository;
 use App\Repositories\ExercisesRepository;
 use App\Repositories\ExerciseSensorDatasRepository;
 
-class NewSessionController extends Controller
-{
+class NewSessionController extends Controller{
 
     protected $sessionsRepo;
     protected $exercisesRepo;
@@ -29,6 +28,7 @@ class NewSessionController extends Controller
         $this->dataRepo = $dataRepo;
         $this->middleware('auth');
     }
+
 
     /**
      * Show the application dashboard.
@@ -51,8 +51,7 @@ class NewSessionController extends Controller
             'title' => $request->input('title'),
         ]);
 
-        $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-        $idSession = $hashids->decode($session->id)[0];
+        $idSession = $session->id;
 
         $curExercise = Exercise::create([
             'idSession'=>$idSession,
@@ -66,6 +65,7 @@ class NewSessionController extends Controller
     }
 
     public function newExercise($idSession){
+
         $newExercise = Exercise::create([
             'idSession'=>$idSession,
             'time'=>0,
@@ -78,26 +78,44 @@ class NewSessionController extends Controller
         return view('newSession', ['id' => $idSession, 'curExercise'=> $newExercise->id]);
     }
 
-    public function endSession(){
+    private function clearSession($idSession){
+      $exercises = Exercise::where('idSession','=',$idSession)->get();
+      $count = 0;
+      foreach ($exercises as $exercise) {
+          if($exercise->time == 0){
+             Exercise::destroy($exercise->id);
+             $count++;
+          }
+      }
 
-        return redirect('/history/sessions');
+      if($count==$exercises->count()){
+          Session::destroy($idSession);
+      }
+   }
+
+   public function end_session_no_view($idSession){
+         $this->clearSession($idSession);
+         return $idSession;
+   }
+
+    public function endSession($idSession){
+      $this->clearSession($idSession);
+      return redirect('/history/'.$idSession.'/session');
     }
 
     public function lastSession(){
-      $lastSession = Session::all()->last();
-
-      $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
+      $lastSession = Session::where('idUser','=',Auth::user()->id)->get()->last();
+      $lastSession = $lastSession->id;
 
       $newExercise = Exercise::create([
-          'idSession'=>$hashids->decode($lastSession->id)[0],
+          'idSession'=>$lastSession,
           'time'=>0,
           'recoil'=>0,
           'compressions'=>0,
           'hand_position'=>0,
       ]);
 
-
-     return view('newSession', ['id' => $lastSession->id, 'curExercise'=> $newExercise->id]);
+     return view('newSession', ['id' => $lastSession, 'curExercise'=> $newExercise->id]);
    }
 
 

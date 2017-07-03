@@ -19,9 +19,9 @@ class Exercise extends Model
 	    return $this->belongsTo(Session::class);
 	}
 
-   public function getIdAttribute(){
+/*   public function getIdAttribute(){
       $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
       return  $hashids->encode($this->attributes['id']);
-   }
+   }*/
 
 }

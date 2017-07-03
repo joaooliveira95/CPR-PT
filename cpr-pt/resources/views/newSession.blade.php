@@ -9,8 +9,16 @@
       var chart;
       var compress_title = "{{trans('messages.compressions')}}";
       var idExercise = "{{$curExercise}}";
+      var idSession = "{{$id}}";
+       var url_clear = "/endSession_nov/"+idSession;
+
+      window.onunload=pageleave;
+        function pageleave() {
+            $.get(url_clear,function(result){});
+        }
 
      $(document).ready(function() {
+
            var options = {
                     chart: {
                        type: 'line',
@@ -140,6 +148,8 @@
            },22000);
 
       }
+
+
     </script>
 @endsection
 
@@ -202,7 +212,7 @@
 
                           <li style="display: inline-block">
                              {!! Form::open(
-                             array('action'=> array('NewSessionController@endSession')
+                             array('action'=> array('NewSessionController@endSession', $id)
                              , 'mepod'=>'post')) !!}
                              {!! csrf_field() !!}
                              {!! Form::submit('&#xf28d;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'color: red;']) !!}
