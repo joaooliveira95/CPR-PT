@@ -86,6 +86,7 @@
 
                 <div class="panel-body">
                       <div class="row">
+                        <h2 class="text-center">Progresso do Utilizador</h2>
                            <div id="compressoes" class="col-md-4" style="height:45vh;">
                            </div>
                            <div id="recoil" class="col-md-4" style="height:45vh;">
