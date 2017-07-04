@@ -30,16 +30,6 @@ class NewSessionController extends Controller{
     }
 
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function index(){
-        return view('createSession');
-    }
-
     public function startSession(Request $request)
     {
         $this->validate($request, array(

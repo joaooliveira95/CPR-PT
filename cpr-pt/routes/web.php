@@ -18,16 +18,16 @@ Auth::routes();
 
 Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@switchLang']);
 
-Route::get('/home', 'HomeController@index');
-
 Route::get('/import', 'ImportExportController@import');
 
 //BLADES
+Route::get('/home', 'BladesController@homeIndex');
+
 Route::get('/content', 'BladesController@contentIndex');
 
-Route::get('/discussion', 'BladesController@discussion');
+Route::get('/discussion', 'BladesController@discussionIndex');
 
-Route::get('/newSession', 'NewSessionController@index');
+Route::get('/newSession', 'BladesController@createSessionIndex');
 
 //NEW SESSION
 Route::get('/lastSession', 'NewSessionController@lastSession');
@@ -63,7 +63,7 @@ Route::get('/exercise_results/{id}', 'SessionsController@exercise');
 
 //COMMENTS
 
-Route::get('/comments', 'CommentsController@comments');
+//Route::get('/comments', 'CommentsController@comments');
 
 //TURMAS
 

@@ -22,6 +22,10 @@ body {
   display: flex;
 }
 
+.gold{
+   color: rgb(250, 217, 0);
+}
+
 /*
 ** Apply styles to the parent element
 */

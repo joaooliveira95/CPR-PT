@@ -173,9 +173,9 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
          $compressoes_corretas=$res_compressoes["compressoes_corretas"];
          $compressoes_incorretas=$res_compressoes["compressoes_incorretas"];
 
-      /*   $res_compressoes = $this->recoil($ts, $sensor1, $sensor2);
-         $compressoes_corretas=$res_compressoes["compressoes_corretas"];
-         $compressoes_incorretas=$res_compressoes["compressoes_incorretas"];*/
+         /*$res_compressoes = $this->recoil($ts, $sensor1, $sensor2);
+         $recoil_correto=$res_compressoes["recoil_correto"];
+         $recoil_correto=$res_compressoes["recoil_incorreto"];*/
 
          $res_pos_maos = $this->pos_maos($ts, $sensor1, $sensor2);
          $posicao_maos_corretas=$res_pos_maos["posicao_maos_corretas"];

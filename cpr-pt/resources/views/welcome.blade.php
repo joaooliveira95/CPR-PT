@@ -40,7 +40,7 @@
   </li>
   <li class="Words-line">
     <a href="https://www.linkedin.com/in/jo%C3%A3o-oliveira-69819410b/"> <p>By</p></a>
-    <a href="https://www.linkedin.com/in/jo%C3%A3o-oliveira-69819410b/"> <p>Joao Oliveira</p></a>
+    <a class="gold" href="https://www.linkedin.com/in/jo%C3%A3o-oliveira-69819410b/"> <p>Joao Oliveira</p></a>
   </li>
 
 </ul>
