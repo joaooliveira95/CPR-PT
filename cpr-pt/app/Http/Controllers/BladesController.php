@@ -29,32 +29,32 @@ class BladesController extends Controller{
      * @return \Illuminate\Http\Response
      */
      public function homeIndex(){
-      return Cache::rememberForever('home', function() {
+      //return Cache::remember('home', 10, function() {
           return View::make('home')
                 ->render();
-      });
+      //});
      }
 
 
    public function createSessionIndex(){
-      return Cache::rememberForever('createSession', function() {
+      //return Cache::remember('createSession',10, function() {
           return View::make('createSession')
                 ->render();
-      });
+      //});
    }
 
     public function contentIndex(){
-        return Cache::remember('content', 10, function() {
+      //  return Cache::remember('content', 10, function() {
              return View::make('content')
                  ->render();
-         });
+         //});
     }
 
     public function discussionIndex(){
-      return Cache::remember('discussion', 10, function() {
+      //return Cache::remember('discussion', 10, function() {
            return View::make('discussion')
                 ->render();
-       });
+       //});
     }
 
 

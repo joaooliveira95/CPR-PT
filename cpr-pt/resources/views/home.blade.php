@@ -78,7 +78,7 @@
 @endsection
 
 @section('content')
-<div class="container" style="width:90vw;">
+<div class="container" style="margin-top: 70px; width:90vw;">
     <div class="row">
         <div class="col-md-12 ">
             <div class="panel panel-default shadow">

@@ -43,7 +43,7 @@ sensor = ""
 
 
 if simular == '1':
-    
+
     i = 0
     #SIMULAR VALORES DO ARDUINO
     duration = random.randint(20000, 30000)
@@ -56,7 +56,7 @@ if simular == '1':
         #sqlarduino = "INSERT into valores (idtreino,idsessao,timestamp,sensor1,sensor2) values (" + treino + "," + sessao + ",1234567,10," + x + ")"
         sqlarduino = "INSERT into exercise_sensor_datas (idExercise,idSensor1, idSensor2, idSensor3,valueSensor1, valueSensor2, valueSensor3, timestep) values (" + treino + ", 1, 2, 3,"+s1+"," + s2 + ", 0, " +ts+ ")"
         #print (sqlarduino)ls
-        
+
         cur.execute(sqlarduino)
         connection.commit()
         i = i + 50

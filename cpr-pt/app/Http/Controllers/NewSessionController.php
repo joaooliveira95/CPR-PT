@@ -29,6 +29,15 @@ class NewSessionController extends Controller{
         $this->middleware('auth');
     }
 
+    private function createExercise($idSession){
+      return Exercise::create([
+          'idSession'=>$idSession,
+          'time'=>0,
+          'recoil'=>0,
+          'compressions'=>0,
+          'hand_position'=>0,
+     ]);
+   }
 
     public function startSession(Request $request)
     {
@@ -43,27 +52,14 @@ class NewSessionController extends Controller{
 
         $idSession = $session->id;
 
-        $curExercise = Exercise::create([
-            'idSession'=>$idSession,
-            'time'=>0,
-            'recoil'=>0,
-            'compressions'=>0,
-            'hand_position'=>0,
-        ]);
+        $curExercise = $this->createExercise($idSession);
 
         return view('newSession', ['id' => $idSession, 'curExercise'=> $curExercise->id]);
     }
 
     public function newExercise($idSession){
 
-        $newExercise = Exercise::create([
-            'idSession'=>$idSession,
-            'time'=>0,
-            'recoil'=>0,
-            'compressions'=>0,
-            'hand_position'=>0,
-        ]);
-
+        $newExercise = $this->createExercise($idSession);
 
         return view('newSession', ['id' => $idSession, 'curExercise'=> $newExercise->id]);
     }
@@ -97,13 +93,7 @@ class NewSessionController extends Controller{
       $lastSession = Session::where('idUser','=',Auth::user()->id)->get()->last();
       $lastSession = $lastSession->id;
 
-      $newExercise = Exercise::create([
-          'idSession'=>$lastSession,
-          'time'=>0,
-          'recoil'=>0,
-          'compressions'=>0,
-          'hand_position'=>0,
-      ]);
+      $newExercise = $this->createExercise($lastSession);
 
      return view('newSession', ['id' => $lastSession, 'curExercise'=> $newExercise->id]);
    }

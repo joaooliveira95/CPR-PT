@@ -127,7 +127,7 @@
 
 @section('content')
 <link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
-<div class="container" style="width: 90vw;">
+<div class="container" style="margin-top: 70px; width: 90vw;">
     <div class="row">
        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default shadow">

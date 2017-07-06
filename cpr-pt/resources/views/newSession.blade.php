@@ -131,7 +131,7 @@
             });
 
             chart.redraw();
-          },50);
+         },20);
 
       });
 
@@ -142,11 +142,6 @@
             $.get(url,function(result){
             });
 
-            setTimeout(function(){
-              var url_resultados = "/exercise_results/"+idExercise;
-              window.open(url_resultados);
-           },22000);
-
       }
 
 
@@ -154,7 +149,7 @@
 @endsection
 
 @section('content')
-<div class="container" style="width: 90vw;">
+<div class="container" style="margin-top: 70px; width: 90vw;">
 
     <div class="row">
 

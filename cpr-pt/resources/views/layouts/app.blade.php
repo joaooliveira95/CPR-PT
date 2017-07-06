@@ -15,6 +15,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dropdowns-enhancement.min.css') }}" rel="stylesheet">
     <style>
     @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
         .glyphicon.glyphicon-envelope {
@@ -51,14 +52,44 @@
             background-position: 50% 0%;
 
             text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .navbar{
-            font-family: "Open Sans", Arial, sans-serif;;
-            background: white;
-            border-color: #ffffff;
-        }
+        .brand-centered {
+           display: flex;
+           justify-content: center;
+           position: absolute;
+           width: 100%;
+           left: 0;
+           top: 0;
+         }
+         .brand-centered .navbar-brand {
+           display: flex;
+           align-items: center;
+         }
+         .navbar-toggle {
+             z-index: 1;
+         }
+
+         .navbar-alignit .navbar-header {
+         	  -webkit-transform-style: preserve-3d;
+           -moz-transform-style: preserve-3d;
+           transform-style: preserve-3d;
+           height: 50px;
+         }
+         .navbar-alignit .navbar-brand {
+         	top: 50%;
+         	display: block;
+         	position: relative;
+         	height: auto;
+         	transform: translate(0,-50%);
+         	margin-right: 15px;
+           margin-left: 15px;
+         }
+
+         .navbar-nav>li>.dropdown-menu {
+         	z-index: 9999;
+         }
 
         .panel{
             background-color: rgba(255, 255, 255, 0.97);
@@ -99,7 +130,7 @@
 
         .divider {
             height: 30px;
-            margin: 10px 9px;
+            margin: 10px 1px;
             border-right: 1px solid #ffffff;
             border-left: 1px solid #f2f2f2;
         }
@@ -174,10 +205,10 @@
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.pt.min.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('js/dropdowns-enhancement.js') }}"></script>
      @yield('highcharts')
 
     <script>
@@ -190,6 +221,16 @@
 
     $(document).ready(function() {
             $(".dropdown-toggle").dropdown();
+            });
+
+            $("#collapse_button").click(function(){
+               if($("#important-id-for-collapsing").attr('class')=="collapse navbar-collapse out"){
+                  $("#important-id-for-collapsing").attr('class')="collapse navbar-collapse in";
+                  $(".navbar-toggle").attr('aria-expanded')="true";
+               }else{
+                  $("#important-id-for-collapsing").attr('class')="collapse navbar-collapse out";
+                  $(".navbar-toggle").attr('aria-expanded')="false";
+               }
             });
 
             /*$(window).on('load', function() {
@@ -215,107 +256,107 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+      <div class="container">
+          <nav class="navbar navbar-default navbar-fixed-top">
+           <div class="container-fluid">
+               <div class="navbar-header">
+                           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#important-id-for-collapsing">
+                   <span id="collapse_button" class="fa fa-bars"></span>
+                </button>
+               </div>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+               <div class="brand-centered">
+               <a class="navbar-brand" href="{{ url('/home') }}"><img class="heart" style="margin-right: 2px; padding: 0;" src="/heart_sm.png" alt="Heart">{{ config('app.name', 'Laravel') }}
+               </a>
+               </div>
 
-                    <!-- Branding Image -->
+              <div class="collapse navbar-collapse out" id="important-id-for-collapsing">
+                   <!-- Left Side Of Navbar -->
+                  @if(Auth::guest())
 
-                    <a class="navbar-brand" href="{{ url('/home') }}" style="padding: 5px 5px;"><img src="/heart_sm.png" class="heart"></a>
-                    <a class="navbar-brand" href="{{ url('/home') }}">{{ config('app.name', 'Laravel') }}</a>
-                </div>
+                  @else
+                  <ul class="nav navbar-nav navbar-left">
+                 <li><a href="/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.session')}}</span></a></li>
+                     <li><a href="/history/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
+                     @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
+                  <!--   <li><a href="/students" targer="-self"><span>Students</span></a></li> -->
+                     <li><a href="/turmas" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
+                     @endif
+                 </ul>
+                 @endif
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    @if(Auth::guest())
-
+                 <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                        <li><a href="{{ route('login') }}" class="norm_shadow">Login</a></li>
+                        <li><a href="{{ route('register') }}" class="norm_shadow">Register</a></li>
                     @else
-                    <ul class="nav navbar-nav">
-                    <li class="divider" style="height: 50px; margin: 0 9px;"></li>
-                    <li><a href="/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.new_session')}}</span></a></li>
-                    <li class="divider"></li>
-                        <li><a href="/history/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
-                        <li class="divider"></li>
-                        @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
-                     <!--   <li><a href="/students" targer="-self"><span>Students</span></a></li> -->
-                        <li><a href="/turmas" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
-                        <li class="divider"></li>
-                        @endif
-                         <li><a href="/content" targer="-self" class="norm_shadow"><span><i class="fa fa-play-circle nav_icon" aria-hidden="true"></i>{{trans('messages.content')}}</span></a></li>
-                        </li>
-                    </ul>
-                    @endif
+                    <li>
+                        <a id='ncomments' href="/discussion" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Discussions</a>
+                     </li>
+                     <li><a href="/content" targer="-self" class="norm_shadow"><span><i class="fa fa-play-circle nav_icon" aria-hidden="true"></i>Media</span></a></li>
+                    </li>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}" class="norm_shadow">Login</a></li>
-                            <li><a href="{{ route('register') }}" class="norm_shadow">Register</a></li>
-                        @else
-                        <li>
-                            <a id='ncomments' href="/discussion" class="norm_shadow"><i class="fa fa-envelope-o nav_icon" aria-hidden="true"></i>Discussions</a>
-                         </li>
-                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown">
-
-                               <img src="/{{App::getLocale()}}.png" height="20"> {{ Config::get('languages')[App::getLocale()] }}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <i class="fa fa-user nav_icon"></i>{{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu">
-                                @foreach (Config::get('languages') as $lang => $language)
-                                    @if ($lang != App::getLocale())
-                                        <li>
-                                            @if($language == "English")
-                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="/en.png" width="25" class="nav_icon">&nbsp;&nbsp;{{$language}}</a>
-                                            @endif
-                                            @if($language == "Português")
-                                            <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="/pt.png" width="25" class="nav_icon">{{$language}}</a>
-                                            @endif
-                                        </li>
-                                    @endif
-                                @endforeach
+
+                            <ul class="dropdown-menu" role="menu">
+                                @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
+                                <li>
+                                    <a href="/admin" class="drop_link">
+                                       <i class="fa fa-lock" aria-hidden="true"></i> Backoffice
+                                    </a>
+                                </li>
+                                @endif
+                                <li>
+                                    <a href="{{ route('logout') }}" class="drop_link"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                       <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+
+
+
+                                <li class="dropdown-submenu">
+                                  <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown">
+
+                                     <img src="/{{App::getLocale()}}.png" height="20"> {{ Config::get('languages')[App::getLocale()] }}
+                                  </a>
+                                  <ul class="dropdown-submenu pull-left">
+                                      @foreach (Config::get('languages') as $lang => $language)
+                                          @if ($lang != App::getLocale())
+                                              <li>
+                                                  @if($language == "en")
+                                                  <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="/en.png" width="25" class="nav_icon">&nbsp;&nbsp;{{$language}}</a>
+                                                  @endif
+                                                  @if($language == "pt")
+                                                  <a href="{{ route('lang.switch', $lang) }}" class="drop_link"><img src="/pt.png" width="25" class="nav_icon">{{$language}}</a>
+                                                  @endif
+                                              </li>
+                                          @endif
+                                      @endforeach
+                                  </ul>
+                                 </li>
+
+
                             </ul>
                         </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle drop_shadow" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <i class="fa fa-user nav_icon"></i>{{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
-                                    <li>
-                                        <a href="/admin" class="drop_link">
-                                           <i class="fa fa-lock" aria-hidden="true"></i> Backoffice
-                                        </a>
-                                    </li>
-                                    @endif
-                                    <li>
-                                        <a href="{{ route('logout') }}" class="drop_link"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                           <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    @endif
+                </ul>
+               </div>
+               <!--/.nav-collapse -->
+           </div>
+           <!--/.container-fluid -->
+          </nav>
+          </div>
 
         @yield('content')
     </div>

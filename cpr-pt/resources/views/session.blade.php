@@ -82,7 +82,7 @@
 
 @section('content')
 <link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
-<div class="container no_overflow">
+<div class="container no_overflow" style="margin-top: 70px;">
     <div class="row">
        <div class="col-md-12" style="padding-right: 0;">
             <div class="panel panel-default shadow">
