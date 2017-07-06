@@ -5,7 +5,15 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default shadow">
-                <div class="panel-heading">Discussions</div>
+               <div class="panel-heading" style="height: 65px;">
+                  <div class="row">
+                     <ol class="breadcrumb breadcrumbs">
+                       <li><a href="/home">Home</a></li>
+                       <li class="active">Discussion</li>
+                     </ol>
+                     <h3 class="titulo-pages">Discussions</h3>
+                  </div>
+              </div>
 
                 <div class="panel-body">
 

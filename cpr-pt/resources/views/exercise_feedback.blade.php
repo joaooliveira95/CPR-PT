@@ -131,7 +131,17 @@
     <div class="row">
        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default shadow">
-            <div class="panel-heading">{{trans('messages.exercise_feedback')}} {{$exercise->id}}</div>
+               <div class="panel-heading" style="height: 65px;">
+                  <div class="row">
+                     <ol class="breadcrumb breadcrumbs">
+                       <li><a href="/home">Home</a></li>
+                       <li><a href="/history">Progress</a></li>
+                       <li><a href="/history/sessions">{{trans('messages.sessions')}}</a></li>
+                       <li class="active">Exercise</li>
+                     </ol>
+                     <h3 class="titulo-pages">{{trans('messages.exercise_feedback')}}{{$exercise->id}}</h3>
+                  </div>
+               </div>
 
             <div class="panel-body">
               <div id="tempo_treino" class="col-md-4">

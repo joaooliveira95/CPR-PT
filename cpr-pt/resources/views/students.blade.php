@@ -5,7 +5,16 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default shadow">
-                <div class="panel-heading"> {{trans('messages.students')}}</div>
+               <div class="panel-heading" style="height: 65px;">
+                  <div class="row">
+                     <ol class="breadcrumb breadcrumbs">
+                       <li><a href="/home">Home</a></li>
+                       <li><a href="/turmas">{{trans('messages.classes')}}</a></li>
+                       <li class="active">{{trans('messages.students')}}</li>
+                     </ol>
+                     <h3 class="titulo-pages">{{trans('messages.students')}}</h3>
+                  </div>
+            </div>
 
                 <div class="panel-body">
                     <form class="form-inline">

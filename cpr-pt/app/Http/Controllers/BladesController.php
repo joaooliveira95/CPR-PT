@@ -57,6 +57,13 @@ class BladesController extends Controller{
        //});
     }
 
+    public function historyIndex(){
+     //return Cache::remember('home', 10, function() {
+         return View::make('progress')
+               ->render();
+     //});
+    }
+
 
 
 }

@@ -29,6 +29,8 @@ Route::get('/discussion', 'BladesController@discussionIndex');
 
 Route::get('/newSession', 'BladesController@createSessionIndex');
 
+Route::get('/history', 'BladesController@historyIndex');
+
 //NEW SESSION
 Route::get('/lastSession', 'NewSessionController@lastSession');
 

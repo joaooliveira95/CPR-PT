@@ -5,7 +5,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default shadow">
-                <div class="panel-heading">{{trans('messages.session')}}</div>
+               <div class="panel-heading" style="height: 65px;">
+                  <div class="row">
+                     <ol class="breadcrumb breadcrumbs">
+                       <li><a href="/home">Home</a></li>
+                       <li class="active">{{trans('messages.session')}}</li>
+                     </ol>
+                     <h3 class="titulo-pages">{{trans('messages.session')}}</h3>
+                  </div>
+             </div>
 
                     <div class="panel-body">
 
@@ -30,7 +38,7 @@
                                 </span>
                             @endif
                       </div>
-                      <a href="/lastSession">Ultima Sessao</a>
+                      <a href="/lastSession"><h3>Última Sessão</h3></a>
                       {!! Form::close() !!}
                     </div>
                 </div>

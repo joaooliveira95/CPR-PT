@@ -86,7 +86,21 @@
     <div class="row">
        <div class="col-md-12" style="padding-right: 0;">
             <div class="panel panel-default shadow">
-                <div class="panel-heading">{{$user->name}} | {{$session->title}} | {{$session->created_at}}</div>
+                <div class="panel-heading" style="height: 65px;">
+                   <div class="row">
+                      <ul class="list-inline session_list">
+                       <li class="nome_session">{{$user->name}}</li>
+                       <li class="titulo_session"><b>{{$session->title}}</b></li>
+                       <li class="data_session">{{$session->created_at}}</li>
+                     </ul>
+                     <ol class="breadcrumb breadcrumbs">
+                       <li><a href="/home">Home</a></li>
+                       <li><a href="/history">Progress</a></li>
+                       <li><a href="/history/sessions">Sessions</a></li>
+                       <li class="active">{{$session->title}}</li>
+                     </ol>
+                  </div>
+                </div>
 
                 <div class="panel-body">
 
@@ -123,7 +137,7 @@
                         {{$exercises->links()}}
                   </div>
 
-                  <div id="progresso_sessao_grafico"></div>
+                  <div id="progresso_sessao_grafico" style="height: 30vh;"></div>
                     @endif
 
 

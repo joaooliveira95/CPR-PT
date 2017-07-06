@@ -201,6 +201,44 @@
             box-shadow: 0px 4px 12px -4px rgba(0,0,0,0.75);
          }
 
+         .breadcrumbs {
+            background-color: transparent;
+            float: right;
+         }
+         .breadcrumbs a {
+            font-family: 'Lato', Arial;
+            font-weight: 300;
+            font-size: 17px;
+         }
+         .titulo-pages {
+            width: 200px;
+            float: left;
+            font-family: 'Lato', Arial;
+            font-weight: 300;
+            margin: 6px 0 0 0;
+            padding: 0 15px 8px 15px;
+         }
+
+         .session_list {
+            float: left;
+            margin-left: 10px;
+         }
+         .nome_session {
+           font-family: 'Lato', Arial;
+           font-weight: 300;
+           font-size: 18px;
+         }
+         .titulo_session {
+           margin: 0 50px;
+           font-family: 'Lato', Arial;
+           font-weight: 300;
+           font-size: 20px;
+         }
+         .data_session {
+           font-family: 'Lato', Arial;
+           font-weight: 300;
+           font-size: 15px;
+         }
          </style>
 
     <!-- Scripts -->
@@ -277,7 +315,7 @@
                   @else
                   <ul class="nav navbar-nav navbar-left">
                  <li><a href="/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.session')}}</span></a></li>
-                     <li><a href="/history/sessions" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
+                     <li><a href="/history" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
                      @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                   <!--   <li><a href="/students" targer="-self"><span>Students</span></a></li> -->
                      <li><a href="/turmas" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>
