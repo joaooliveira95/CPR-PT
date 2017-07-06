@@ -10,7 +10,8 @@
             var title = "{{trans('messages.progress')}}";
             var xTitle = "{{trans('messages.exercises')}}";
             var yTitle = "{{trans('messages.sensor_units')}}";
-
+            var min = 100;
+            var max = 120;
             $(document).ready(function() {
 
                var options = {
@@ -36,7 +37,8 @@
                             text: yTitle
                         },
 
-                    },
+                     },
+
 
                     plotOptions: {
                         series: {
@@ -58,19 +60,42 @@
                 options.series[0].name = "Compressions (BPM)";
                 options.xAxis.categories = dados.dates.reverse();
                 chart = new Highcharts.Chart("compressoes", options);
+                chart.yAxis[0].addPlotBand({
+                     from: 100,
+                     to: 120,
+                     color: 'rgba(5, 254, 0, 0.27)',
+                     label: {
+                        text: ''
+                     }
+                  });
 
                options.series[0].data = dados.recoil.reverse();
                options.series[0].name = "Recoil (%)";
                   options.series[0].color = '#FF0000';
                options.xAxis.categories = dados.dates.reverse();
                chart = new Highcharts.Chart("recoil", options);
+               chart.yAxis[0].addPlotBand({
+                     from: 90,
+                     to: 100,
+                     color: 'rgba(5, 254, 0, 0.27)',
+                     label: {
+                        text: ''
+                     }
+                  });
 
                options.series[0].data = dados.hands.reverse();
                options.xAxis.categories = dados.dates.reverse();
-                  options.series[0].color = '#00FF00';
+                  options.series[0].color = '#a10dd5';
                options.series[0].name = "Hand Position (%)";
                chart = new Highcharts.Chart("pos_maos", options);
-
+               chart.yAxis[0].addPlotBand({
+                     from: 90,
+                     to: 100,
+                     color: 'rgba(5, 254, 0, 0.27)',
+                     label: {
+                        text: ''
+                     }
+                  });
               })
             });
 
