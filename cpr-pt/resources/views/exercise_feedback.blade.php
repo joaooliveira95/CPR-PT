@@ -137,6 +137,7 @@
                        <li><a href="/home">Home</a></li>
                        <li><a href="/history">Progress</a></li>
                        <li><a href="/history/sessions">{{trans('messages.sessions')}}</a></li>
+                       <li><a href="/history/{{$exercise->idSession}}/session">{{trans('messages.session')}}</a></li>
                        <li class="active">Exercise</li>
                      </ol>
                      <h3 class="titulo-pages">{{trans('messages.exercise_feedback')}}{{$exercise->id}}</h3>

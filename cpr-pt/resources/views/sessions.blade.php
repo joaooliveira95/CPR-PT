@@ -11,7 +11,7 @@
                      <ol class="breadcrumb breadcrumbs">
                        <li><a href="/home">Home</a></li>
                        <li><a href="/history">Progress</a></li>
-                       <li class="active">Sessions</li>
+                       <li class="active">{{trans('messages.sessions')}}</li>
                      </ol>
                      <h3 class="titulo-pages">{{trans('messages.sessions')}}</h3>
                   </div>

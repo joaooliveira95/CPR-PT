@@ -211,7 +211,7 @@
             font-size: 17px;
          }
          .titulo-pages {
-            width: 200px;
+            width: 300px;
             float: left;
             font-family: 'Lato', Arial;
             font-weight: 300;
