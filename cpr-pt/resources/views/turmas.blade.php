@@ -28,17 +28,19 @@
                     <div class="table-responsive">
                        <table id="turmas_table" class='table table-hover'>
                              <br>
-                            <thead class="thead-default">
-                                <tr>
+                            <thead class="thead-default;">
+                                <tr style="font-size: 20px;">
                                     <th>{{trans('messages.class')}}</th>
+                                    <th>Nº Alunos</th>
                                     <th>{{trans('messages.created_at')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($turmas as $turma)
-                                    <tr>
-                                        <td><a href="/turma/{{$turma->id}}">{{$turma->name}}</a></td>
-                                        <td>{{$turma->created_at}}</td>
+                                    <tr style="font-size: 16px;">
+                                        <td class="tabela_link"><a href="/turma/{{$turma->id}}">{{$turma->name}}</a></td>
+                                        <td ondload="n_alunos({{$turma->id}})"></td>
+                                        <td>{{date('d M Y' ,strtotime($turma->created_at))}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

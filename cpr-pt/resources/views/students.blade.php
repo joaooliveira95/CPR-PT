@@ -29,7 +29,7 @@
                      <div class="table-responsive">
                      <table id="sessions_table" class='table table-hover'>
                              <thead class="thead-default">
-                                <tr>
+                                <tr class="tabela_header">
                                     <th>{{trans('messages.name')}}</th>
                                     <th>Email</th>
                                     <th>Link</th>
@@ -37,10 +37,10 @@
                             </thead>
                             <tbody>
                                 @foreach($students as $student)
-                                    <tr>
+                                    <tr style="font-size: 16px;">
                                         <td>{{$student->name}}</td>
                                         <td>{{$student->email}}</td>
-                                        <td><a href="/students/{{$student->id}}/sessions">Sessões</a></td>
+                                        <td class="tabela_link"><a href="/students/{{$student->id}}/sessions">Sessões</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

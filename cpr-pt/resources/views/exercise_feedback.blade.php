@@ -129,10 +129,11 @@
 <link href="{{ asset('/css/comentsStyle.css') }}" rel="stylesheet">
 <div class="container" style="margin-top: 70px; width: 90vw;">
     <div class="row">
-       <div class="col-md-10 col-md-offset-1">
+       <div class="col-md-12">
             <div class="panel panel-default shadow">
-               <div class="panel-heading" style="height: 65px;">
+               <div class="panel-heading">
                   <div class="row">
+                     <h3 class="titulo-pages">Feedback {{$exercise->id}}</h3>
                      <ol class="breadcrumb breadcrumbs">
                        <li><a href="/home">Home</a></li>
                        <li><a href="/history">Progress</a></li>
@@ -140,7 +141,6 @@
                        <li><a href="/history/{{$exercise->idSession}}/session">{{trans('messages.session')}}</a></li>
                        <li class="active">Exercise</li>
                      </ol>
-                     <h3 class="titulo-pages">{{trans('messages.exercise_feedback')}}{{$exercise->id}}</h3>
                   </div>
                </div>
 
@@ -151,15 +151,15 @@
                  <table id="table_1" class='table table-hover'>
                     <br>
                     <thead class="thead-default">
-                      <tr>
-                        <th class = "centered_tb">{{trans('messages.total_time')}}</th>
-                        <th class = "centered_tb">COMPRESS. {{trans('messages.time')}}</th>
+                      <tr class="tabela_header">
+                        <th class = "centered_tb ">{{trans('messages.total_time')}}</th>
+                        <th class = "centered_tb">Compress. {{trans('messages.time')}}</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td id="tempo" class = "centered_tb"></td>
-                        <td class = "centered_tb">{{$exercise->time}} s</td>
+                        <td class = "centered_tb tabela_simples">{{$exercise->time}} s</td>
                       </tr>
                     </tbody>
                   </table>
@@ -171,7 +171,7 @@
                  <table id="table_2" class='table table-hover'>
                        <br>
                       <thead class="thead-default">
-                          <tr>
+                          <tr class="tabela_header">
                               <th class = "centered_tb">{{trans('messages.frequence')}}</th>
                               <th class = "centered_tb">{{trans('messages.full_recoil')}}</th>
                               <th class = "centered_tb">{{trans('messages.correct_hands')}}</th>

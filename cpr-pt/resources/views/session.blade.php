@@ -86,12 +86,12 @@
     <div class="row">
        <div class="col-md-12" style="padding-right: 0;">
             <div class="panel panel-default shadow">
-                <div class="panel-heading" style="height: 65px;">
+                <div class="panel-heading">
                    <div class="row">
                       <ul class="list-inline session_list">
                        <li class="nome_session">{{$user->name}}</li>
                        <li class="titulo_session"><b>{{$session->title}}</b></li>
-                       <li class="data_session">{{$session->created_at}}</li>
+                       <li class="data_session">{{date('d M Y' ,strtotime($session->created_at))}}</li>
                      </ul>
                      <ol class="breadcrumb breadcrumbs">
                        <li><a href="/home">Home</a></li>
@@ -109,7 +109,7 @@
                             <div class="table-responsive">
                              <table id="sessions_table" class='table table-hover'>
                                    <br>
-                                  <thead class="thead-default">
+                                  <thead class="thead-default tabela_header">
                                       <tr>
                                           <th class = "centered_tb">{{trans('messages.exercise')}}</th>
                                           <th class = "centered_tb">{{trans('messages.time')}}</th>
@@ -121,12 +121,12 @@
 
                                   <tbody>
                                       @foreach($exercises as $exercise)
-                                          <tr>
-                                            <td class = "centered_tb"><a href="/exercise_results/{{$exercise->id}}"> {{$exercise->id}} </a></td>
-                                            <td class = "centered_tb">{{$exercise->time}}</td>
-                                            <td class = "centered_tb">{{$exercise->recoil}}</td>
-                                            <td class = "centered_tb">{{$exercise->compressions}}</td>
-                                            <td class = "centered_tb">{{$exercise->hand_position}}</td>
+                                          <tr style="font-size: 16px;">
+                                            <td class = "centered_tb tabela_link"><a href="/exercise_results/{{$exercise->id}}"> {{ date("H:i:s", strtotime($exercise->created_at))}} </a></td>
+                                            <td class = "centered_tb">{{$exercise->time}} s</td>
+                                            <td class = "centered_tb">{{$exercise->recoil}} %</td>
+                                            <td class = "centered_tb">{{$exercise->compressions}} BPM</td>
+                                            <td class = "centered_tb">{{$exercise->hand_position}} %</td>
                                           </tr>
                                       @endforeach
                                   </tbody>
@@ -137,7 +137,7 @@
                         {{$exercises->links()}}
                   </div>
 
-                  <div id="progresso_sessao_grafico" style="height: 30vh;"></div>
+               <!--   <div id="progresso_sessao_grafico" style="height: 30vh;"></div>-->
                     @endif
 
 
@@ -150,6 +150,7 @@
       <!--  <div class="col-md-3" >
                    <div class="panel panel-default" >
          <div class="panel-body">-->
+         <br />
          <div id="disqus_thread"></div>
           <script>
 

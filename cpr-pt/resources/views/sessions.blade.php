@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default shadow">
-               <div class="panel-heading" style="height: 65px;">
+               <div class="panel-heading">
                   <div class="row">
                      <ol class="breadcrumb breadcrumbs">
                        <li><a href="/home">Home</a></li>
@@ -45,19 +45,19 @@
                        <table id="sessions_table" class='table table-hover'>
                              <br>
                             <thead class="thead-default">
-                                <tr>
+                                <tr class="tabela_header">
                                     <th>{{trans('messages.date')}}</th>
                                     <th>{{trans('messages.session')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($sessions as $session)
-                                    <tr>
+                                    <tr style="font-size: 16px;">
                                         <td>{{$session->created_at}}</td>
                                         @if (Auth::user()->id != $session->idUser)
-                                            <td> <a href="/students/{{$session->id}}/session">{{$session->title}}</a></td>
+                                            <td class="tabela_link"> <a href="/students/{{$session->id}}/session">{{$session->title}}</a></td>
                                         @else
-                                            <td> <a href="/history/{{$session->id}}/session">{{$session->title}}</a></td>
+                                            <td class="tabela_link"> <a href="/history/{{$session->id}}/session">{{$session->title}}</a></td>
                                         @endif
                                     </tr>
                                 @endforeach

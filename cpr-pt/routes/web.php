@@ -71,6 +71,8 @@ Route::get('/exercise_results/{id}', 'SessionsController@exercise');
 
 Route::get('/turmas', 'TurmasController@turmas')->middleware('teacher');
 
+Route::post('/n_alunos/{$idTurma}', 'TurmasController@number_students')->middleware('teacher');
+
 Route::get('/turma/{idTurma}', 'TurmasController@studentsIndex')->middleware('teacher');
 
 //OTHERS

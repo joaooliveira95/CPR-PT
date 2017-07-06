@@ -20,6 +20,11 @@ class TurmasController extends Controller{
     }
 
       //Retorna para a View 'turmas' todas as turmas que o utilizador(teacher) é professor
+   public function number_students($idTurma){
+      $n_students = $this->turmasRepo->getStudentsOfTurma($idTurma)->count();
+       return $n_students;
+   }
+
     public function turmas(){
         $idUser = Auth::user()->id;
 
@@ -27,7 +32,6 @@ class TurmasController extends Controller{
         if(request()->has('filter')){
             $turmas = $this->turmasRepo->getTurmasOfUserFiltered($idUser);
         }
-
          return view('turmas', ['turmas'=> $turmas]);
     }
 

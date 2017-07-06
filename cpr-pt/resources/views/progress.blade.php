@@ -119,15 +119,16 @@
 
                 <div class="panel-body">
                       <div class="row">
-                        <h2 class="text-center">Progresso do Utilizador</h2>
-                           <div id="compressoes" class="col-md-4" style="height:45vh;">
+                           <div id="compressoes" class="col-md-4" style="height:50vh;">
                            </div>
                            <div id="recoil" class="col-md-4" style="height:45vh;">
                            </div>
                            <div id="pos_maos" class="col-md-4" style="height:45vh;">
                            </div>
                      </div>
-                      <a href="/history/sessions"><h3>Ver Todas as Sessões</h3></a>
+                     <div class="row" style="margin: 30px 0 20px 0; padding: 0 0 0 25px;">
+                       <a href="/history/sessions" class="btn-sessoes">Todas as Sessões</a>
+                     </div>
                   </div>
             </div>
         </div>

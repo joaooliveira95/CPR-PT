@@ -202,16 +202,20 @@
          }
 
          .breadcrumbs {
+            padding: 0px 15px;
+            margin-bottom: 0px;
             background-color: transparent;
             float: right;
          }
          .breadcrumbs a {
+
             font-family: 'Lato', Arial;
             font-weight: 300;
             font-size: 17px;
+            color: #B23838;
          }
          .titulo-pages {
-            width: 300px;
+            width: 250px;
             float: left;
             font-family: 'Lato', Arial;
             font-weight: 300;
@@ -229,7 +233,7 @@
            font-size: 18px;
          }
          .titulo_session {
-           margin: 0 50px;
+           margin: 0 20px;
            font-family: 'Lato', Arial;
            font-weight: 300;
            font-size: 20px;
@@ -239,6 +243,40 @@
            font-weight: 300;
            font-size: 15px;
          }
+
+         .btn-sessoes {
+            width: 300px;
+            color: #000000;
+            border: 2px solid #B23838;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 5px 10px;
+            font-family: 'Lato', Arial;
+            font-weight: 400;
+            font-size: 20px;
+         }
+         .btn-sessoes:hover {
+            color: #B23838;
+            border: 2px solid #B23838;
+            background-color: #f1f1f1;
+            text-decoration: none;
+         }
+
+         .tabela_link a {
+            color: #B23838;
+            font-weight: bold;
+            font-size: 17px;
+         }
+
+         .tabela_simples{
+            font-size: 18px;
+         }
+
+         .tabela_header{
+            font-size: 20px;
+            font-weight: bold;
+         }
+
          </style>
 
     <!-- Scripts -->
