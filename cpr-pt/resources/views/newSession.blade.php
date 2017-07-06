@@ -156,8 +156,8 @@
         <div class="col-md-12">
             <div class="panel panel-default shadow">
                 <div class="panel-body">
-                      <div class="title"><h2 class="text-center" style="font-family: 'Lato', Arial;">Dados da sessão</h2></div>
-                      <div id="progressao_treino" style="height:50vh;">
+                     <!-- <div class="title"><h2 class="text-center" style="font-family: 'Lato', Arial;">Dados da sessão</h2></div>-->
+                      <div id="progressao_treino" style="height:48vh;">
 
                       </div>
 
@@ -165,27 +165,27 @@
                         <div class="col-md-4" style="min-width: 32%; float: left;">
                            <div class="panel panel-primary" style="border-color: #f1f1f1;">
                               <div class="panel-heading" style="background: #f1f1f1;color: #000;border-color: #f1f1f1;">
-                                <p class="text-center" style='font-size: 15px;' >Frequência</p>
+                                <b><p class="text-center" style='font-size: 15px;' >Frequência</p></b>
                               </div>
-                               <p id="frequencia"></p>
+                               <b><p id="frequencia"></p></b>
                                <p id="recomend_frequencia"></p>
                            </div>
                         </div>
                         <div class="col-md-4" style="min-width: 32%; float: left;">
                            <div class="panel panel-primary" style="border-color: #f1f1f1;">
                               <div class="panel-heading" style="background: #f1f1f1;color: #000;border-color: #f1f1f1;">
-                                <p class="text-center" style='font-size: 15px;' >Mãos Corretas</p>
+                                <b><p class="text-center" style='font-size: 15px;' >Mãos Corretas</p></b>
                               </div>
-                               <p id="pos_maos"></p>
+                               <b><p id="pos_maos"></p></b>
                                <p id="recomend_pos_maos"></p>
                            </div>
                         </div>
                         <div class="col-md-4" style="min-width: 32%; float: left;">
                            <div class="panel panel-primary" style="border-color: #f1f1f1;">
                               <div class="panel-heading" style="background: #f1f1f1;color: #000;border-color: #f1f1f1;">
-                                <p class="text-center" style='font-size: 15px;' >Recoil Completo</p>
+                                <b><p class="text-center" style='font-size: 15px;' >Recoil Completo</p></b>
                               </div>
-                               <p id="recoil"></p>
+                               <b><p id="recoil"></p></b>
                                <p id="recomend_recoil"></p>
                            </div>
                         </div>
