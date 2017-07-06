@@ -9,12 +9,10 @@ define("TRESHOLD_SENSOR1_POSICAO_MAOS",3000);
 define("TRESHOLD_SENSOR1_COMPRESSOES",2000);
 define("TRESHOLD_SENSOR2_COMPRESSOES",300);
 define("TRESHOLD_SENSOR3_INSUFLACOES",20);
-
 define("TRESHOLD_SENSOR1_RECOIL",1500);
 define("DIF_RECOIL",6000);
 define("RATIO_RECOIL",2.5);
 define("RATIO_RECOIL_NORM",0.7);
-
 define("SIMULAR",0);
 
 class SimulationController extends Controller{
@@ -22,36 +20,32 @@ class SimulationController extends Controller{
    private function min_val($valores,$ini,$fim){
       $pmin=$ini;
       $vmin=$valores[$ini];
-
       for($i=$ini+1;$i<=$fim;$i++){
             if($valores[$i]<$vmin){
                $pmin=$i;
                $vmin=$valores[$i];
             }
       }
-
       return $pmin;
    }
 
-   private function compressoes($ts, $sensor1, $sensor2){
+   private function processa_compressoes($ts, $sensor1, $sensor2){
       $compressoes_corretas = $compressoes_incorretas = 0;
 
       if ($sensor2[$ts]>TRESHOLD_SENSOR2_COMPRESSOES && $sensor2[$ts]-$sensor2[$ts-1]>=0 && $sensor2[$ts-1]-$sensor2[$ts-2]>=0 && $sensor2[$ts]-$sensor2[$ts+1]>=0 && $sensor2[$ts+1]-$sensor2[$ts+2]>=0){
             if($sensor1[$ts]>TRESHOLD_SENSOR1_COMPRESSOES){
-               // Se compressao correta valor 1
                $compressoes_corretas=1;
             }else{
-               // Se compressao incorreta valor -1
                $compressoes_incorretas=1;
             }
       }else{
-        // $compressoes=0;
+           $compressoes_corretas=$compressoes_incorretas=0;
       }
 
       return ["compressoes_corretas"=>$compressoes_corretas, "compressoes_incorretas"=>$compressoes_incorretas];
    }
 
-   private function pos_maos($ts, $sensor1, $sensor2){
+   private function processa_pos_maos($ts, $sensor1, $sensor2){
       $posicao_maos_corretas = $posicao_maos_incorretas = 0;
 
       if ($sensor2[$ts]>TRESHOLD_SENSOR2_COMPRESSOES && $sensor2[$ts]-$sensor2[$ts-1]>=0 && $sensor2[$ts-1]-$sensor2[$ts-2]>=0 && $sensor2[$ts]-$sensor2[$ts+1]>=0 && $sensor2[$ts+1]-$sensor2[$ts+2]>=0){
@@ -60,18 +54,15 @@ class SimulationController extends Controller{
             }else{
                $posicao_maos_incorretas=1; //INCORRETO
             }
-
       }else{
-         $posicao_maos_corretas=0; //N DETETOU
-         $posicao_maos_incorretas=0;
+         $posicao_maos_corretas=$posicao_maos_incorretas=0;
       }
 
       return ["posicao_maos_corretas"=>$posicao_maos_corretas, "posicao_maos_incorretas"=>$posicao_maos_incorretas];
    }
 
-   private function recoil($ts, $sensor1, $sensor2){
-         $pos_pico_ini=0;
-         $pos_pico_fim=0;
+   private function processa_recoil($ts, $sensor1, $sensor2){
+         $pos_pico_ini = $pos_pico_fim=0;
          $found_first_peak=0;
          $p=0;
 
@@ -85,8 +76,7 @@ class SimulationController extends Controller{
          }
 
           $rec=0;
-          $rec_incorreto=0;
-          $rec_correto=0;
+          $rec_incorreto = $rec_correto=0;
 
           for($i=$pos_pico_ini+1;$i<sizeof($compressoes);$i++){
             if($compressoes==1000 || $compressoes==900 ){
@@ -101,11 +91,9 @@ class SimulationController extends Controller{
 
       // SE posicao das maos incorreta no pico anterior e a diferenca entre  max do sensor de cima e o max do sensor de baixo <1000 = no recoil
               if($ratio_norm>RATIO_RECOIL_NORM){
-
                   $recoil[$ts[$min_pos]]=1000;
                   $rec_correto++;
               }else{
-
                   $recoil[$ts[$min_pos]]=900;
                   $rec_incorreto++;
               }
@@ -116,7 +104,7 @@ class SimulationController extends Controller{
       return ["rec_correto"=>$rec_correto, "rec_incorreto"=>$rec_incorreto];
    }
 
-   public function pausas($ts, $sensor1, $sensor2, $sensor3){
+   public function processa_pausas($ts, $sensor1, $sensor2, $sensor3){
       $pausas = $picos_sensor3 = $ninsuflacoes = 0;
 
       if ($sensor1[$ts+2]<TRESHOLD_SENSOR1_BASELINE && $sensor1[$ts+1]<TRESHOLD_SENSOR1_BASELINE && $sensor1[$ts]<TRESHOLD_SENSOR1_BASELINE && $sensor1[$ts-1]<TRESHOLD_SENSOR1_BASELINE &&
@@ -147,6 +135,17 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
      }//ACABA
    }
 
+      private function calcula_picos_sensor($ts, $sensor){
+         $picos_sensor=0;
+
+         if ($sensor[$ts]-$sensor[$ts-1]>=0 && $sensor[$ts-1]-$sensor[$ts-2]>=0 && $sensor[$ts]-$sensor[$ts+1]>=0 && $sensor[$ts+1]-$sensor[$ts+2]>=0){
+            $picos_sensor=$sensor[$ts];
+         }else{
+            $picos_sensor=0;
+         }
+         return $picos_sensor;
+      }
+
     private function processa_sinal($time, $sensor1, $sensor2, $sensor3){
         $picos_sensor1 = $picos_sensor2 = $picos_sensor3 = 0;
         $compressoes_corretas = $compressoes_incorretas = 0;
@@ -158,45 +157,35 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
 
          // Limpa os sinais com media deslizante de 5 pontos
          //$treino->cleanSignal(); RESOLVER DEPOIS!!!!
-
-         // Duracao total do sinal em segundos
-         // $duracao=($time[sizeof($time)-2]-$time[0])/1000;
-
          $ts = 2;
 
-         $res_pausas = $this->pausas($ts, $sensor1, $sensor2, $sensor3);
+         $res_pausas = $this->processa_pausas($ts, $sensor1, $sensor2, $sensor3);
          $pausas = $res_pausas["pausas"];
          $ninsuflacoes += $res_pausas["ninsuflacoes"];
          $picos_sensor3 = $res_pausas["picos_sensor3"];
 
-         $res_compressoes = $this->compressoes($ts, $sensor1, $sensor2);
+         $res_compressoes = $this->processa_compressoes($ts, $sensor1, $sensor2);
          $compressoes_corretas=$res_compressoes["compressoes_corretas"];
          $compressoes_incorretas=$res_compressoes["compressoes_incorretas"];
 
-         /*$res_compressoes = $this->recoil($ts, $sensor1, $sensor2);
+         //POR CONCLUIR
+         /*$res_compressoes = $this->processa_recoil($ts, $sensor1, $sensor2);
          $recoil_correto=$res_compressoes["recoil_correto"];
          $recoil_correto=$res_compressoes["recoil_incorreto"];*/
 
-         $res_pos_maos = $this->pos_maos($ts, $sensor1, $sensor2);
+         $res_pos_maos = $this->processa_pos_maos($ts, $sensor1, $sensor2);
          $posicao_maos_corretas=$res_pos_maos["posicao_maos_corretas"];
          $posicao_maos_incorretas=$res_pos_maos["posicao_maos_incorretas"];
 
-         if ($sensor1[$ts]-$sensor1[$ts-1]>=0 && $sensor1[$ts-1]-$sensor1[$ts-2]>=0 && $sensor1[$ts]-$sensor1[$ts+1]>=0 && $sensor1[$ts+1]-$sensor1[$ts+2]>=0){
-            $picos_sensor1=$sensor1[$ts];
-         }else{
-            $picos_sensor1=0;
-         }
+         //PICOS SENSOR
+         $picos_sensor1=$this->calcula_picos_sensor($ts, $sensor1);
+         $picos_sensor2=$this->calcula_picos_sensor($ts, $sensor2);
 
-         if ($sensor2[$ts]-$sensor2[$ts-1]>=0 && $sensor2[$ts-1]-$sensor2[$ts-2]>=0 && $sensor2[$ts]-$sensor2[$ts+1]>=0 && $sensor2[$ts+1]-$sensor2[$ts+2]>=0){
-            $picos_sensor2=$sensor2[$ts];
-         }else{
-            $picos_sensor2=0;
-         }
     return array("time"=>$time[2], "picos_sensor1"=>$picos_sensor1, "picosSensor2"=>$picos_sensor2, "ponto_sensor1"=>$sensor1[2], "ponto_sensor2"=>$sensor2[2],
      "posicao_maos_corretas"=>$posicao_maos_corretas, "compressoes"=>$compressoes_corretas+$compressoes_incorretas, "pausas"=>$pausas,"maos_corretas"=>0, "frequencia"=>0, "rcc"=>0);
  }
 
-   public static function calculos($dp, $compressoes, $posicao_maos_corretas){
+   public static function calcula_info($dp, $compressoes, $posicao_maos_corretas){
       $dps=$dp/1000;
       $fcc=0;
 
@@ -217,7 +206,7 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
       return ["maos_corretas"=>$mc, "frequencia"=>$fcc];
    }
 
-   public static function calculos_tempos($pausas, $time){
+   public static function calcula_pausas($pausas, $time){
             $started_band = $start_point=0;
             $last_event=1;
             $intervalo_pausa = $pausa_ini = $pausa_fim = 0;
@@ -251,10 +240,6 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
    }
 
     public function live_info($idExercise){
-      //$hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-      //$idExercise = $hashids->decode($idExercise)[0];
-
-        ini_set('memory_limit', '-1');
         $con = mysqli_connect("127.0.0.1","root","","cpr");
         $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise  ORDER BY timestep ASC";
         $res = mysqli_query($con, $sql);
@@ -267,13 +252,13 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
 
         while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                 array_push($time, $row["timestep"]);
-                array_push($sensor1, $row["valueSensor1"]);
-                array_push($sensor2, $row["valueSensor2"]);
+                array_push($sensor1, $row["valueSensor1"]);//Compressoes
+                array_push($sensor2, $row["valueSensor2"]);//Pos_maos
+                // array_push($sensor3, $row["valueSensor3"]);
                 array_push($pausas, 0); //!!!!!!!!!!!!!!!
-               // array_push($sensor3, $row["valueSensor3"]);
+
         }
-         $mao_tmp = 0;
-         $compress_tmp = 0;
+         $mao_tmp = $compress_tmp = 0;
 
         for($i = 3; $i < $n_rows-2; $i++){
             $time_temp = $sensor1_temp = $sensor2_temp = array();
@@ -284,38 +269,38 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
                array_push($sensor2_temp, $sensor2[$j]);
             }
 
+            //PROCESSAMENTO dos valores dos sensores
             $data_tmp = $this->processa_sinal($time_temp, $sensor1_temp, $sensor2_temp, $sensor3);
 
-            $compressoes+=$data_tmp["compressoes"];
-            $pos_maos_corretas+=$data_tmp["posicao_maos_corretas"];
-            $pausas[$i]=$data_tmp["pausas"];
+            //Dados processados sobre os sensores
+            $compressoes += $data_tmp["compressoes"];
+            $pos_maos_corretas += $data_tmp["posicao_maos_corretas"];
+            $pausas[$i] = $data_tmp["pausas"];
 
-            $calculos_tempos = $this->calculos_tempos($pausas, $time);
-
+            //Calculo do tempo de pausaW
+            $calculos_tempos = $this->calcula_pausas($pausas, $time);
             $dp = $calculos_tempos["dp"];
 
-            $calculos = $this->calculos($dp, $compressoes, $pos_maos_corretas);
+            //A partir dos dados processados calcula a informação que o utilizador irá visualizar
+            $calculos = $this->calcula_info($dp, $compressoes, $pos_maos_corretas);
 
-            $data_tmp["maos_corretas"]=$calculos["maos_corretas"];
-            $data_tmp["frequencia"]=$calculos["frequencia"];
+            $data_tmp["maos_corretas"] = $calculos["maos_corretas"];
+            $data_tmp["frequencia"] = $calculos["frequencia"];
+
             $mao_tmp = $calculos["maos_corretas"];
-            $compress_tmp= $calculos["frequencia"];
-            array_push($data, $data_tmp);
+            $compress_tmp = $calculos["frequencia"];
 
-            unset($time_temp);
-            unset($sensor1_temp);
-            unset($sensor2_temp);
+            array_push($data, $data_tmp);
         }
 
+       //Atualiza o Exercicio com as informações finais resultantes da simulação
         Exercise::where('id', $idExercise)
          ->update(['hand_position' => $mao_tmp, 'compressions' => $compress_tmp, 'time'=>max($time)]);
-
 
         return json_encode($data);
     }
 
     public function script($idExercise, $simular){
-
         global $db;
         $data = array();
         $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;

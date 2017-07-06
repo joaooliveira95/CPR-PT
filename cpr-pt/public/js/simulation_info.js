@@ -2,7 +2,7 @@ function recomendation(id, rec_id, color, recomendation){
    //VALORES DO SENSOR
   document.getElementById(id).style = "color: "+color+"; text-align: center; font-size: 25px;";
   //RECOMENDACAO DO SENSOR
-  document.getElementById(rec_id).style = "color: "+color+"; text-align: center; border: none;";
+  document.getElementById(rec_id).style = "color: "+color+"; text-align: center; border: none; font-size: 15px;";
   document.getElementById(rec_id).textContent = recomendation;
 }
 
