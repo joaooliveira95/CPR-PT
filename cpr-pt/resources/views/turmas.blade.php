@@ -39,7 +39,7 @@
                                 @foreach($turmas as $turma)
                                     <tr style="font-size: 16px;">
                                         <td class="tabela_link"><a href="/turma/{{$turma->id}}">{{$turma->name}}</a></td>
-                                        <td ondload="n_alunos({{$turma->id}})"></td>
+                                        <td>{{$num_alunos[$turma->id]}}</td>
                                         <td>{{date('d M Y' ,strtotime($turma->created_at))}}</td>
                                     </tr>
                                 @endforeach
