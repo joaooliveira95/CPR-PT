@@ -26,12 +26,6 @@
             font-weight: bold;
         }
 
-        .video-container {
-        position: relative;
-        padding-bottom: 56.25%;
-        padding-top: 30px; height: 0; overflow: hidden;
-        }
-
         .video-container iframe,
         .video-container object,
         .video-container embed {
@@ -277,6 +271,44 @@
             font-weight: bold;
          }
 
+         .video-t{
+           list-style: none;
+           padding: 0;
+           text-align: center;
+         }
+         .video-t li{
+           background-color: #ddd;
+           background-size: cover;
+           background-position: center center;
+           display: inline-block;
+           width: 200px;
+           height: 112px;
+           margin-left: 10px;
+           margin-right: 10px;
+           opacity: 0.5;
+           cursor: pointer;
+         }
+
+         .video-t li:hover{
+           opacity: 1;
+         }
+
+         .video-o{
+           position: fixed;
+           width: 100%;
+           height: 100%;
+           background: #fff;
+           top: 0;
+           left: 0;
+         }
+
+         .video-o .frame{
+           height: 80%;
+           width: 80%;
+           position: relative;
+           margin: auto;
+           margin-top: 70px;
+         }
 
          </style>
 
@@ -298,6 +330,16 @@
 
     $(document).ready(function() {
             $(".dropdown-toggle").dropdown();
+            });
+
+            $("#button1").click(function() {
+               //   if($( "#video1" ).css('display') =="none"){
+                     $( "#video1" ).attr('class') = "modal fade in";
+                     $( "#video1" ).css("display", "none");;
+                  /*}else{
+                     $( "#video1" ).attr('class') = "modal fade";
+                     $( "#video1" ).css("display", "none");
+                  }*/
             });
 
             $("#collapse_button").click(function(){
