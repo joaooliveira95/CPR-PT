@@ -125,7 +125,7 @@
                       // chart.series[2].addPoint( [time, Number(dados[i].picos_sensor1)], false, false);
                       //chart.series[3].addPoint( [time, Number(dados[i].picosSensor2)], false, false);
 
-                     simulation_live_info(dados[i].maos_corretas, dados[i].rcc, dados[i].frequencia);
+                     simulation_live_info(dados[i].maos_corretas, dados[i].recoil, dados[i].frequencia);
                   }
              }
             });

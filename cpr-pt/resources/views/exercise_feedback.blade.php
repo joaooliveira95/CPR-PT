@@ -116,7 +116,7 @@
 
 
                 }
-               simulation_feedback(dados[total-1].maos_corretas, dados[total-1].rcc, dados[total-1].frequencia, time);
+               simulation_feedback(dados[total-1].maos_corretas, dados[total-1].recoil, dados[total-1].frequencia, time);
 
                 chart = new Highcharts.Chart("treino", options);
 

@@ -121,13 +121,15 @@
                       <div class="row">
                            <div id="compressoes" class="col-md-4" style="height:50vh;">
                            </div>
-                           <div id="recoil" class="col-md-4" style="height:45vh;">
+                           <div id="recoil" class="col-md-4" style="height:50vh;">
                            </div>
-                           <div id="pos_maos" class="col-md-4" style="height:45vh;">
+                           <div id="pos_maos" class="col-md-4" style="height:50vh;">
                            </div>
                      </div>
                      <div class="row" style="margin: 30px 0 20px 0; padding: 0 0 0 25px;">
-                       <a href="/history/sessions" class="btn-sessoes">Todas as Sessões</a>
+                        <div class="col-md-12" style="text-align: center;">
+                           <a href="/history/sessions" class="btn-sessoes">Todas as Sessões</a>
+                        </div>
                      </div>
                   </div>
             </div>

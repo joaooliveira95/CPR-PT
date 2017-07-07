@@ -8,7 +8,21 @@
                 <div class="panel-heading">Home</div>
 
                     <div class="panel-body">
+                       <div class = "About">
 
+                       </div>
+                        <div class="Simulation" style="height: 300px; backgroundColor: #1F5FF0">
+
+                        </div>
+                        <div class="Progress" style="height: 300px; backgroundColor: #0FFF00">
+
+                        </div>
+                        <div class="Sessions" style="height: 300px; backgroundColor: #FF0F00">
+
+                        </div>
+                        <div class="Teacher" style="height: 300px; backgroundColor: #FFFF00">
+
+                        </div>
                     </div>
             </div>
         </div>

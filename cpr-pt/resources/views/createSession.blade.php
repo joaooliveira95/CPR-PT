@@ -24,10 +24,10 @@
                        array('action'=> 'NewSessionController@startSession'
                        , 'method'=>'post')) !!}
                         {!! csrf_field() !!}
-                       <h4 class="text-center">{!! Form::label('Title','Título') !!}</h4>
+                       <h4 class="text-center tabela_header">{!! Form::label('Title','Título') !!}</h4>
                       <div class="row">
-                      <div class="input-group col-md-6 col-md-offset-3">
-                        {!! Form::text('title', null, ['class'=>'form-control']) !!}
+                      <div class="input-group col-md-6 col-md-offset-3 ">
+                        {!! Form::text('title', null, ['class'=>'form-control ']) !!}
                         <span id="nova_sesao" class="input-group-btn">
                           {!! Form::submit('&#xf067;', ['class'=>'fa-input btn btn-default btn-md']) !!}
                         </span>
@@ -38,7 +38,12 @@
                                 </span>
                             @endif
                       </div>
-                      <a href="/lastSession"><h3>Última Sessão</h3></a>
+                      <div class="row" style="margin: 30px">
+                        <div class="col-md-12" style="text-align: center;">
+                           <a href="/lastSession" class="btn-sessoes">Última Sessão</a>
+                        </div>
+                     </div>
+                  </div>
                       {!! Form::close() !!}
                     </div>
                 </div>

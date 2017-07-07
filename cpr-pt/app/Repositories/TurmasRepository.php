@@ -26,7 +26,7 @@ class TurmasRepository extends BaseRepository
         $query ->select('users.id', 'users.email', 'users.name', 'users.created_at');
         $query ->where('turma_alunos.idTurma', '=', $idTurma);
         $query ->where('users.role_id', '=', 2);
-        $query ->orderBy('created_at');
+        $query ->orderBy('turma_alunos.created_at');
 
       return $this->doQuery($query, $take, $paginate);
   }
@@ -45,7 +45,7 @@ class TurmasRepository extends BaseRepository
         $query ->where('turma_alunos.idTurma', '=', $idTurma);
         $query ->where('users.role_id', '=', 2);
          $query ->where($by, 'LIKE', '%'.request('filter').'%');
-        $query ->orderBy('created_at');
+        $query ->orderBy('turma_alunos.created_at');
 
       return $this->doQuery($query, $take, $paginate);
   }
