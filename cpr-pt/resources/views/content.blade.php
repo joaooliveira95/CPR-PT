@@ -33,9 +33,9 @@
             var temp = dados[categories[i].name];
             var html='';
             for(var j=0; j<temp.length; j++){
-               html +='<li><a>'+temp[j].title+'</a></li>';
+               html +='<div class="row text-center" style="width: 100%"><a class="normal_link" href="'+temp[j].url+'">'+temp[j].title+'</a></div>';
             }
-            $('#conteudos').append('<div id="'+categories[i].name+'"class="col-md-4"><h4 class="text-center">'+categories[i].name+'</h4><ul>'+html+'</ul></div>');
+            $('#conteudos').append('<div id="'+categories[i].name+'"class="col-md-4"><h4 class="tabela_header text-center">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
             }
             var html='';
 
@@ -73,8 +73,7 @@
                  </div>
 
                  <h3 class="titulo-header text-center" style="margin-bottom: 35px;">Conteúdos</h3>
-                 <div id="conteudos" class="row">
-
+                 <div id="conteudos">
                </div>
               </div>
             </div>

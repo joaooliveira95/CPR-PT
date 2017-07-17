@@ -262,6 +262,11 @@
             font-size: 17px;
          }
 
+         .normal_link{
+            color: #B23838;
+            font-size: 17px;
+         }
+
          .tabela_simples{
             font-size: 18px;
          }
@@ -327,6 +332,12 @@
                   background-color: #5d0101;
                   border-color: #5d0101;
             }
+
+         .ul_centered{
+            width: auto;
+            margin: auto;
+
+         }
          </style>
 
     <!-- Scripts -->
