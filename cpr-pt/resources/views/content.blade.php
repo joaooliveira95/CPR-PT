@@ -36,7 +36,7 @@
               </div>
               <div class="panel-body">
                  <div class="video-container text-center">
-                     <h3 class="titulo-header">Videos</h3>
+                     <h3 class="titulo-header" style="margin-bottom: 35px;">Videos</h3>
                      <div class="row">
                         <ul class="video-t">
                           <li data-code="Qb8YtgKrWzs"></li>
@@ -45,6 +45,20 @@
                         </ul>
                      </div>
                  </div>
+
+                 <h3 class="titulo-header text-center" style="margin-bottom: 35px;">Conteúdos</h3>
+                 <div class="row">
+                  @foreach($categories as $category)
+                    <div class="col-md-4">
+                          <h4 class="text-center">{{$category->name}}</h4>
+                          <ul class="lista_conteudos">
+                             @foreach($medias[''.$category->name.''] as $media)
+                                   <li><a>{{$media->title}}</a></li>
+                             @endforeach
+                          </ul>
+                    </div>
+                 @endforeach
+               </div>
               </div>
             </div>
         </div>

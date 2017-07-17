@@ -310,6 +310,23 @@
            margin-top: 70px;
          }
 
+         .pagination>li>a{
+            color: #B23838;
+         }
+
+         .pagination>li>a:hover{
+            color: #5d0101;
+         }
+
+         .pagination>.active>span{
+            background-color: #B23838;
+            border-color: #B23838;
+         }
+
+            .pagination>.active>span:hover{
+                  background-color: #5d0101;
+                  border-color: #5d0101;
+            }
          </style>
 
     <!-- Scripts -->

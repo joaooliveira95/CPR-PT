@@ -157,9 +157,7 @@
             <div class="panel panel-default shadow">
                 <div class="panel-body">
                      <!-- <div class="title"><h2 class="text-center" style="font-family: 'Lato', Arial;">Dados da sessão</h2></div>-->
-                      <div id="progressao_treino" style="height:48vh;">
 
-                      </div>
 
                       <div class="row">
                         <div class="col-md-4" style="min-width: 32%; float: left;">
@@ -189,6 +187,9 @@
                                <p id="recomend_recoil"></p>
                            </div>
                         </div>
+                      </div>
+                      <div id="progressao_treino" style="height:48vh;">
+
                       </div>
                        <div class = "inputs" style="margin: 0 auto; text-align: center;">
                           <li style="display: inline-block">

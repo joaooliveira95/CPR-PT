@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use DateTime;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -43,12 +44,6 @@ class BladesController extends Controller{
       //});
    }
 
-    public function contentIndex(){
-      //  return Cache::remember('content', 10, function() {
-             return View::make('content')
-                 ->render();
-         //});
-    }
 
     public function discussionIndex(){
       //return Cache::remember('discussion', 10, function() {

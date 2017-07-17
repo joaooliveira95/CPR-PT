@@ -23,7 +23,7 @@ Route::get('/import', 'ImportExportController@import');
 //BLADES
 Route::get('/home', 'BladesController@homeIndex');
 
-Route::get('/content', 'BladesController@contentIndex');
+Route::get('/content', 'MediaController@contentIndex');
 
 Route::get('/discussion', 'BladesController@discussionIndex');
 
