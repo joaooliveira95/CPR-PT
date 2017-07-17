@@ -4,6 +4,7 @@
 <script>
 
    $(document).ready(function() {
+
       $('.video-t li').each(function() {
       var code = $(this).attr('data-code');
       $(this).css("background-image", "url(https://img.youtube.com/vi/" + code + "/0.jpg)");
@@ -14,6 +15,31 @@
               $('div.video-o').remove();
             });
          });
+      });
+
+      var url = "/contentInfo";
+      $.get(url,function(result){
+         var dados= jQuery.parseJSON(result);
+
+         var categories = dados['categories'];
+         var total = categories.length;
+
+         for(var i=0; i < total; i++){
+            if(i%3==0){
+               $('#conteudos').append('</div>');
+               $('#conteudos').append('<div class="row">');
+            }
+
+            var temp = dados[categories[i].name];
+            var html='';
+            for(var j=0; j<temp.length; j++){
+               html +='<li><a>'+temp[j].title+'</a></li>';
+            }
+            $('#conteudos').append('<div id="'+categories[i].name+'"class="col-md-4"><h4 class="text-center">'+categories[i].name+'</h4><ul>'+html+'</ul></div>');
+            }
+            var html='';
+
+         $('#conteudos').append('</div>');
       });
    });
 
@@ -47,21 +73,13 @@
                  </div>
 
                  <h3 class="titulo-header text-center" style="margin-bottom: 35px;">Conteúdos</h3>
-                 <div class="row">
-                  @foreach($categories as $category)
-                    <div class="col-md-4">
-                          <h4 class="text-center">{{$category->name}}</h4>
-                          <ul class="lista_conteudos">
-                             @foreach($medias[''.$category->name.''] as $media)
-                                   <li><a>{{$media->title}}</a></li>
-                             @endforeach
-                          </ul>
-                    </div>
-                 @endforeach
+                 <div id="conteudos" class="row">
+
                </div>
               </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

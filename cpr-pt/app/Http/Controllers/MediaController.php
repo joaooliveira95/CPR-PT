@@ -19,13 +19,20 @@ class MediaController extends Controller{
     }
 
     public function contentIndex(){
+
+      return view("content");
+    }
+
+    public function contentInfo(){
       $categories = MediaCategory::all();
       $array = array();
+
+      $array['categories']=$categories;
       foreach ($categories as $category) {
          $temp = Media::where('idCategory','=',$category->id)->get();
          $array[''.$category->name.''] = $temp;
       }
-      return view("content", ["categories"=>$categories, "medias"=>$array]);
+      return json_encode($array);
     }
 
 }
