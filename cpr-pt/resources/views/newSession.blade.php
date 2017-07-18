@@ -18,7 +18,7 @@
         }
 
      $(document).ready(function() {
-
+            $("#next_button").attr("disabled", true);
            var options = {
                     chart: {
                        type: 'line',
@@ -137,7 +137,7 @@
 
       function exercise(){
             $("#exercise_button").attr("disabled", true);
-
+            $("#next_button").attr("disabled", false);
             var url = "/script/"+idExercise+"&1";
             $.get(url,function(result){
             });
@@ -201,7 +201,7 @@
                              array('action'=> array('NewSessionController@newExercise', $id)
                              , 'mepod'=>'post')) !!}
                              {!! csrf_field() !!}
-                             {!! Form::submit('&#xf28b;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'margin: 0 10px 0 10px;']) !!}
+                             {!! Form::submit('&#xf28b;', ['id'=>'next_button', 'class'=>'fa-input btn btn-default btn-md', 'style'=>'margin: 0 10px 0 10px;']) !!}
 
                             {!! Form::close() !!}
                           </li>
@@ -216,6 +216,9 @@
                             {!! Form::close() !!}
                           </li>
                         </div>
+                        @if (session('erro'))
+                        <p class="text-warning"><strong>{{ session('erro')}}</strong></p>
+                        @endif
                   </div>
               </div>
           </div>

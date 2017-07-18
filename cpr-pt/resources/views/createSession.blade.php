@@ -41,6 +41,9 @@
                       <div class="row" style="margin: 30px">
                         <div class="col-md-12" style="text-align: center;">
                            <a href="/lastSession" class="btn-sessoes">Última Sessão</a>
+                           @if (session('erro'))
+                           <p class="text-warning"><strong>{{ session('erro')}}</strong></p>
+                           @endif
                         </div>
                      </div>
                   </div>

@@ -35,13 +35,16 @@
             for(var j=0; j<temp.length; j++){
                html +='<div class="row text-center" style="width: 100%"><a class="normal_link" href="'+temp[j].url+'">'+temp[j].title+'</a></div>';
             }
-            $('#conteudos').append('<div id="'+categories[i].name+'"class="col-md-4"><h4 class="tabela_header text-center">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
+            $('#conteudos').append('<div id="'+categories[i].name+'"class="col-md-4 foo"><h4 class="tabela_header text-center">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
             }
             var html='';
 
          $('#conteudos').append('</div>');
       });
    });
+
+   window.sr = ScrollReveal({ duration: 2000 });
+   sr.reveal('.foo', 50);
 
 </script>
 @endsection
