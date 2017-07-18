@@ -49,6 +49,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
+       .navbar-fixed-top{
+
+           border-bottom-color: #f5f8fa;
+        }
+
         .brand-centered {
            display: flex;
            justify-content: center;
@@ -338,6 +343,27 @@
             margin: auto;
 
          }
+
+         .masonry {
+           display: block
+         }
+
+         .conteudo{
+            border: 1px solid #c4c4c4;
+            border-radius: 11px;
+            padding: 5px;
+            margin: 5px;
+            width: 32.2%;
+            max-width: 100%;
+            display: block;
+            float: left;
+         }
+
+         @media (min-width: 979px) {
+           ul.nav li.dropdown:hover > ul.dropdown-menu {
+             display: block;
+           }
+         }
          </style>
 
     <!-- Scripts -->
@@ -346,6 +372,7 @@
     <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.pt.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dropdowns-enhancement.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/scrollReveal.js') }}"></script>
      @yield('highcharts')
 
     <script>
@@ -510,5 +537,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+		window.sr = ScrollReveal();
+		sr.reveal('.video-container', {
+		  duration: 2500,
+		  origin: 'bottom'
+		});
+	</script>
 </body>
 </html>

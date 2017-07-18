@@ -25,26 +25,19 @@
          var total = categories.length;
 
          for(var i=0; i < total; i++){
-            if(i%3==0){
-               $('#conteudos').append('</div>');
-               $('#conteudos').append('<div class="row">');
-            }
-
             var temp = dados[categories[i].name];
             var html='';
             for(var j=0; j<temp.length; j++){
                html +='<div class="row text-center" style="width: 100%"><a class="normal_link" href="'+temp[j].url+'">'+temp[j].title+'</a></div>';
             }
-            $('#conteudos').append('<div id="'+categories[i].name+'"class="col-md-4 foo"><h4 class="tabela_header text-center">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
+            $('#conteudos').append('<div id="'+categories[i].name+'"class="conteudo"><h4 class="tabela_header text-center">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
             }
             var html='';
+         window.sr2 = ScrollReveal();
+         sr2.reveal('.conteudo', { duration: 2000, origin: 'right', distance: '100px' }, 50);
 
-         $('#conteudos').append('</div>');
       });
    });
-
-   window.sr = ScrollReveal({ duration: 2000 });
-   sr.reveal('.foo', 50);
 
 </script>
 @endsection
@@ -76,12 +69,13 @@
                  </div>
 
                  <h3 class="titulo-header text-center" style="margin-bottom: 35px;">Conteúdos</h3>
-                 <div id="conteudos">
-               </div>
+
+                 <div id="conteudos" class="masonry"></div>
               </div>
             </div>
         </div>
     </div>
 </div>
+
 
 @endsection

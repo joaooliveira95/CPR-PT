@@ -135,12 +135,13 @@
 
       });
 
+      //Ativa e desativa os butões
       function exercise(){
-            $("#exercise_button").attr("disabled", true);
-            $("#next_button").attr("disabled", false);
-            var url = "/script/"+idExercise+"&1";
-            $.get(url,function(result){
-            });
+         $("#exercise_button").attr("disabled", true);
+         $("#next_button").attr("disabled", false);
+         var url = "/script/"+idExercise+"&1";
+         $.get(url,function(result){
+         });
 
       }
 

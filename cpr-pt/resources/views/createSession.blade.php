@@ -17,7 +17,7 @@
 
                     <div class="panel-body">
 
-                      <img src="/cpr.jpg" class="img-responsive img-thumbnail center-block" style="margin-bottom: 5px; max-width: 80%">
+                      <img src="/cpr.jpg" class="img-responsive img-thumbnail center-block" style="margin-bottom: 5px; max-width: 60%">
 
 
                        {!! Form::open(
