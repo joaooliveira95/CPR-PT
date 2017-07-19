@@ -16,6 +16,7 @@
     <link href="{{ asset('bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dropdowns-enhancement.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
     <style>
     @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
         .glyphicon.glyphicon-envelope {
@@ -344,20 +345,11 @@
 
          }
 
-         .masonry {
-           display: block
+         .conteudo{
+            margin: 5px 5px 10px 5px;
+            padding: 5px;
          }
 
-         .conteudo{
-            border: 1px solid #c4c4c4;
-            border-radius: 11px;
-            padding: 5px;
-            margin: 5px;
-            width: 32.2%;
-            max-width: 100%;
-            display: block;
-            float: left;
-         }
 
          @media (min-width: 979px) {
            ul.nav li.dropdown:hover > ul.dropdown-menu {
@@ -373,6 +365,7 @@
     <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.pt.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dropdowns-enhancement.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/scrollReveal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
      @yield('highcharts')
 
     <script>

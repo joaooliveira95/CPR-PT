@@ -28,9 +28,9 @@
             var temp = dados[categories[i].name];
             var html='';
             for(var j=0; j<temp.length; j++){
-               html +='<div class="row text-center" style="width: 100%"><a class="normal_link" href="'+temp[j].url+'">'+temp[j].title+'</a></div>';
+               html +='<div class="row text-center" style="width: 100%"><a class="normal_link" href="'+temp[j].url+'">'+temp[j].title+' ('+temp[j].type+')</a></div>';
             }
-            $('#conteudos').append('<div id="'+categories[i].name+'"class="conteudo"><h4 class="tabela_header text-center">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
+            $('#conteudos').append('<div id="'+categories[i].name+'"class="conteudo text-center"><h4 class="tabela_header">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
             }
             var html='';
          window.sr2 = ScrollReveal();
@@ -58,7 +58,7 @@
               </div>
               <div class="panel-body">
                  <div class="video-container text-center">
-                     <h3 class="titulo-header" style="margin-bottom: 35px;">Videos</h3>
+                     <h3 class="titulo_header" style="margin-bottom: 10px;">Videos</h3>
                      <div class="row">
                         <ul class="video-t">
                           <li data-code="Qb8YtgKrWzs"></li>
@@ -67,10 +67,7 @@
                         </ul>
                      </div>
                  </div>
-
-                 <h3 class="titulo-header text-center" style="margin-bottom: 35px;">Conteúdos</h3>
-
-                 <div id="conteudos" class="masonry"></div>
+                 <div id="conteudos" ></div>
               </div>
             </div>
         </div>
