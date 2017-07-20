@@ -8,14 +8,14 @@ class ExercisesRepository extends BaseRepository
 {
   protected $modelClass = Exercise::class;
 
-  public function getSessionExercises($idSession, $take = 6, $paginate = true){
+  public function getSessionExercises($idSession, $take = null, $paginate = true){
         $query = $this->newQuery();
         $query ->where('idSession', '=', $idSession);
 
       return $this->doQuery($query, $take, $paginate);
   }
 
-    public function getUserExercises($idUser, $take = 100, $paginate = false){
+    public function getUserExercises($idUser, $take = null, $paginate = false){
 
         $query = $this->newQuery();
         $query ->join('sessions', 'sessions.id', '=', 'exercises.idSession');

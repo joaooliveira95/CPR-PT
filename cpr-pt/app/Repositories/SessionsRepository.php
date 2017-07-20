@@ -8,7 +8,7 @@ class SessionsRepository extends BaseRepository
 {
   protected $modelClass = Session::class;
 
-  public function getUserSessions($idUser,  $take = 7, $paginate = true){
+  public function getUserSessions($idUser,  $take = null, $paginate = false){
         $query = $this->newQuery();
         $query ->join('users', 'users.id', '=', 'sessions.idUser');
         $query ->select('sessions.*', 'users.name');
@@ -16,17 +16,5 @@ class SessionsRepository extends BaseRepository
         $query ->orderBy('created_at', 'desc');
 
       return $this->doQuery($query, $take, $paginate);
-  }
-
-  public function getUserSessionsByDate($idUser, $from, $to,  $take = 7, $paginate = true){
-        $query = $this->newQuery();
-        $query ->join('users', 'users.id', '=', 'sessions.idUser');
-        $query ->select('sessions.*', 'users.name');
-        $query ->where('idUser', '=', $idUser);
-        $query->where('sessions.created_at', '>', $from);
-        $query->where('sessions.created_at', '<', $to);
-        $query ->orderBy('sessions.created_at', 'desc');
-
-      return $this->doQuerySpecial($query, $take, $paginate, $from, $to);
   }
 }

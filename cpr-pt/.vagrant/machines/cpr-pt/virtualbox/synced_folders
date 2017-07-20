@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/Code/cpr-pt":{"type":null,"mount_options":["uid=1000","gid=1000"],"guestpath":"/home/vagrant/Code/cpr-pt","hostpath":"C:/Users/ASUS/Documents/cpr-pt-fmup/cpr-pt","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/ASUS/Documents/cpr-pt-fmup/cpr-pt","disabled":false,"__vagrantfile":true}}}

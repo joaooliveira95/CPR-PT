@@ -26,13 +26,7 @@ class TurmasController extends Controller{
    }
 
     public function turmas(){
-        $idUser = Auth::user()->id;
-
-        $turmas = $this->turmasRepo->getTurmasOfUser($idUser);
-        if(request()->has('filter')){
-            $turmas = $this->turmasRepo->getTurmasOfUserFiltered($idUser);
-        }
-
+         $idUser = Auth::user()->id;
          $num_alunos = array();
         foreach ($turmas as $turma) {
            $idTurma = $turma->id;
@@ -44,10 +38,6 @@ class TurmasController extends Controller{
       //Retorna todos os utilizadores(alunos) da turma recebida por parametro para a View 'students'
     public function studentsIndex($idTurma){
          $students = $this->turmasRepo->getStudentsOfTurma($idTurma);
-
-         if(request()->has('filter')){
-             $students = $this->turmasRepo->getStudentsOfTurmaFiltered($idTurma, request('filter'));
-         }
 
         return view('students')->with('students', $students);
     }

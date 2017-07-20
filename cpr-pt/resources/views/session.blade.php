@@ -134,7 +134,7 @@
 
 
                       </div>
-                        {{$exercises->links()}}
+
                   </div>
 
                <!--   <div id="progresso_sessao_grafico" style="height: 30vh;"></div>-->
@@ -175,4 +175,9 @@
         </div><!--Lado Direito-->
     </div><!--Row-->
 </div><!--Container-->
+<script>
+    $(document).ready(function(){
+          $('.table').DataTable();
+    });
+</script>
 @endsection

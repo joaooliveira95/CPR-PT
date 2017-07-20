@@ -4,19 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" href="/heart_md.png">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dropdowns-enhancement.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
     <style>
     @import url('https://fonts.googleapis.com/css?family=Lato:300,400');
         .glyphicon.glyphicon-envelope {
@@ -72,23 +67,23 @@
          }
 
          .navbar-alignit .navbar-header {
-         	  -webkit-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
            -moz-transform-style: preserve-3d;
            transform-style: preserve-3d;
            height: 50px;
          }
          .navbar-alignit .navbar-brand {
-         	top: 50%;
-         	display: block;
-         	position: relative;
-         	height: auto;
-         	transform: translate(0,-50%);
-         	margin-right: 15px;
+          top: 50%;
+          display: block;
+          position: relative;
+          height: auto;
+          transform: translate(0,-50%);
+          margin-right: 15px;
            margin-left: 15px;
          }
 
          .navbar-nav>li>.dropdown-menu {
-         	z-index: 9999;
+          z-index: 9999;
          }
 
         .panel{
@@ -358,14 +353,11 @@
          }
          </style>
 
+      <link href="{{ asset('datatables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-    <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::to('bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.pt.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dropdowns-enhancement.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/scrollReveal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
      @yield('highcharts')
 
     <script>
@@ -527,15 +519,5 @@
 
         @yield('content')
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-		window.sr = ScrollReveal();
-		sr.reveal('.video-container', {
-		  duration: 2500,
-		  origin: 'bottom'
-		});
-	</script>
 </body>
 </html>
