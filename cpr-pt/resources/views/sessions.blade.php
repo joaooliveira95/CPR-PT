@@ -10,7 +10,7 @@
                   <div class="row">
                      <ol class="breadcrumb breadcrumbs">
                        <li><a href="/home">Home</a></li>
-                       <li><a href="/history">Progress</a></li>
+                       <li><a href="/history/{{$idUser}}">Progress</a></li>
                        <li class="active">{{trans('messages.sessions')}}</li>
                      </ol>
                      <h3 class="titulo-pages">{{trans('messages.sessions')}}</h3>
@@ -26,18 +26,6 @@
                         <th>{{trans('messages.session')}}</th>
                       </tr>
                     </thead>
-                    <tbody>
-                       @foreach($sessions as $session)
-                          <tr style="font-size: 16px;">
-                              <td>{{$session->created_at}}</td>
-                              @if (Auth::user()->id != $session->idUser)
-                                  <td class="tabela_link"> <a href="/students/{{$session->id}}/session">{{$session->title}}</a></td>
-                              @else
-                                  <td class="tabela_link"> <a href="/history/{{$session->id}}/session">{{$session->title}}</a></td>
-                              @endif
-                          </tr>
-                        @endforeach
-                    </tbody>
                 </table>
               </div>
             </div>
@@ -47,7 +35,16 @@
 <script>
     $(document).ready(function(){
           $('.table').DataTable({
-                      "order": [[ 0, "desc" ]]
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/sessions_datatable/{{$idUser}}",
+            "columns":[
+               {data: 'created_at'},
+               {data: function (data, type, row, meta) {
+                     return '<a href="/sessions/session/'+data.id+'">' + data.title + '</a>';
+               }},
+            ],
+            "order": [[ 0, "desc" ]]
           });
     });
 </script>

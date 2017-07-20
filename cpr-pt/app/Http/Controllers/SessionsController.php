@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Repositories\UsersRepository;
 use App\Repositories\SessionsRepository;
 use App\Repositories\ExercisesRepository;
+use Yajra\Datatables\Facades\Datatables;
 
 class SessionsController extends Controller{
 
@@ -19,23 +20,16 @@ class SessionsController extends Controller{
         $this->usersRepo = $usersRepo;
         $this->sessionsRepo = $sessionsRepo;
         $this->exercisesRepo = $exercisesRepo;
-        $this->middleware('auth');
+
     }
 
-    public function auth_sessions(){
-      $idUser =  Auth::User()->id;
-      $sessions = $this->sessionsRepo->getUserSessions($idUser);
-
-      return view('sessions', ['sessions'=> $sessions, 'idUser' => $idUser]);
+   public function sessions_datatable($idUser){
+      return Datatables::of(DB::table('sessions')->where('idUser','=',$idUser)->get())->make(true);
    }
 
     public function sessions($idUser){
-
-        $sessions = $this->sessionsRepo->getUserSessions($idUser);
-
-        return view('sessions', ['sessions'=> $sessions, 'idUser' => $idUser]);
+        return view('sessions', ['idUser' => $idUser]);
     }
-
 
     public function session($idSession){
       //Decifra o idSession

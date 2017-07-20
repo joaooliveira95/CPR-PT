@@ -6,7 +6,7 @@
 
       <script>
             var chart;
-            var idUser = {{Auth::user()->id}};
+            var idUser = {{$idUser}};
             var title = "{{trans('messages.progress')}}";
             var xTitle = "{{trans('messages.exercises')}}";
             var yTitle = "{{trans('messages.sensor_units')}}";
@@ -128,7 +128,7 @@
                      </div>
                      <div class="row" style="margin: 30px 0 20px 0; padding: 0 0 0 25px;">
                         <div class="col-md-12" style="text-align: center;">
-                           <a href="/history/sessions" class="btn-sessoes">Todas as Sessões</a>
+                           <a href="/sessions/{{$idUser}}" class="btn-sessoes">Todas as Sessões</a>
                         </div>
                      </div>
                   </div>

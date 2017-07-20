@@ -436,7 +436,7 @@
                   @else
                   <ul class="nav navbar-nav navbar-left">
                  <li><a href="/newSession" targer="-self" class="norm_shadow"><span><i class="fa fa-heartbeat nav_icon" aria-hidden="true"></i>{{trans('messages.session')}}</span></a></li>
-                     <li><a href="/history" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
+                     <li><a href="/history/{{Auth::User()->id}}" targer="-self" class="norm_shadow"><span><i class="fa fa-history nav_icon" aria-hidden="true"></i>{{trans('messages.history')}}</span></a></li>
                      @if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
                   <!--   <li><a href="/students" targer="-self"><span>Students</span></a></li> -->
                      <li><a href="/turmas" targer="-self" class="norm_shadow"><span><i class="fa fa-users nav_icon" aria-hidden="true"></i>{{trans('messages.classes')}}</span></a></li>

@@ -95,8 +95,8 @@
                      </ul>
                      <ol class="breadcrumb breadcrumbs">
                        <li><a href="/home">Home</a></li>
-                       <li><a href="/history">Progress</a></li>
-                       <li><a href="/history/sessions">Sessions</a></li>
+                       <li><a href="/history/{{$session->idUser}}">Progress</a></li>
+                       <li><a href="/sessions/{{$session->idUser}}">Sessions</a></li>
                        <li class="active">{{$session->title}}</li>
                      </ol>
                   </div>

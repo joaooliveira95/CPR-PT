@@ -33,7 +33,7 @@
                                     <tr style="font-size: 16px;">
                                         <td>{{$student->name}}</td>
                                         <td>{{$student->email}}</td>
-                                        <td class="tabela_link"><a href="/students/{{$student->id}}/sessions">Sessões</a></td>
+                                        <td class="tabela_link"><a href="/sessions/{{$student->id}}">Sessões</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

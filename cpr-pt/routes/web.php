@@ -32,7 +32,7 @@ Route::get('/discussion', 'BladesController@discussionIndex');
 
 Route::get('/newSession', 'BladesController@createSessionIndex');
 
-Route::get('/history', 'BladesController@historyIndex');
+Route::get('/history/{idUser}', 'BladesController@historyIndex');
 
 //NEW SESSION
 Route::get('/lastSession', 'NewSessionController@lastSession');
@@ -51,16 +51,14 @@ Route::get('/exercise_progress/{idExercise}','SimulationController@live_info');
 Route::get('/script/{idExercise}&{sim}','SimulationController@script');
 
 //SESSIONS
-
-Route::get('/history/sessions', 'SessionsController@auth_sessions');
-
-Route::get('/history/{idSession}/session', 'SessionsController@session');
-
-Route::get('/students/{idUser}/sessions', 'SessionsController@sessions')->middleware('teacher');
-
-Route::get('/students/{idSession}/session', 'SessionsController@session')->middleware('teacher');
-
 Route::get('/progress/{idSession}', 'SessionsController@progress');
+
+Route::get('/sessions/{idUser}', 'SessionsController@sessions');
+
+Route::get('/sessions/session/{idSession}', 'SessionsController@session');
+
+Route::get('/sessions_datatable/{idUser}', 'SessionsController@sessions_datatable');
+
 
 Route::get('/exercises/{id}', 'SessionsController@userExercises');
 

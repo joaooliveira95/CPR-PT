@@ -83,7 +83,7 @@ class NewSessionController extends Controller{
 
     public function endSession($idSession){
       $this->clearSession($idSession);
-      return redirect('/history/'.$idSession.'/session');
+      return redirect('sessions/session/'.$idSession);
     }
 
    //Procura a última sessão do utilizador
