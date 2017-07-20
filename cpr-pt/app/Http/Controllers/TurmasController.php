@@ -26,7 +26,8 @@ class TurmasController extends Controller{
    }
 
     public function turmas(){
-         $idUser = Auth::user()->id;
+        $idUser = Auth::user()->id;
+        $turmas = $this->turmasRepo->getTurmasOfUser($idUser);
          $num_alunos = array();
         foreach ($turmas as $turma) {
            $idTurma = $turma->id;

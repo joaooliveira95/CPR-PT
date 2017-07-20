@@ -45,7 +45,8 @@
 </div>
 <script>
 $(document).ready(function(){
-      $('.table').DataTable();
+      $('.table').DataTable({
+      });
 });
 </script>
 @endsection
