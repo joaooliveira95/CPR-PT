@@ -26,6 +26,14 @@
                         <th>{{trans('messages.session')}}</th>
                       </tr>
                     </thead>
+                    <tbody>
+                       @foreach($sessions as $session)
+                          <tr style="font-size: 16px;">
+                              <td>{{$session->created_at}}</td>
+                                  <td class="tabela_link"> <a href="/sessions/session/{{$session->id}}">{{$session->title}}</a></td>
+                          </tr>
+                        @endforeach
+                    </tbody>
                 </table>
               </div>
             </div>
@@ -35,16 +43,7 @@
 <script>
     $(document).ready(function(){
           $('.table').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": "/sessions_datatable/{{$idUser}}",
-            "columns":[
-               {data: 'created_at'},
-               {data: function (data, type, row, meta) {
-                     return '<a href="/sessions/session/'+data.id+'">' + data.title + '</a>';
-               }},
-            ],
-            "order": [[ 0, "desc" ]]
+                "order": [[ 0, "desc" ]]
           });
     });
 </script>

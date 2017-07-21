@@ -20,6 +20,7 @@ class SessionsController extends Controller{
         $this->usersRepo = $usersRepo;
         $this->sessionsRepo = $sessionsRepo;
         $this->exercisesRepo = $exercisesRepo;
+          $this->middleware('auth');
 
     }
 
@@ -28,8 +29,10 @@ class SessionsController extends Controller{
    }
 
     public function sessions($idUser){
-        return view('sessions', ['idUser' => $idUser]);
-    }
+      $sessions = $this->sessionsRepo->getUserSessions($idUser);
+
+      return view('sessions', ['sessions'=> $sessions, 'idUser' => $idUser]);
+  }
 
     public function session($idSession){
       //Decifra o idSession
