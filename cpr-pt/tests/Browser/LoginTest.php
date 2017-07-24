@@ -13,7 +13,7 @@ class LoginTest extends DuskTestCase
 
 	use DatabaseMigrations;
 
-    public function welcomePageTest(){ 
+    public function welcomePageTest(){
         $this->browse(function (Browser $browser){
             $browser->visit('http://127.0.0.1:8000')
                     ->waitForText('Cardio Pulmonary Ressuscitation Personal Trainer')
@@ -24,7 +24,7 @@ class LoginTest extends DuskTestCase
 
     }
 
-    public function testWrongUserLogin1(){ 
+    public function testWrongUserLogin1(){
         $this->browse(function (Browser $browser){
             $browser->visit('http://127.0.0.1:8000/login')
                     ->type('email', 'naoexiste@nao.com')
@@ -35,12 +35,11 @@ class LoginTest extends DuskTestCase
         });
     }
 
-    public function testWrongUserLogin2(){ 
-              $user2 = factory(User::class)->create([
+    public function testWrongUserLogin2(){
+              $user2 = User::create([
                  'name' => 'Frank Sinatra',
                  'email' => 'frank@sinatra.com',
                  'password' => bcrypt('password'),
-                 'role_id' => 1,
               ]);
 
         $this->browse(function (Browser $browser){
@@ -61,11 +60,11 @@ class LoginTest extends DuskTestCase
     * @return void
     */
     public function testUserLogin(){
-          $user2 = factory(User::class)->create([
+
+         $user1 = User::create([
              'name' => 'Jim Morrison',
              'email' => 'jim@morrison.com',
              'password' => bcrypt('password'),
-             'role_id' => 1,
           ]);
 
         $this->browse(function (Browser $browser){

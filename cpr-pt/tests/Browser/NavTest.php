@@ -13,13 +13,21 @@ class NavTest extends DuskTestCase
 
 	use DatabaseMigrations;
 
+
+	public function testBasicTest()
+	{
+		 $response = $this->get('/');
+
+		 $response->assertStatus(200);
+	}
+	
     /**
     * Verifica de o utilizador é capaz de fazer login na aplicacao
     * com um utilizador gerado por seed
     *
     * @return void
     */
-    public function testUserLogin(){
+   /* public function testUserLogin(){
         $user2 = factory(User::class)->create([
          'name' => 'Admin',
          'email' => 'admin@admin.com',
@@ -52,6 +60,6 @@ class NavTest extends DuskTestCase
                             ->assertPathIs('/content');
         });
     }
-
+*/
 
 }
