@@ -11,9 +11,6 @@ class Exercise extends Model
         'idSession', 'time', 'recoil', 'compressions', 'hand_position'
     ];
 
-    protected $hidden = [
-        'remember_token'
-    ];
 
     public function idSession(){
 	    return $this->belongsTo(Session::class);

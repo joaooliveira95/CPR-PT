@@ -16,9 +16,8 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idUser')->unsigned();
-			$table->foreign('idUser')->references('id')->on('users');
+			$table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateSessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sessions');
+        Schema::drop('sessions');
     }
 }

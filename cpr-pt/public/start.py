@@ -54,7 +54,7 @@ if simular == '1':
         s1= str(random.randint(1, 5000))
         s2 = str(random.randint(1, 500))
         #sqlarduino = "INSERT into valores (idtreino,idsessao,timestamp,sensor1,sensor2) values (" + treino + "," + sessao + ",1234567,10," + x + ")"
-        sqlarduino = "INSERT into exercise_sensor_datas (idExercise,idSensor1, idSensor2, idSensor3,valueSensor1, valueSensor2, valueSensor3, timestep) values (" + treino + ", 1, 2, 3,"+s1+"," + s2 + ", 0, " +ts+ ")"
+        sqlarduino = "INSERT into exercise_sensors_data (idExercise,idSensor1, idSensor2, idSensor3,valueSensor1, valueSensor2, valueSensor3, timestep) values (" + treino + ", 1, 2, 3,"+s1+"," + s2 + ", 0, " +ts+ ")"
         #print (sqlarduino)ls
 
         cur.execute(sqlarduino)
@@ -82,7 +82,7 @@ if simular == '0':
         if len(sensor) > 1:
             lixo=0
 
-            sql = "INSERT into exercise_sensor_datas (idExercise,idSensor1, idSensor2, idSensor3,valueSensor1, valueSensor2, valueSensor3, timestep) values ("+ treino + "," + sessao + "," +str(sensor[0])+","+str(sensor[1])+","+str(sensor[2])+","+str(sensor[3])+","+str(sensor[4])+","+str(sensor[5])+","+str(sensor[6])+","+str(sensor[7])+")"
+            sql = "INSERT into exercise_sensors_data (idExercise,idSensor1, idSensor2, idSensor3,valueSensor1, valueSensor2, valueSensor3, timestep) values ("+ treino + "," + sessao + "," +str(sensor[0])+","+str(sensor[1])+","+str(sensor[2])+","+str(sensor[3])+","+str(sensor[4])+","+str(sensor[5])+","+str(sensor[6])+","+str(sensor[7])+")"
 
             cur.execute(sql)
             connection.commit()
@@ -99,7 +99,7 @@ if simular == '0':
 
                 #print(sensor)
 
-        sql = "INSERT into exercise_sensors_datas (idExercise,idSensor1, idSensor2, idSensor3,timestamp,sensor1,sensor2,sensor3,sensor4,sensor5,sensor6,sensor7) values ("+ treino + "," + sessao + "," +str(sensor[0])+","+str(sensor[1])+","+str(sensor[2])+","+str(sensor[3])+","+str(sensor[4])+","+str(sensor[5])+","+str(sensor[6])+","+str(sensor[7])+")"
+        sql = "INSERT into exercise_sensors_data (idExercise,idSensor1, idSensor2, idSensor3,timestamp,sensor1,sensor2,sensor3,sensor4,sensor5,sensor6,sensor7) values ("+ treino + "," + sessao + "," +str(sensor[0])+","+str(sensor[1])+","+str(sensor[2])+","+str(sensor[3])+","+str(sensor[4])+","+str(sensor[5])+","+str(sensor[6])+","+str(sensor[7])+")"
                 #print(sql)
         cur.execute(sql)
         connection.commit()

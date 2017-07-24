@@ -16,12 +16,11 @@ class CreateExercisesTable extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idSession')->unsigned();
-            $table->foreign('idSession')->references('id')->on('sessions');
+            $table->foreign('idSession')->references('id')->on('sessions')->onDelete('cascade');
             $table->integer('time')->unsigned();
             $table->integer('recoil')->unsigned();
             $table->integer('compressions')->unsigned();
             $table->integer('hand_position')->unsigned();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateExercisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercises');
+        Schema::drop('exercises');
     }
 }

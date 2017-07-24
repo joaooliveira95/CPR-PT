@@ -17,7 +17,7 @@ class CreateMedia extends Migration
          $table->increments('id');
          $table->string('title')->unique();
          $table->integer('idCategory')->unsigned();
-         $table->foreign('idCategory')->references('id')->on('media_categories');
+         $table->foreign('idCategory')->references('id')->on('media_categories')->onDelete('cascade');
          $table->string('url');
          $table->string('type');
          $table->timestamps();
@@ -31,6 +31,6 @@ class CreateMedia extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('media');
+         Schema::drop('media');
     }
 }

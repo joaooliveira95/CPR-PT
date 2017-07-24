@@ -16,9 +16,9 @@ class CreateTurmaAlunoTable extends Migration
         Schema::create('turma_alunos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idUser')->unsigned();
-            $table->foreign('idUser')->references('id')->on('users');
+            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->integer('idTurma')->unsigned();
-            $table->foreign('idTurma')->references('id')->on('turmas');
+            $table->foreign('idTurma')->references('id')->on('turmas')->onDelete('cascade');
              $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTurmaAlunoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turma_alunos');
+        Schema::drop('turma_alunos');
     }
 }

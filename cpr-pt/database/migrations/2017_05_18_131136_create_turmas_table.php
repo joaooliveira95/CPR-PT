@@ -16,7 +16,6 @@ class CreateTurmasTable extends Migration
          Schema::create('turmas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateTurmasTable extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('turmas');
+       Schema::drop('turmas');
     }
 }

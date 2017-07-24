@@ -27,6 +27,6 @@ class MediaCategories extends Migration
      * @return void
      */
      public function down() {
-          Schema::dropIfExists('media_categories');
+          Schema::drop('media_categories');
      }
 }

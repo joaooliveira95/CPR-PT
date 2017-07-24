@@ -252,7 +252,7 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
 
     public function live_info($idExercise){
         $con = mysqli_connect("127.0.0.1","root","","cpr");
-        $sql="SELECT * FROM exercise_sensor_datas WHERE idExercise=$idExercise  ORDER BY timestep ASC";
+        $sql="SELECT * FROM exercise_sensors_data WHERE idExercise=$idExercise  ORDER BY timestep ASC";
         $res = mysqli_query($con, $sql);
         $n_rows = mysqli_num_rows($res);
 
@@ -316,11 +316,11 @@ $sensor2[$ts]<TRESHOLD_SENSOR2_BASELINE && $sensor2[$ts-1]<TRESHOLD_SENSOR2_BASE
     public function script($idExercise, $simular){
         global $db;
         $data = array();
-        $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;
+        $cmd='python "'.public_path().'/start.py" '.$idExercise." ".$simular;
 
         if (substr(php_uname(), 0, 7) == "Windows"){
 
-            $cmd="python C:\Users\ASUS\Documents\cpr-pt-fmup\cpr-pt\public\start.py ".$idExercise." ".$simular;
+            $cmd='python "'.public_path().'/start.py" '.$idExercise.' '.$simular;
             $handle = popen("start /B ". $cmd, "r");
             pclose($handle);
 
