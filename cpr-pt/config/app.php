@@ -165,7 +165,6 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
-        TCG\Voyager\VoyagerServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
          Yajra\Datatables\DatatablesServiceProvider::class,

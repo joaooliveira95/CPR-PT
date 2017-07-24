@@ -20,6 +20,13 @@ class NavTest extends DuskTestCase
     * @return void
     */
     public function testUserLogin(){
+        $user2 = factory(User::class)->create([
+         'name' => 'Admin',
+         'email' => 'admin@admin.com',
+         'password' => bcrypt('password'),
+         'role_id' => 1, //ADMIN
+      ]);
+
         $this->browse(function (Browser $browser){
         	$browser->visit('http://127.0.0.1:8000/login')
         			->type('email', 'admin@admin.com')

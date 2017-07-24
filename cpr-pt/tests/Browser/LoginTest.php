@@ -36,9 +36,16 @@ class LoginTest extends DuskTestCase
     }
 
     public function testWrongUserLogin2(){ 
+              $user2 = factory(User::class)->create([
+                 'name' => 'Frank Sinatra',
+                 'email' => 'frank@sinatra.com',
+                 'password' => bcrypt('password'),
+                 'role_id' => 1,
+              ]);
+
         $this->browse(function (Browser $browser){
             $browser->visit('http://127.0.0.1:8000/login')
-                    ->type('email', 'admin@admin.com')
+                    ->type('email', 'frank@sinatra.com')
                     ->type('password', 'incorreta')
                     ->check('remember')
                     ->press('Login')
@@ -54,9 +61,16 @@ class LoginTest extends DuskTestCase
     * @return void
     */
     public function testUserLogin(){
+          $user2 = factory(User::class)->create([
+             'name' => 'Jim Morrison',
+             'email' => 'jim@morrison.com',
+             'password' => bcrypt('password'),
+             'role_id' => 1,
+          ]);
+
         $this->browse(function (Browser $browser){
         	$browser->visit('http://127.0.0.1:8000/login')
-        			->type('email', 'admin@admin.com')
+        			->type('email', 'jim@morrison.com')
         			->type('password', 'password')
         			->check('remember')
 					->press('Login')

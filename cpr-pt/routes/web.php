@@ -78,8 +78,6 @@ Route::get('/turma/{idTurma}', 'TurmasController@studentsIndex')->middleware('te
 
 //OTHERS
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('/home', 'HomeController@index')->name('home');
