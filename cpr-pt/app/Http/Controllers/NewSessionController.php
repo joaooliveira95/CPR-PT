@@ -36,22 +36,37 @@ class NewSessionController extends Controller{
    }
 
    //Elimina todos os exercicios da sessão que não tenham sido inicializados, sem dados, interrompidos de inicio
+   //Retorna 1 caso a sessao n esteja vazia, e 0 se estiver
    private function clearSession($idSession){
       $exercises = Exercise::where('idSession','=',$idSession)->get();
-      $count = 0;
-      //Apaga os exercicioes em "branco" e vai contando
+      //Apaga os exercicioes em "branco"
       foreach ($exercises as $exercise) {
           if($exercise->time == 0){
              Exercise::destroy($exercise->id);
-             $count++;
           }
       }
       //Se o número de exercicios corresponde ao total de exercicios da sessão, elimina tb a sessao
-      if($count==$exercises->count()){
+      if(Exercise::where('idSession','=',$idSession)->count()==0){
           Session::destroy($idSession);
+          return 0;
       }
+      return 1;
    }
 
+   //Evocado sempre q muda de pagina ou atualiza
+   public function end_session_no_view($idSession){
+         $this->clearSession($idSession);
+         return $idSession;
+   }
+
+    public function endSession($idSession){
+      $count = $this->clearSession($idSession);
+      if($count==1){
+         return redirect('sessions/session/'.$idSession);
+      }
+      $id_auth = Auth::user()->id;
+      return redirect('sessions/'.$id_auth);
+    }
 
     public function startSession(Request $request){
         $this->validate($request, array(
@@ -64,9 +79,9 @@ class NewSessionController extends Controller{
         ]);
 
         $idSession = $session->id;
-        $curExercise = $this->createExercise($idSession);
+        $newExercise = $this->createExercise($idSession);
 
-        return view('newSession', ['id' => $idSession, 'curExercise'=> $curExercise->id]);
+        return view('newSession', ['id' => $idSession, 'curExercise'=> $newExercise->id]);
     }
 
     public function newExercise($idSession){
@@ -74,17 +89,6 @@ class NewSessionController extends Controller{
            return view('newSession', ['id' => $idSession, 'curExercise'=> $newExercise->id]);
     }
 
-
-   //Evocado sempre q muda de pagina ou atualiza
-   public function end_session_no_view($idSession){
-         $this->clearSession($idSession);
-         return $idSession;
-   }
-
-    public function endSession($idSession){
-      $this->clearSession($idSession);
-      return redirect('sessions/session/'.$idSession);
-    }
 
    //Procura a última sessão do utilizador
    //Continua a sessão, criando um novo exercicio q pertence a essa sessão

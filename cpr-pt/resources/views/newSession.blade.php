@@ -200,7 +200,7 @@
                           <li style="display: inline-block">
                              {!! Form::open(
                              array('action'=> array('NewSessionController@newExercise', $id)
-                             , 'mepod'=>'post')) !!}
+                             , 'method'=>'post')) !!}
                              {!! csrf_field() !!}
                              {!! Form::submit('&#xf28b;', ['id'=>'next_button', 'class'=>'fa-input btn btn-default btn-md', 'style'=>'margin: 0 10px 0 10px;']) !!}
 
@@ -210,7 +210,7 @@
                           <li style="display: inline-block">
                              {!! Form::open(
                              array('action'=> array('NewSessionController@endSession', $id)
-                             , 'mepod'=>'post')) !!}
+                             , 'method'=>'post')) !!}
                              {!! csrf_field() !!}
                              {!! Form::submit('&#xf28d;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'color: red;']) !!}
 
