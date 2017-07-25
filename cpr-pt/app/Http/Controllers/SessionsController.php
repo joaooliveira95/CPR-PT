@@ -24,10 +24,6 @@ class SessionsController extends Controller{
 
     }
 
-   public function sessions_datatable($idUser){
-      return Datatables::of(DB::table('sessions')->where('idUser','=',$idUser)->get())->make(true);
-   }
-
     public function sessions($idUser){
       $sessions = $this->sessionsRepo->getUserSessions($idUser);
 
@@ -35,10 +31,6 @@ class SessionsController extends Controller{
   }
 
     public function session($idSession){
-      //Decifra o idSession
-   //   $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-   //   $idSession = $hashids->decode($idSession)[0];
-
         $session = $this->sessionsRepo->findByID($idSession);
         $user = $this->usersRepo->findByID($session->idUser);
         $exercises = $this->exercisesRepo->getSessionExercises($idSession);
@@ -47,10 +39,6 @@ class SessionsController extends Controller{
     }
 
     public function progress($idSession){
-      //Decifra o idSession
-   //   $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-   //   $idSession = $hashids->decode($idSession)[0];
-
         $exercises = $this->exercisesRepo->getSessionExercises($idSession);
         $recoil = $compress = $hands = array();
         $cnt = count($exercises);

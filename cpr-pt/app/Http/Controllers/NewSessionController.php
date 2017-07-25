@@ -7,21 +7,15 @@ use Illuminate\Support\Facades\DB;
 use App\Session;
 use App\Exercise;
 use Illuminate\Http\Request;
-use App\Repositories\SessionsRepository;
-use App\Repositories\ExercisesRepository;
 
 class NewSessionController extends Controller{
 
-    protected $sessionsRepo;
-    protected $exercisesRepo;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(SessionsRepository $sessionsRepo, ExercisesRepository $exercisesRepo){
-        $this->sessionsRepo = $sessionsRepo;
-        $this->exercisesRepo = $exercisesRepo;
+    public function __construct(){
         $this->middleware('auth');
     }
 

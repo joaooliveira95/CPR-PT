@@ -57,8 +57,6 @@ Route::get('/sessions/{idUser}', 'SessionsController@sessions');
 
 Route::get('/sessions/session/{idSession}', 'SessionsController@session');
 
-Route::get('/sessions_datatable/{idUser}', 'SessionsController@sessions_datatable');
-
 
 Route::get('/exercises/{id}', 'SessionsController@userExercises');
 
