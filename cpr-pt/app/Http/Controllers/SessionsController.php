@@ -20,7 +20,7 @@ class SessionsController extends Controller{
         $this->usersRepo = $usersRepo;
         $this->sessionsRepo = $sessionsRepo;
         $this->exercisesRepo = $exercisesRepo;
-          $this->middleware('auth');
+        $this->middleware('auth');
 
     }
 
