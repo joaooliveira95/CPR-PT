@@ -20,7 +20,7 @@ class TurmasController extends Controller{
     }
 
       //Retorna para a View 'turmas' todas as turmas que o utilizador(teacher) é professor
-   public function number_students($idTurma){
+   private function number_students($idTurma){
       $n_students = $this->turmasRepo->getStudentsOfTurma($idTurma)->count();
        return $n_students;
    }
@@ -39,7 +39,6 @@ class TurmasController extends Controller{
       //Retorna todos os utilizadores(alunos) da turma recebida por parametro para a View 'students'
     public function studentsIndex($idTurma){
          $students = $this->turmasRepo->getStudentsOfTurma($idTurma);
-
         return view('students')->with('students', $students);
     }
 

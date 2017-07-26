@@ -38,36 +38,36 @@ class TurmasControllerTest extends TestCase
       return $turmaAluno;
    }
 
-    //0 Estudantes, 1 Professor
-    public function testNumberStudents(){
-      $user1 = $this->createUser('John Doe','john@example.com', 1);
+    public function testTurmas(){
+      //ROLE = PROFESSOR
+      $user1 = $this->createUser('John Doe','john@example.com', 3);
+      $user2 = $this->createUser('Jimi Hendrix','jimi@hendrix.com', 2);
+      $user3 = $this->createUser('Frank Sinatra','frank@sinatra.com', 2);
 
       $turma1 = Turma::create([
          'name' => 'Turma 1',
       ]);
 
+      $turma2 = Turma::create([
+         'name' => 'Turma 2',
+      ]);
+
       $turmaAluno1 = $this->addUserToTurma($user1->id, $turma1->id);
+      $turmaAluno2 = $this->addUserToTurma($user1->id, $turma2->id);
 
-      $this->actingAs($user1);
-      $response = $this->call('POST', 'n_alunos/'.$turma1->id);
-
-      $json =  json_decode($response->getContent());
-      $this->assertEquals(0, $json['n_students']);
-
-    }
-
-
-    public function testNumberStudents1(){
-
-   }
-
-    public function testTurmas(){
-      //ROLE = PROFESSOR
-      $user1 = $this->createUser('John Doe','john@example.com', 3);
+      $turmaAluno1 = $this->addUserToTurma($user2->id, $turma1->id);
+      $turmaAluno2 = $this->addUserToTurma($user3->id, $turma2->id);
 
       $this->actingAs($user1);
       $response = $this->call('GET', 'turmas/');
       $view= $response->original;
+
+      $turmas = $view['turmas'];
+      $num_alunos = $view['num_alunos'];
+      $this->assertEquals(2, $turmas->count());
+      $this->assertEquals('Turma 1', $turmas->first()->name);
+      $this->assertEquals(1, $num_alunos['1']);
+      $this->assertEquals(1, $num_alunos['2']);
    }
 
    public function testStudentsIndex(){
