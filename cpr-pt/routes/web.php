@@ -25,7 +25,7 @@ Route::get('/home', 'BladesController@homeIndex');
 
 Route::get('/content', 'MediaController@contentIndex');
 
-Route::get('contentInfo', 'MediaController@contentInfo');
+Route::get('/contentInfo', 'MediaController@contentInfo');
 
 
 Route::get('/discussion', 'BladesController@discussionIndex');

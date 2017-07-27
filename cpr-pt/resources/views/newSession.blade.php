@@ -11,6 +11,8 @@
       var idExercise = "{{$curExercise}}";
       var idSession = "{{$id}}";
        var url_clear = "/endSession_nov/"+idSession;
+       var snd = new Audio("{{ URL::to('/beep-1.flac') }}");
+       var playing = false;
 
       window.onunload=pageleave;
         function pageleave() {
@@ -19,6 +21,19 @@
 
      $(document).ready(function() {
             $("#next_button").attr("disabled", true);
+
+            $("#sound").click(function(){
+               if(playing){
+                  playing=false;
+                  $("#sound").removeClass('fa-volume-off');
+                  $("#sound").addClass('fa-volume-up');
+               }else{
+                  playing=true;
+                  $("#sound").removeClass('fa-volume-up');
+                  $("#sound").addClass('fa-volume-off');
+               }
+            });
+
            var options = {
                     chart: {
                        type: 'line',
@@ -133,6 +148,15 @@
             chart.redraw();
          },100);
 
+
+         var perfect_BPM = 110;
+         var BPM = 60 / perfect_BPM*1000;
+         setInterval(function(){
+            if(playing){
+               snd.play();
+            }
+         },BPM);
+
       });
 
       //Ativa e desativa os butões
@@ -189,7 +213,7 @@
                            </div>
                         </div>
                       </div>
-                      <div id="progressao_treino" style="height:48vh;">
+                      <div id="progressao_treino" style="height:45vh;">
 
                       </div>
                        <div class = "inputs" style="margin: 0 auto; text-align: center;">
@@ -216,6 +240,11 @@
 
                             {!! Form::close() !!}
                           </li>
+
+                          <li style="display: inline-block">
+                             <i id="sound" class="fa fa-volume-off"></i>
+                          </li>
+
                         </div>
                         @if (session('erro'))
                         <p class="text-warning"><strong>{{ session('erro')}}</strong></p>

@@ -25,11 +25,13 @@
          var total = categories.length;
 
          for(var i=0; i < total; i++){
-            var temp = dados[categories[i].name];
+            var temp = dados[categories[i].id];
+            alert(temp);
             var html='';
             for(var j=0; j<temp.length; j++){
                html +='<div class="row text-center" style="width: 100%"><a class="normal_link" href="'+temp[j].url+'">'+temp[j].title+' ('+temp[j].type+')</a></div>';
             }
+            alert(html);
             $('#conteudos').append('<div id="'+categories[i].name+'"class="conteudo text-center"><h4 class="tabela_header">'+categories[i].name+'</h4><ul class="ul_centered">'+html+'</ul></div>');
             }
             var html='';

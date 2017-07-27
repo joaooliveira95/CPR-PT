@@ -30,7 +30,8 @@ class MediaController extends Controller{
       $array['categories']=$categories;
       foreach ($categories as $category) {
          $temp = Media::where('idCategory','=',$category->id)->get();
-         $array[''.$category->name.''] = $temp;
+         print_r($temp);
+         $array[$category->id] = $temp;
       }
       return json_encode($array);
     }
