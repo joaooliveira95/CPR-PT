@@ -25,12 +25,12 @@
             $("#sound").click(function(){
                if(playing){
                   playing=false;
-                  $("#sound").removeClass('fa-volume-off');
-                  $("#sound").addClass('fa-volume-up');
-               }else{
-                  playing=true;
                   $("#sound").removeClass('fa-volume-up');
                   $("#sound").addClass('fa-volume-off');
+               }else{
+                  playing=true;
+                  $("#sound").removeClass('fa-volume-off');
+                  $("#sound").addClass('fa-volume-up');
                }
             });
 
@@ -188,7 +188,8 @@
                         <div class="col-md-4" style="min-width: 32%; float: left;">
                            <div class="panel panel-primary" style="border-color: #f1f1f1;">
                               <div class="panel-heading" style="background: #f1f1f1;color: #000;border-color: #f1f1f1;">
-                                <b><p class="text-center" style='font-size: 15px;' >Frequência</p></b>
+                                  <b><p class="text-center" style='font-size: 15px;' >Frequência</p></b>
+
                               </div>
                                <b><p id="frequencia"></p></b>
                                <p id="recomend_frequencia"></p>
@@ -217,6 +218,8 @@
 
                       </div>
                        <div class = "inputs" style="margin: 0 auto; text-align: center;">
+
+
                           <li style="display: inline-block">
                             <input class = "btn btn-default btn-md fa-input" type="submit" name="filter_button" id="exercise_button" onclick = "exercise()" value="&#xf144;" style="color: green;"/>
                           </li>
@@ -240,12 +243,11 @@
 
                             {!! Form::close() !!}
                           </li>
-
-                          <li style="display: inline-block">
-                             <i id="sound" class="fa fa-volume-off"></i>
-                          </li>
-
                         </div>
+                        <div>
+                         <a style="margin-left: 20px" href="#" ><i id="sound" class="fa fa-volume-off fa-2x" ></i></a><div style="display: inline-block; margin-left: 20px;">
+                            Recomendado 100-120/min</div>
+                         </div>
                         @if (session('erro'))
                         <p class="text-warning"><strong>{{ session('erro')}}</strong></p>
                         @endif

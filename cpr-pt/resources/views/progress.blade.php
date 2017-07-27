@@ -29,10 +29,11 @@
                             text: xTitle
                         },
                         categories: [],
-                        tickInterval: 1000,
+                        tickInterval: 3600*24,
                     },
 
                     yAxis: {
+                       softMax: 120,
                         title: {
                             text: yTitle
                         },
@@ -65,7 +66,7 @@
                      to: 120,
                      color: 'rgba(5, 254, 0, 0.27)',
                      label: {
-                        text: ''
+                        text: 'Compressões Corretas'
                      }
                   });
 
@@ -73,19 +74,22 @@
                options.series[0].name = "Recoil (%)";
                   options.series[0].color = '#FF0000';
                options.xAxis.categories = dados.dates.reverse();
+               options.yAxis.softMax = 95;
                chart = new Highcharts.Chart("recoil", options);
                chart.yAxis[0].addPlotBand({
                      from: 90,
                      to: 100,
                      color: 'rgba(5, 254, 0, 0.27)',
                      label: {
-                        text: ''
+                        text: 'Recoil Correto'
                      }
                   });
 
                options.series[0].data = dados.hands.reverse();
                options.xAxis.categories = dados.dates.reverse();
-                  options.series[0].color = '#a10dd5';
+               options.yAxis.softMax = 95;
+               options.yAxis.tickInterval = 10;
+               options.series[0].color = '#a10dd5';
                options.series[0].name = "Hand Position (%)";
                chart = new Highcharts.Chart("pos_maos", options);
                chart.yAxis[0].addPlotBand({
@@ -93,7 +97,7 @@
                      to: 100,
                      color: 'rgba(5, 254, 0, 0.27)',
                      label: {
-                        text: ''
+                        text: 'Posição de mãos correta'
                      }
                   });
               })
