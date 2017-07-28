@@ -7,12 +7,13 @@
 
       <script>
             var chart;
+            var idUser = {{$idUser}};
             var title = "{{trans('messages.progress')}}";
             var xTitle = "{{trans('messages.exercises')}}";
             var yTitle = "{{trans('messages.sensor_units')}}";
 
             $(document).ready(function() {
-               var options = progresss_options();
+               var options = progresssChart();
                 var url = "/exercises/"+idUser;
               $.get(url,function(result){
                   var dados = jQuery.parseJSON(result);

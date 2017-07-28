@@ -5,122 +5,34 @@
 <script type="text/javascript" src="{{ URL::to('/js/highstock.js') }}"></script>
 <script type="text/javascript" src="{{ URL::to('/js/boost.js') }}"></script>
 <script type="text/javascript" src="{{ URL::to('/js/simulation_info.js') }}"></script>
+<script type="text/javascript" src="{{ URL::to('/js/highcharts_options.js') }}"></script>
 
       <script>
       var chart;
       var idExercise = "{{$exercise->id}}";
    $(document).ready(function() {
-
-               var options = {
-
-                    chart: {
-                       type: 'line',
-                       panning: true,
-                      panKey: 'shift',
-                        zoomType: 'x',
-                        backgroundColor:'transparent',
-                    },
-
-                    plotOptions: {
-                        series: {
-                            animation: false
-                        }
-                    },
-
-                    boost: {
-                        useGPUTranslations: true
-                    },
-
-
-                    title: {
-                        text: 'Dados da Sessão de Treino'
-                    },
-
-                    subtitle: {
-                        text: 'CPR PT'
-                    },
-
-                    xAxis:{
-                        min: 0,
-                        minRange: 10000,
-                        type: 'datetime',
-
-                       title: {
-                            text: 'Tempo'
-                        },
-
-                    },
-
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: 'Sensor (Definir Unidades)'
-                        },
-
-                    },
-
-                    tooltip: {
-                        headerFormat: '<b>{series.name}</b><br />',
-                        pointFormat: 'x = {point.x}, y = {point.y}'
-                    },
-
-                    legend: {
-
-                        align: 'right',
-
-                    },
-
-                      credits: {
-                          enabled: false
-                      },
-
-
-                    series: [{
-                        name: 'Compressões',
-                        data: []
-                    }, {
-                        name: 'Pos_Mãos',
-                        data: []
-                    },{
-                        name: 'Picos1',
-                        data: []
-                    }, {
-                        name: 'Picos2',
-                        data: []
-                    }],
-
-                    scrollbar:{
-                      enabled: true,
-                    }
-
-
-                };
-
+               var options = exerciseFeedbackChart();
 
                 var url = "/exercise_progress/"+idExercise;
               $.get(url,function(result){
 
-                var dados= jQuery.parseJSON(result);
-                var total=dados.length;
+                     var dados= jQuery.parseJSON(result);
+                     var total=dados.length;
 
-                var i;
-                var time = 0;
-                for(i=0;i<total;i++){
-                  time = Number(dados[i].time);
+                     var time = 0;
+                     for(var i=0;i<total;i++){
+                        time = Number(dados[i].time);
 
-                  options.series[0].data.push( [time, Number(dados[i].ponto_sensor1)]);
-                  options.series[1].data.push( [time, Number(dados[i].ponto_sensor2)]);
+                        options.series[0].data.push( [time, Number(dados[i].ponto_sensor1)]);
+                        options.series[1].data.push( [time, Number(dados[i].ponto_sensor2)]);
 
-                  options.series[2].data.push( [time, Number(dados[i].picos_sensor1)]);
-                  options.series[3].data.push( [time, Number(dados[i].picosSensor2)]);
+                        options.series[2].data.push( [time, Number(dados[i].picos_sensor1)]);
+                        options.series[3].data.push( [time, Number(dados[i].picosSensor2)]);
+                     }
+                     simulation_feedback(dados[total-1].maos_corretas, dados[total-1].recoil, dados[total-1].frequencia, time);
 
-
-                }
-               simulation_feedback(dados[total-1].maos_corretas, dados[total-1].recoil, dados[total-1].frequencia, time);
-
-                chart = new Highcharts.Chart("treino", options);
-
-                })
+                     chart = new Highcharts.Chart("treino", options);
+                });
               });
     </script>
 @endsection
