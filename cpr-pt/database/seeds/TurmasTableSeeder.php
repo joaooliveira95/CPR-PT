@@ -23,6 +23,11 @@ class TurmasTableSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Turma B'
             ]);
+
+            Turma::create([
+                'id' => 3,
+                'name' => 'Turma C'
+            ]);
         }
     }
 }

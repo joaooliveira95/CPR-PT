@@ -9,11 +9,12 @@ class NewUsersTableSeeder extends Seeder
 
     public function run()
     {
-        if (User::count() == 0) {
-            $admin = Role::where('name', 'admin')->firstOrFail();
-             $user = Role::where('name', 'user')->firstOrFail();
-              $teacher = Role::where('name', 'teacher')->firstOrFail();
+         $admin = Role::where('name', 'admin')->firstOrFail();
+         $user = Role::where('name', 'user')->firstOrFail();
+         $teacher = Role::where('name', 'teacher')->firstOrFail();
 
+
+        if (User::count() == 0) {
 
             User::create([
                 'name'           => 'Admin',
@@ -31,22 +32,6 @@ class NewUsersTableSeeder extends Seeder
                 'role_id'        => $user->id,
             ]);
 
-          User::create([
-                'name'           => 'Givanildo',
-                'email'          => 'fcp@hotmail.com',
-                'password'       => bcrypt('password'),
-                'remember_token' => str_random(60),
-                'role_id'        => $user->id,
-            ]);
-
-           User::create([
-                'name'           => 'Ruivo',
-                'email'          => 'ruivo@mail.com',
-                'password'       => bcrypt('password'),
-                'remember_token' => str_random(60),
-                'role_id'        => $user->id,
-            ]);
-
             User::create([
                 'name'           => 'Pedro Marques',
                 'email'          => 'pmarques@mail.com',
@@ -54,6 +39,18 @@ class NewUsersTableSeeder extends Seeder
                 'remember_token' => str_random(60),
                 'role_id'        => $teacher->id,
             ]);
+
+            factory(App\User::class,10)->create(
+               ['password'=> bcrypt('password'),
+               'role_id' => $user->id]
+            );
+
+
+            factory(App\User::class,5)->create(
+               ['password'=> bcrypt('password'),
+               'role_id' => $teacher->id]
+            );
+
         }
     }
 }

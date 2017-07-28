@@ -29,7 +29,14 @@
                      options.series[0].name = series_name[i];    //LEGENDA
                      options.series[0].color = series_color[i]; //COR DO GRAFICO
                      options.xAxis.categories = dados.dates.reverse();
+                     if(i>0){
+                        options.yAxis.max = 100;
+                        options.yAxis.softMax= 100;
+                     }else if(i==0){
+                        options.yAxis.softMax= 120;
+                     }
                      chart = new Highcharts.Chart(chart_name[i], options);
+
                      chart.yAxis[0].addPlotBand({
                           from: plot_interval[i][0],
                           to:  plot_interval[i][1],
@@ -61,6 +68,7 @@
              </div>
 
                 <div class="panel-body">
+                   <h4>Progresso dos exercícios efetuados pelo utilizador dividido pelos diferentes sensores.</h4>
                       <div class="row">
                            <div id="compressoes" class="col-md-4" style="height:50vh;">
                            </div>

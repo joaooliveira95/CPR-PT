@@ -24,12 +24,15 @@ class SessionsController extends Controller{
 
     }
 
+//Retorna a view Sessions.blade com todas as sessões do utilizador com
+// o id recebido por parametro
     public function sessions($idUser){
       $sessions = $this->sessionsRepo->getUserSessions($idUser);
 
       return view('sessions', ['sessions'=> $sessions, 'idUser' => $idUser]);
   }
 
+//Retorna a view Session.blade da sessão com o id recebido por parametro
     public function session($idSession){
         $session = $this->sessionsRepo->findByID($idSession);
         $user = $this->usersRepo->findByID($session->idUser);
@@ -72,9 +75,7 @@ class SessionsController extends Controller{
     }
 
     public function exercise($idExercise){
-      //   $hashids = new \Hashids\Hashids(env('APP_KEY'),8);
-      //   $idExercise = $hashids->decode($idExercise)[0];
-
+      
          $exercise = $this->exercisesRepo->findByID($idExercise);
          return view("exercise_feedback", ['exercise' => $exercise]);
     }

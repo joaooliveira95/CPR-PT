@@ -52,7 +52,6 @@
              var highestTime = chart.xAxis[0].getExtremes().dataMax;
              for(var i=0;i<total;i++){
                   var time = Number(dados[i].time);
-
                   if(time>highestTime){
                       chart.series[0].addPoint( [time, Number(dados[i].ponto_sensor1)], false, false);
                       chart.series[1].addPoint( [time, Number(dados[i].ponto_sensor2)], false, false);
@@ -127,16 +126,30 @@
                               <!-- GRAFICO HIGHCHARTS -->
                               <!-- GRAFICO HIGHCHARTS -->
                       </div>
-                       <div class = "inputs" style="margin: 0 auto; text-align: center;">
+                      <div class = "row">
+                        <div class="col-md-4">
+
+                           <div class="row">
+                                 <div class="col-md-2">
+                                       <a href="#" ><i id="sound" class="fa fa-volume-off fa-4x" style="margin-left: 20px;" ></i></a>
+                                 </div>
+                                 <div class= "col-md-10">
+                                    <h4>Auxílio Sonoro para o ritmo das compressões</h4>
+                                    <p>Recomendado 100-120/min</p>
+                                 </div>
+                           </div>
+                        </div>
+
+                       <div class = "col-md-4 inputs" style="margin: 0 auto; text-align: center;">
                           <li style="display: inline-block">
-                            <input class = "btn btn-default btn-md fa-input" type="submit" name="filter_button" id="exercise_button" onclick = "exercise()" value="&#xf144;" style="color: green;"/>
+                            <input class = "btn btn-default btn-lg fa-input" type="submit" name="filter_button" id="exercise_button" onclick = "exercise()" value="&#xf144;" style="color: green;"/>
                           </li>
                           <li style="display: inline-block">
                              {!! Form::open(
                              array('action'=> array('NewSessionController@newExercise', $id)
                              , 'method'=>'post')) !!}
                              {!! csrf_field() !!}
-                             {!! Form::submit('&#xf28b;', ['id'=>'next_button', 'class'=>'fa-input btn btn-default btn-md', 'style'=>'margin: 0 10px 0 10px;']) !!}
+                             {!! Form::submit('&#xf28b;', ['id'=>'next_button', 'class'=>'fa-input btn btn-default btn-lg', 'style'=>'margin: 0 10px 0 10px;']) !!}
 
                             {!! Form::close() !!}
                           </li>
@@ -146,18 +159,16 @@
                              array('action'=> array('NewSessionController@endSession', $id)
                              , 'method'=>'post')) !!}
                              {!! csrf_field() !!}
-                             {!! Form::submit('&#xf28d;', ['class'=>'fa-input btn btn-default btn-md', 'style'=>'color: red;']) !!}
+                             {!! Form::submit('&#xf28d;', ['class'=>'fa-input btn btn-default btn-lg', 'style'=>'color: red;']) !!}
 
                             {!! Form::close() !!}
                           </li>
                         </div>
-                        <div>
-                         <a style="margin-left: 20px" href="#" ><i id="sound" class="fa fa-volume-off fa-2x" ></i></a><div style="display: inline-block; margin-left: 20px;">
-                            Recomendado 100-120/min</div>
-                         </div>
+
                         @if (session('erro'))
                         <p class="text-warning"><strong>{{ session('erro')}}</strong></p>
                         @endif
+                     </div>
                   </div>
               </div>
           </div>

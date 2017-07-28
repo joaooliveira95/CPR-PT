@@ -98,13 +98,10 @@ function progresssChart(){
         },
 
         yAxis: {
-           softMax: 120,
             title: {
                 text: yTitle
             },
-
          },
-
 
         plotOptions: {
             series: {
@@ -165,7 +162,6 @@ function exerciseFeedbackChart(){
             title: {
                 text: 'Sensor (Definir Unidades)'
             },
-
         },
 
         tooltip: {
@@ -174,9 +170,7 @@ function exerciseFeedbackChart(){
         },
 
         legend: {
-
             align: 'right',
-
         },
 
           credits: {
@@ -201,7 +195,6 @@ function exerciseFeedbackChart(){
         scrollbar:{
           enabled: true,
         }
-
 
    };
 }

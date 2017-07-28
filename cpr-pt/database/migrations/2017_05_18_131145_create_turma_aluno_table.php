@@ -19,6 +19,7 @@ class CreateTurmaAlunoTable extends Migration
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->integer('idTurma')->unsigned();
             $table->foreign('idTurma')->references('id')->on('turmas')->onDelete('cascade');
+            $table->unique(array('idUser', 'idTurma'));
              $table->timestamps();
         });
     }

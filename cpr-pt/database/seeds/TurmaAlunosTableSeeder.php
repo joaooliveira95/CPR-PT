@@ -25,30 +25,17 @@ class TurmaAlunosTableSeeder extends Seeder
             ]);
 
             TurmaAluno::create([
-                'idUser' => 2,
-                'idTurma' => 1
+                'idUser' => 1,
+                'idTurma' => 3
             ]);
 
-            TurmaAluno::create([
-                'idUser' => 3,
-                'idTurma' => 2
-            ]);
+            foreach (App\User::all() as $user) {
+               TurmaAluno::firstOrCreate(
+                  ['idUser'=> $user->id,
+                  'idTurma' => rand(1,3)]
+               );
+            }
 
-            TurmaAluno::create([
-                'idUser' => 4,
-                'idTurma' => 2
-            ]);
-
-
-            TurmaAluno::create([
-                'idUser' => 5,
-                'idTurma' => 1
-            ]);
-
-            TurmaAluno::create([
-                'idUser' => 5,
-                'idTurma' => 2
-            ]);
         }
     }
 }
