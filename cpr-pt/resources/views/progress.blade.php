@@ -3,6 +3,7 @@
 @section('highcharts')
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="{{ URL::to('/js/highcharts.js') }}"></script>
+<script type="text/javascript" src="{{ URL::to('/js/highcharts_options.js') }}"></script>
 
       <script>
             var chart;
@@ -14,49 +15,13 @@
             var max = 120;
             $(document).ready(function() {
 
-               var options = {
-                        chart: {
-                            zoomType: 'x',
-                            backgroundColor: null,
-                        },
-                    title: {
-                        text: null
-                    },
-
-                    xAxis:{
-                        type: 'datetime',
-                        title: {
-                            text: xTitle
-                        },
-                        categories: [],
-                        tickInterval: 3600*24,
-                    },
-
-                    yAxis: {
-                       softMax: 120,
-                        title: {
-                            text: yTitle
-                        },
-
-                     },
-
-
-                    plotOptions: {
-                        series: {
-                            pointStart: 0
-                        }
-                    },
-
-                    series: [{
-                        name: 'Sensor',
-                        data: []
-                    }]
-                };
+               var options = progresss_options();
 
                 var url = "/exercises/"+idUser;
               $.get(url,function(result){
 
                 var dados = jQuery.parseJSON(result);
+
                 options.series[0].data = dados.compress.reverse();
                 options.series[0].name = "Compressions (BPM)";
                 options.xAxis.categories = dados.dates.reverse();
@@ -72,7 +37,7 @@
 
                options.series[0].data = dados.recoil.reverse();
                options.series[0].name = "Recoil (%)";
-                  options.series[0].color = '#FF0000';
+               options.series[0].color = '#FF0000';
                options.xAxis.categories = dados.dates.reverse();
                options.yAxis.softMax = 95;
                chart = new Highcharts.Chart("recoil", options);
