@@ -7,67 +7,40 @@
 
       <script>
             var chart;
-            var idUser = {{$idUser}};
             var title = "{{trans('messages.progress')}}";
             var xTitle = "{{trans('messages.exercises')}}";
             var yTitle = "{{trans('messages.sensor_units')}}";
-            var min = 100;
-            var max = 120;
+
             $(document).ready(function() {
-
                var options = progresss_options();
-
                 var url = "/exercises/"+idUser;
               $.get(url,function(result){
+                  var dados = jQuery.parseJSON(result);
+                  var chart_name = ["compressoes", "recoil", "pos_maos"];
+                  var series_data = [dados.compress.reverse(), dados.recoil.reverse(), dados.hands.reverse()];
+                  var series_name = ["Compressions (BPM)", "Recoil (%)",  "Hand Position (%)"];
+                  var series_color =["#3a54dd","#FF0000","#a10dd5"]
+                  var plot_interval =[[100, 120], [90, 100], [90, 100]];
+                  var label_text = ["Compressões Corretas (100-120)", "Recoil Correto (90-100)", "Mãos Corretas (90-100)"];
 
-                var dados = jQuery.parseJSON(result);
+                  for(var i = 0; i < 3; i++){
+                     options.series[0].data = series_data[i];    //DADOS DOS EXERCICIOS
+                     options.series[0].name = series_name[i];    //LEGENDA
+                     options.series[0].color = series_color[i]; //COR DO GRAFICO
+                     options.xAxis.categories = dados.dates.reverse();
+                     chart = new Highcharts.Chart(chart_name[i], options);
+                     chart.yAxis[0].addPlotBand({
+                          from: plot_interval[i][0],
+                          to:  plot_interval[i][1],
+                          color: 'rgba(5, 254, 0, 0.27)',
+                          label: {
+                             text: label_text[i],
+                          }
+                    });
+                  }
 
-                options.series[0].data = dados.compress.reverse();
-                options.series[0].name = "Compressions (BPM)";
-                options.xAxis.categories = dados.dates.reverse();
-                chart = new Highcharts.Chart("compressoes", options);
-                chart.yAxis[0].addPlotBand({
-                     from: 100,
-                     to: 120,
-                     color: 'rgba(5, 254, 0, 0.27)',
-                     label: {
-                        text: 'Compressões Corretas'
-                     }
-                  });
-
-               options.series[0].data = dados.recoil.reverse();
-               options.series[0].name = "Recoil (%)";
-               options.series[0].color = '#FF0000';
-               options.xAxis.categories = dados.dates.reverse();
-               options.yAxis.softMax = 95;
-               chart = new Highcharts.Chart("recoil", options);
-               chart.yAxis[0].addPlotBand({
-                     from: 90,
-                     to: 100,
-                     color: 'rgba(5, 254, 0, 0.27)',
-                     label: {
-                        text: 'Recoil Correto'
-                     }
-                  });
-
-               options.series[0].data = dados.hands.reverse();
-               options.xAxis.categories = dados.dates.reverse();
-               options.yAxis.softMax = 95;
-               options.yAxis.tickInterval = 10;
-               options.series[0].color = '#a10dd5';
-               options.series[0].name = "Hand Position (%)";
-               chart = new Highcharts.Chart("pos_maos", options);
-               chart.yAxis[0].addPlotBand({
-                     from: 90,
-                     to: 100,
-                     color: 'rgba(5, 254, 0, 0.27)',
-                     label: {
-                        text: 'Posição de mãos correta'
-                     }
-                  });
-              })
+              });
             });
-
     </script>
 @endsection
 
