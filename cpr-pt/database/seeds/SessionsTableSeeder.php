@@ -16,13 +16,14 @@ class SessionsTableSeeder extends Seeder
         if (Session::count() == 0) {
 
             foreach (App\User::all() as $user) {
-               for($i=0; $i<rand(0,3); $i++){
+               if($user->name!='Admin'){
+               for($i=0; $i<rand(2,5); $i++){
                   $session = Session::create([
                     'title' => 'title'.$i,
                      'idUser'=> $user->id,
                   ]);
 
-                  for($i=0; $i<rand(0,5); $i++){
+                  for($i=0; $i<rand(1,5); $i++){
                      Exercise::create([
                         'idSession'=>$session->id,
                         'time'=>rand(1000, 20000),
@@ -30,8 +31,8 @@ class SessionsTableSeeder extends Seeder
                         'compressions'=>rand(20,140),
                         'hand_position'=>rand(0,100),
                         ]);
+                     }
                   }
-
                }
             }
 

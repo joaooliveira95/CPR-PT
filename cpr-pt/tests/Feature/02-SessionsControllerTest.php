@@ -42,7 +42,7 @@ class SessionsControllerTest extends TestCase
          $response = $this->call('GET', 'sessions/'.$user1->id);
 
          $view= $response->original;
-         $this->assertEquals($user1->id, $view['idUser']);
+         $this->assertEquals($user1->id, $view['user']->id);
 
          $sessions_view = $view['sessions'];
          $this->assertEquals(Session::where('idUser', $session1->idUser)->count(), $sessions_view->count());
