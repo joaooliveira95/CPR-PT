@@ -19,10 +19,10 @@
                   var dados = jQuery.parseJSON(result);
                   var chart_name = ["compressoes", "recoil", "pos_maos"];
                   var series_data = [dados.compress.reverse(), dados.recoil.reverse(), dados.hands.reverse()];
-                  var series_name = ["Compressions (BPM)", "Recoil (%)",  "Hand Position (%)"];
+                  var series_name = ["{{trans('messages.compressions')}} (BPM)", "Recoil (%)",  "{{trans('messages.hands_position')}} (%)"];
                   var series_color =["#3a54dd","#FF0000","#a10dd5"]
                   var plot_interval =[[100, 120], [90, 100], [90, 100]];
-                  var label_text = ["Compressões Corretas (100-120)", "Recoil Correto (90-100)", "Mãos Corretas (90-100)"];
+                  var label_text = ["{{trans('messages.frequence')}} (100-120) BPM", "{{trans('messages.full_recoil')}} (90-100) %", "{{trans('messages.correct_hands')}} (90-100) %"];
 
                   for(var i = 0; i < 3; i++){
                      options.series[0].data = series_data[i];    //DADOS DOS EXERCICIOS
@@ -65,7 +65,7 @@
                      </ol>
                      <ul class="list-inline session_list">
                       <li class="nome_session">{{$user->name}}</li>
-                      <li class="titulo_session"><b>Progress</b></li>
+                      <li class="titulo_session"><b>{{trans('messages.progress')}}</b></li>
                    </ul>
                   </div>
              </div>
@@ -82,7 +82,7 @@
                      </div>
                      <div class="row" style="margin: 30px 0 20px 0; padding: 0 0 0 25px;">
                         <div class="col-md-12" style="text-align: center;">
-                           <a href="/sessions/{{$user->id}}" class="btn-sessoes">Todas as Sessões</a>
+                           <a href="/sessions/{{$user->id}}" class="btn-sessoes">{{trans('messages.all_sessions')}}</a>
                         </div>
                      </div>
                   </div>

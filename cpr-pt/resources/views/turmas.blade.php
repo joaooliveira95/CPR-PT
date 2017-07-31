@@ -23,7 +23,7 @@
                             <thead class="thead-default;">
                                 <tr style="font-size: 20px;">
                                     <th>{{trans('messages.class')}}</th>
-                                    <th>Nº Alunos</th>
+                                    <th>{{trans('messages.num_students')}}</th>
                                     <th>{{trans('messages.created_at')}}</th>
                                 </tr>
                             </thead>

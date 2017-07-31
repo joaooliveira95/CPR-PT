@@ -198,3 +198,58 @@ function exerciseFeedbackChart(){
 
    };
 }
+
+function sessionChart(){
+   return {
+
+        title: {
+            text: 'Progresso da Sessão'
+        },
+
+        subtitle: {
+            text: 'CPR PT'
+        },
+
+        xAxis:{
+           allowDecimals: false,
+          title: {
+                text: 'Treinos'
+            }
+        },
+
+        yAxis: {
+
+            title: {
+                text: 'Unidades do sensor'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+
+            series: {
+                pointStart: 0
+            }
+        },
+
+
+        series: [{
+            name: 'Tempo (s)',
+            data: []
+        },{
+            name: 'Recoil',
+            data: []
+        }, {
+            name: 'Compressões',
+            data: []
+        }, {
+            name: 'Pos. Mãos (%)',
+            data: []
+        }]
+
+   };
+}

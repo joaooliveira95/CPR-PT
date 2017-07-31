@@ -2,64 +2,12 @@
 
 @section('highcharts')
 <script type="text/javascript" src="{{ URL::to('/js/highcharts.js') }}"></script>
-
+<script type="text/javascript" src="{{ URL::to('/js/highcharts_options.js') }}"></script>
       <script>
              var idSession = "{{$session->id}}";
              $(document).ready(function() {
 
-               var options = {
-
-                    title: {
-                        text: 'Progresso da Sessão'
-                    },
-
-                    subtitle: {
-                        text: 'CPR PT'
-                    },
-
-                    xAxis:{
-                       allowDecimals: false,
-                      title: {
-                            text: 'Treinos'
-                        }
-                    },
-
-                    yAxis: {
-
-                        title: {
-                            text: 'Unidades do sensor'
-                        }
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
-
-                    plotOptions: {
-
-                        series: {
-                            pointStart: 0
-                        }
-                    },
-
-
-                    series: [{
-                        name: 'Tempo (s)',
-                        data: []
-                    },{
-                        name: 'Recoil',
-                        data: []
-                    }, {
-                        name: 'Compressões',
-                        data: []
-                    }, {
-                        name: 'Pos. Mãos (%)',
-                        data: []
-                    }]
-
-                };
-
+               var options = sessionChart();
                 var url = "/progress/"+idSession;
               $.get(url,function(result){
 
@@ -75,7 +23,6 @@
                 //options.title.text="aqui e podria cambiar el titulo dinamicamente";
                 chart = new Highcharts.Chart("progresso_sessao_grafico", options);
               });
-
             });
     </script>
 @endsection

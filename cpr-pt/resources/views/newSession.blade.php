@@ -97,7 +97,7 @@
                         <div class="col-md-4" style="min-width: 32%; float: left;">
                            <div class="panel panel-primary" style="border-color: #f1f1f1;">
                               <div class="panel-heading" style="background: #f1f1f1;color: #000;border-color: #f1f1f1;">
-                                  <b><p class="text-center" style='font-size: 20px;' >Frequência</p></b>
+                                  <b><p class="text-center" style='font-size: 20px;' >{{trans('messages.frequence')}}</p></b>
                               </div>
                                <b><p id="frequencia"></p></b>
                                <p id="recomend_frequencia"></p>
@@ -106,7 +106,7 @@
                         <div class="col-md-4" style="min-width: 32%; float: left;">
                            <div class="panel panel-primary" style="border-color: #f1f1f1;">
                               <div class="panel-heading" style="background: #f1f1f1;color: #000;border-color: #f1f1f1;">
-                                <b><p class="text-center" style='font-size: 20px;' >Mãos Corretas</p></b>
+                                <b><p class="text-center" style='font-size: 20px;' >{{trans('messages.correct_hands')}}</p></b>
                               </div>
                                <b><p id="pos_maos"></p></b>
                                <p id="recomend_pos_maos"></p>
@@ -115,7 +115,7 @@
                         <div class="col-md-4" style="min-width: 32%; float: left;">
                            <div class="panel panel-primary" style="border-color: #f1f1f1;">
                               <div class="panel-heading" style="background: #f1f1f1;color: #000;border-color: #f1f1f1;">
-                                <b><p class="text-center" style='font-size: 20px;' >Recoil Completo</p></b>
+                                <b><p class="text-center" style='font-size: 20px;' >{{trans('messages.full_recoil')}}</p></b>
                               </div>
                                <b><p id="recoil"></p></b>
                                <p id="recomend_recoil"></p>

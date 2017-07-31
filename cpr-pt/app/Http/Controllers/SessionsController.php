@@ -45,7 +45,6 @@ class SessionsController extends Controller{
 
     public function progressIndex($idUser){
          $user = User::find($idUser);
-
          return view('progress', ['user'=> $user]);
     }
 

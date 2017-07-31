@@ -36,7 +36,7 @@
                </div>
                <div class="row" style="margin: 30px">
                   <div class="col-md-12" style="text-align: center;">
-                     <a href="/lastSession" class="btn-sessoes">Continuar Última Sessão</a>
+                     <a href="/lastSession" class="btn-sessoes">{{trans('messages.last_session')}}</a>
                      @if (session('erro'))
                      <p class="text-warning"><strong>{{ session('erro')}}</strong></p>
                      @endif
