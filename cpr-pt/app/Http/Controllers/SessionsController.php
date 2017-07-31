@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\UsersRepository;
@@ -28,8 +29,9 @@ class SessionsController extends Controller{
 // o id recebido por parametro
     public function sessions($idUser){
       $sessions = $this->sessionsRepo->getUserSessions($idUser);
+      $user = User::find($idUser);
 
-      return view('sessions', ['sessions'=> $sessions, 'idUser' => $idUser]);
+      return view('sessions', ['sessions'=> $sessions, 'user' => $user]);
   }
 
 //Retorna a view Session.blade da sessão com o id recebido por parametro
@@ -39,6 +41,12 @@ class SessionsController extends Controller{
         $exercises = $this->exercisesRepo->getSessionExercises($idSession);
 
         return view('session', ['session' => $session, 'user' => $user, 'exercises' => $exercises]);
+    }
+
+    public function progressIndex($idUser){
+         $user = User::find($idUser);
+
+         return view('progress', ['user'=> $user]);
     }
 
     public function progress($idSession){
@@ -75,7 +83,7 @@ class SessionsController extends Controller{
     }
 
     public function exercise($idExercise){
-      
+
          $exercise = $this->exercisesRepo->findByID($idExercise);
          return view("exercise_feedback", ['exercise' => $exercise]);
     }

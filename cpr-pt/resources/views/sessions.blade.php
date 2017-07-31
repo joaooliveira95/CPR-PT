@@ -10,10 +10,13 @@
                   <div class="row">
                      <ol class="breadcrumb breadcrumbs">
                        <li><a href="/home">Home</a></li>
-                       <li><a href="/history/{{$idUser}}">Progress</a></li>
+                       <li><a href="/history/{{$user->id}}">Progress</a></li>
                        <li class="active">{{trans('messages.sessions')}}</li>
                      </ol>
-                     <h3 class="titulo-pages">{{trans('messages.sessions')}}</h3>
+                     <ul class="list-inline session_list">
+                      <li class="nome_session">{{$user->name}}</li>
+                      <li class="titulo_session"><b>{{trans('messages.sessions')}}</b></li>
+                   </ul>
                   </div>
                </div>
 

@@ -7,7 +7,7 @@
 
       <script>
             var chart;
-            var idUser = {{$idUser}};
+            var idUser = {{$user->id}};
             var title = "{{trans('messages.progress')}}";
             var xTitle = "{{trans('messages.exercises')}}";
             var yTitle = "{{trans('messages.sensor_units')}}";
@@ -63,7 +63,10 @@
                        <li><a href="/home">Home</a></li>
                        <li class="active">Progress</li>
                      </ol>
-                     <h3 class="titulo-pages">Progress</h3>
+                     <ul class="list-inline session_list">
+                      <li class="nome_session">{{$user->name}}</li>
+                      <li class="titulo_session"><b>Progress</b></li>
+                   </ul>
                   </div>
              </div>
 
@@ -79,7 +82,7 @@
                      </div>
                      <div class="row" style="margin: 30px 0 20px 0; padding: 0 0 0 25px;">
                         <div class="col-md-12" style="text-align: center;">
-                           <a href="/sessions/{{$idUser}}" class="btn-sessoes">Todas as Sessões</a>
+                           <a href="/sessions/{{$user->id}}" class="btn-sessoes">Todas as Sessões</a>
                         </div>
                      </div>
                   </div>

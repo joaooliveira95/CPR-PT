@@ -52,12 +52,6 @@ class BladesController extends Controller{
        //});
     }
 
-    public function historyIndex($idUser){
-     //return Cache::remember('home', 10, function() {
-         return View::make('progress', ['idUser'=> $idUser])
-               ->render();
-     //});
-    }
 
 
 

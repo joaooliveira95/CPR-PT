@@ -32,8 +32,6 @@ Route::get('/discussion', 'BladesController@discussionIndex');
 
 Route::get('/newSession', 'BladesController@createSessionIndex');
 
-Route::get('/history/{idUser}', 'BladesController@historyIndex');
-
 //NEW SESSION
 Route::get('/lastSession', 'NewSessionController@lastSession');
 
@@ -51,17 +49,18 @@ Route::get('/exercise_progress/{idExercise}','SimulationController@live_info');
 Route::get('/script/{idExercise}&{sim}','SimulationController@script');
 
 //SESSIONS
-Route::get('/progress/{idSession}', 'SessionsController@progress');
+
+Route::get('/history/{idUser}', 'SessionsController@progressIndex');
 
 Route::get('/sessions/{idUser}', 'SessionsController@sessions');
 
 Route::get('/sessions/session/{idSession}', 'SessionsController@session');
 
-
 Route::get('/exercises/{id}', 'SessionsController@userExercises');
 
 Route::get('/exercise_results/{id}', 'SessionsController@exercise');
 
+Route::get('/progress/{idSession}', 'SessionsController@progress');
 //COMMENTS
 
 //Route::get('/comments', 'CommentsController@comments');
