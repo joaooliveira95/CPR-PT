@@ -14,6 +14,26 @@ class SessionsControllerTest extends TestCase
 {
    use DatabaseMigrations;
    use DatabaseTransactions;
+
+   private function createUser($name, $email, $role){
+     $user1 = User::create([
+         'name' => $name,
+         'email' => $email,
+         'password' => bcrypt('password'),
+         'role_id' => $role, //ADMIN
+     ]);
+     return $user1;
+  }
+
+  private function createExercise($idSession){
+     return Exercise::create([
+         'idSession'=>$idSession,
+         'time'=>rand(1, 20000),
+         'recoil'=>rand(1,100),
+         'compressions'=>rand(1,150),
+         'hand_position'=>rand(1,100),
+     ]);
+  }
     /**
      * A basic test example.
      *
@@ -21,12 +41,7 @@ class SessionsControllerTest extends TestCase
      */
     public function testSessions()
     {
-         $user1 = User::create([
-             'name' => 'John Doe',
-             'email' => 'john@example.com',
-             'password' => bcrypt('password'),
-             'role_id' => 1,
-         ]);
+         $user1 = $this->createUser('John Doe','john@example.com', 1);
 
          $session1 = Session::create([
            'title' => 'title1',
@@ -56,33 +71,15 @@ class SessionsControllerTest extends TestCase
     }
 
     public function testSession(){
-      $user1 = User::create([
-          'name' => 'John Doe',
-          'email' => 'john@example.com',
-          'password' => bcrypt('password'),
-          'role_id' => 1,
-      ]);
+      $user1 = $this->createUser('John Doe','john@example.com', 1);
 
       $session1 = Session::create([
         'title' => 'title1',
           'idUser'=> $user1->id,
       ]);
 
-      $exercise1 = Exercise::create([
-         'idSession'=>$session1->id,
-         'time'=>20000,
-         'recoil'=>90,
-         'compressions'=>66,
-         'hand_position'=>77,
-      ]);
-
-      $exercise2 = Exercise::create([
-         'idSession'=>$session1->id,
-         'time'=>40000,
-         'recoil'=>50,
-         'compressions'=>16,
-         'hand_position'=>27,
-      ]);
+      $exercise1 = $this->createExercise($session1->id);
+      $exercise2 = $this->createExercise($session1->id);
 
       $this->actingAs($user1);
       $response = $this->call('GET', 'sessions/session/'.$session1->id);
@@ -110,25 +107,14 @@ class SessionsControllerTest extends TestCase
    }
 
    public function testExercise(){
-      $user1 = User::create([
-          'name' => 'John Doe',
-          'email' => 'john@example.com',
-          'password' => bcrypt('password'),
-          'role_id' => 1,
-      ]);
+      $user1 = $this->createUser('John Doe','john@example.com', 1);
 
       $session1 = Session::create([
         'title' => 'title1',
           'idUser'=> $user1->id,
       ]);
 
-      $exercise1 = Exercise::create([
-         'idSession'=>$session1->id,
-         'time'=>20000,
-         'recoil'=>90,
-         'compressions'=>66,
-         'hand_position'=>77,
-      ]);
+      $exercise1 = $this->createExercise($session1->id);
 
       $this->actingAs($user1);
       $response = $this->call('GET', 'exercise_results/'.$exercise1->id);
