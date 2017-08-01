@@ -165,9 +165,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
-         Yajra\Datatables\DatatablesServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
                 /*
          * Package Service Providers...
          */
@@ -182,6 +180,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        TCG\Voyager\VoyagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*

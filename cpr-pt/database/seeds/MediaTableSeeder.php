@@ -16,14 +16,14 @@ class MediaTableSeeder extends Seeder
          $Protocolo =   MediaCategory::where('name','Protocolo CPR')->first();
          $Artigos =  MediaCategory::where('name','Artigos Relevantes')->first();
 
-         Media::create([
+         Media::firstOrCreate([
             'title' => 'Indicações da OMS',
             'idCategory' => $Protocolo->id,
             'url' => "/coisas",
             'type' => 'PDF',
          ]);
 
-         Media::create([
+         Media::firstOrCreate([
             'title' => 'Artigo sobre CPR',
             'idCategory' => $Artigos->id,
             'url' => "/coisas2",
