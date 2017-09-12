@@ -89,12 +89,16 @@
                               <th class = "centered_tb">{{trans('messages.correct_hands')}}</th>
                           </tr>
                       </thead>
-
                       <tbody>
                         <tr>
                             <td id="frequencia" class = "centered_tb" style="color:green"></td>
                             <td id="recoil" class = "centered_tb" style="color:red"></td>
                             <td id="pos_maos" class = "centered_tb"></td>
+                        </tr>
+                        <tr>
+                           <td id="recomend_frequencia"></td>
+                           <td id="recomend_recoil"></td>
+                           <td id="recomend_pos_maos"></td>
                         </tr>
                       </tbody>
                   </table>
